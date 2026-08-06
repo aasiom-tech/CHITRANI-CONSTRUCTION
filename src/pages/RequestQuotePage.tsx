@@ -1,35 +1,74 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { PageHeader } from '../components/common/PageHeader';
 import { SEO } from '../components/common/SEO';
-import { QuoteForm } from '../components/QuoteForm';
-import { FinalCTA } from '../components/FinalCTA';
+import { QuoteIntro } from '../components/quote/QuoteIntro';
+import { QuoteRequirementSelector } from '../components/quote/QuoteRequirementSelector';
+import { QuoteFormContainer } from '../components/quote/QuoteFormContainer';
+import { QuoteClarification } from '../components/quote/QuoteClarification';
+
+type RequirementType = 'construction-contracting' | 'equipment-rental';
 
 export const RequestQuotePage: React.FC = () => {
-  const [searchParams] = useSearchParams();
-  const preselectedRequirement = searchParams.get('requirement') || 'Construction Contracting';
-  const preselectedEquipment = searchParams.get('equipment') || '';
+  const [searchParams, setSearchParams] = useSearchParams();
+  const rawParam = searchParams.get('requirement') || 'construction-contracting';
+
+  const [requirement, setRequirement] = useState<RequirementType>(
+    rawParam.toLowerCase().includes('equipment') || rawParam.toLowerCase().includes('rental') || rawParam.toLowerCase().includes('placer')
+      ? 'equipment-rental'
+      : 'construction-contracting'
+  );
+
+  useEffect(() => {
+    const raw = searchParams.get('requirement') || '';
+    if (raw.toLowerCase().includes('equipment') || raw.toLowerCase().includes('rental') || raw.toLowerCase().includes('placer')) {
+      setRequirement('equipment-rental');
+    } else if (raw.toLowerCase().includes('construction') || raw.toLowerCase().includes('contracting')) {
+      setRequirement('construction-contracting');
+    }
+  }, [searchParams]);
+
+  const handleSelectRequirement = (val: RequirementType) => {
+    setRequirement(val);
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set('requirement', val);
+    setSearchParams(newParams);
+  };
 
   return (
-    <div>
+    <>
       <SEO 
-        title="Request Proposal & Quote | Chitrani Construction"
-        description="Request a formal civil contracting proposal or Putzmeister M42-5 concrete boom placer rental quote from Chitrani Construction."
+        title="Request a Quote | Chitrani Construction"
+        description="Request a detailed commercial quote for civil contracting or concrete boom placer rental in Maharashtra."
         canonical="https://chitraniconstruction.com/request-quote"
       />
 
-      <PageHeader
-        title="Request a Formal Proposal"
-        subtitle="Itemized BOQ estimations, civil contract proposals, and equipment rental scheduling desk."
-        badge="ESTIMATION & TENDER DESK"
-      />
+      <div className="bg-[#EADBC8] space-y-0 text-[#3D352D]">
+        {/* 1. Shared PageHeader */}
+        <PageHeader
+          badge="REQUEST A QUOTE"
+          title="Share Your Project or Equipment Requirement"
+          subtitle="Provide the project, location, service, schedule and equipment information required for Chitrani Construction to review your enquiry."
+          breadcrumb={[{ label: 'Home', href: '/' }]}
+        />
 
-      <QuoteForm
-        preselectedRequirement={preselectedRequirement}
-        preselectedEquipment={preselectedEquipment}
-      />
+        {/* 2. Overview Intro */}
+        <QuoteIntro />
 
-      <FinalCTA />
-    </div>
+        {/* 3. Requirement Selector */}
+        <QuoteRequirementSelector
+          selected={requirement}
+          onSelect={handleSelectRequirement}
+        />
+
+        {/* 4. Interactive Quotation Experience */}
+        <QuoteFormContainer
+          initialRequirement={requirement}
+        />
+
+        {/* 5. Commercial Clarification Callout */}
+        <QuoteClarification />
+      </div>
+    </>
   );
 };

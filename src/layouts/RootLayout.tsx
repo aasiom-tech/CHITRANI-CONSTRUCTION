@@ -4,6 +4,7 @@ import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { MobileActionBar } from '../components/MobileActionBar';
 import { ScrollToTop } from '../components/common/ScrollToTop';
+import { ErrorBoundary } from '../components/common/ErrorBoundary';
 
 export const RootLayout: React.FC = () => {
   return (
@@ -21,9 +22,11 @@ export const RootLayout: React.FC = () => {
       {/* Global Header */}
       <Header />
 
-      {/* Dynamic Route Outlet */}
+      {/* Dynamic Route Outlet with Error Boundary */}
       <main id="main-content" className="flex-1">
-        <Outlet />
+        <ErrorBoundary>
+          <Outlet />
+        </ErrorBoundary>
       </main>
 
       {/* Global Footer */}

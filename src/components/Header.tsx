@@ -59,12 +59,11 @@ export const Header: React.FC = () => {
   // Route change reset
   useEffect(() => {
     setIsDrawerOpen(false);
-    const currentScrollY = window.scrollY;
-    if (currentScrollY <= 60) {
-      setHeaderState('expanded');
-    } else {
-      setHeaderState('compact');
-    }
+    setIsHovered(false);
+    setIsFocused(false);
+    prevScrollY.current = 0;
+    accumulatedDelta.current = 0;
+    setHeaderState('expanded');
   }, [location.pathname]);
 
   // Handle focus inside/outside header for keyboard accessibility
