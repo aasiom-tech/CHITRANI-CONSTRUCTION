@@ -1,72 +1,78 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Building2, 
-  Landmark, 
   Building, 
+  Landmark, 
   Factory, 
   Warehouse, 
-  Route, 
   GraduationCap, 
-  Hospital, 
-  Hotel, 
-  Hammer, 
-  Cpu 
+  Truck,
+  ArrowRight
 } from 'lucide-react';
 import { industriesData } from '../data/industries';
 
 const iconMap: Record<string, React.FC<{ className?: string }>> = {
   Building2,
-  Landmark,
   Building,
+  Landmark,
   Factory,
   Warehouse,
-  Route,
   GraduationCap,
-  Hospital,
-  Hotel,
-  Hammer,
-  Cpu
+  Truck
 };
 
 export const Industries: React.FC = () => {
   return (
-    <section id="industries" className="py-16 sm:py-24 bg-[#F9F7F2] text-[#2D2D2D] border-t border-[#E7E7E7]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="industries" className="py-16 sm:py-24 bg-[#F5EEE5] text-[#3D352D] border-t border-[#E8DDD0]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <span className="font-display text-xs text-[#FFB300] font-bold tracking-wider uppercase block mb-2">
-            CROSS-SECTOR EXPERIENCE
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <span className="font-display text-xs text-[#C96F1B] font-bold tracking-wider uppercase block">
+            INDUSTRIES WE SUPPORT
           </span>
-          <h2 className="font-heading font-bold text-3xl sm:text-4xl text-[#2D2D2D] tracking-tight">
-            Industries We Serve
+          <h2 className="font-heading font-bold text-3xl sm:text-4xl text-[#3D352D] tracking-tight">
+            Construction and Equipment Support Across Project Sectors
           </h2>
-          <p className="mt-3 text-base text-[#5D5D5D] font-body">
-            Tailored engineering capabilities and machinery logistics for diverse economic sectors.
+          <p className="text-sm sm:text-base text-[#6B5E4E] font-body leading-relaxed">
+            Services may support requirements across selected residential, commercial, civil, industrial, institutional, and contractor-led project environments.
           </p>
         </div>
 
-        {/* Compact Icon Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {industriesData.map((ind) => {
-            const IconComponent = iconMap[ind.iconName] || Factory;
+        {/* 7 Sectors Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {industriesData.map((ind, idx) => {
+            const IconComponent = iconMap[ind.iconName] || Building2;
 
             return (
               <div
                 key={ind.id}
-                className="bg-white p-5 rounded-[20px] border border-[#E7E7E7] shadow-[0_15px_35px_rgba(0,0,0,0.08)] hover:-translate-y-1 hover:border-[#FFB300] hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] transition-all duration-300 flex flex-col items-center text-center group"
+                className="bg-white p-6 rounded-[18px] border border-[#E8DDD0] shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:border-[#C96F1B] motion-safe:hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
               >
-                <div className="w-12 h-12 rounded-md bg-[#FFB300]/12 border border-[#FFB300]/35 text-[#FFB300] group-hover:bg-[#FFB300] group-hover:text-white flex items-center justify-center mb-3 transition-colors">
-                  <IconComponent className="w-6 h-6" />
+                <div className="space-y-3">
+                  <div className="w-10 h-10 rounded-full bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center group-hover:bg-[#C96F1B] group-hover:text-white transition-colors">
+                    <IconComponent className="w-5 h-5" />
+                  </div>
+
+                  <h3 className="font-heading font-bold text-lg text-[#3D352D] group-hover:text-[#C96F1B] transition-colors">
+                    {ind.name}
+                  </h3>
+
+                  <p className="text-xs text-[#6B5E4E] font-body leading-relaxed line-clamp-3">
+                    {ind.description}
+                  </p>
                 </div>
 
-                <h3 className="font-heading font-bold text-xs sm:text-sm text-[#2D2D2D] mb-1 group-hover:text-[#FFB300] transition-colors">
-                  {ind.name}
-                </h3>
-
-                <p className="text-[11px] text-[#7D7D7D] font-body leading-tight hidden sm:block">
-                  {ind.description}
-                </p>
+                <div className="pt-4 mt-4 border-t border-[#E8DDD0]">
+                  <Link
+                    to="/industries"
+                    className="inline-flex items-center gap-1.5 text-xs font-heading font-bold text-[#C96F1B] hover:text-[#B35E17] uppercase tracking-wider transition-colors"
+                  >
+                    <span>View Sector Details</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
               </div>
             );
           })}

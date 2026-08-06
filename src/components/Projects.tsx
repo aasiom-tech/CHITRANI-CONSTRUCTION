@@ -1,144 +1,118 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Building2, ArrowUpRight, ShieldCheck } from 'lucide-react';
+import { Building2, MapPin, Calendar, ArrowRight, FileText, HardHat } from 'lucide-react';
 import { projectsData } from '../data/projects';
-import { ProjectDetailModal } from './ProjectDetailModal';
-import { ProjectItem } from '../types';
 
 export const Projects: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<string>('All');
-  const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
-
-  const categories = [
-    { label: 'All Projects', key: 'All' },
-    { label: 'Infrastructure', key: 'Infrastructure' },
-    { label: 'Commercial', key: 'Commercial' },
-    { label: 'Residential', key: 'Residential' },
-  ];
-
-  const filteredProjects = projectsData.filter((item) => {
-    if (activeCategory === 'All') return true;
-    return item.category.toLowerCase().includes(activeCategory.toLowerCase());
-  });
+  const project = projectsData[0];
+  const altText = "Representative urban building construction project in Mumbai";
 
   return (
-    <section id="projects" className="py-16 sm:py-24 bg-[#F9F7F2] text-[#2D2D2D] border-t border-[#E7E7E7]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="py-16 sm:py-24 bg-[#F5EEE5] text-[#3D352D] border-t border-[#E8DDD0]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-          <span className="font-display text-xs text-[#FFB300] font-bold tracking-wider uppercase block mb-2">
-            CONTRACT TRACK RECORD & PORTFOLIO
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <span className="font-display text-xs text-[#C96F1B] font-bold tracking-wider uppercase block">
+            PROJECT EXPERIENCE
           </span>
-          <h2 className="font-heading font-bold text-3xl sm:text-4xl text-[#2D2D2D] tracking-tight">
-            Featured Construction & Equipment Deployments
+          <h2 className="font-heading font-bold text-3xl sm:text-4xl text-[#3D352D] tracking-tight">
+            Verified Project Engagement
           </h2>
-          <p className="mt-3 text-base text-[#5D5D5D] font-body">
-            Demonstrated civil structural contracting and Putzmeister M42-5 concrete boom placer deployments across major projects.
+          <p className="text-sm sm:text-base text-[#6B5E4E] font-body leading-relaxed">
+            Chitrani Construction’s project portfolio is presented using verified client and work-order information.
           </p>
         </div>
 
-        {/* Category Filters */}
-        <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-4 mb-10 no-scrollbar">
-          {categories.map((cat) => (
-            <button
-              key={cat.key}
-              onClick={() => setActiveCategory(cat.key)}
-              className={`px-4 py-2 rounded-md font-heading text-xs tracking-wider uppercase transition-all whitespace-nowrap shrink-0 ${
-                activeCategory === cat.key
-                  ? 'bg-[#FFB300] text-white font-bold shadow-xs'
-                  : 'bg-white text-[#5D5D5D] hover:text-[#2D2D2D] border border-[#E7E7E7]'
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => (
-            <div 
-              key={project.id}
-              className="bg-white rounded-[20px] overflow-hidden border border-[#E7E7E7] hover:-translate-y-1 hover:border-[#FFB300] hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] transition-all duration-300 flex flex-col justify-between group shadow-[0_15px_35px_rgba(0,0,0,0.08)]"
-            >
-              {/* Image & Badges */}
-              <div className="relative h-48 overflow-hidden bg-[#F9F7F2]">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 filter brightness-95"
+        {/* Single Project Card Container */}
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white rounded-[18px] border border-[#E8DDD0] shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:border-[#C96F1B] motion-safe:hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group">
+            <div>
+              <div className="relative aspect-[16/9] overflow-hidden bg-[#F5EEE5]">
+                <img
+                  src={project.image}
+                  alt={altText}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                
-                <div className="absolute top-3 left-3">
-                  <span className="px-2.5 py-1 rounded-md bg-white/90 text-[#2D2D2D] border border-[#E7E7E7] font-display text-xs font-bold uppercase tracking-wider shadow-xs">
-                    {project.category}
-                  </span>
-                </div>
-
-                <div className="absolute bottom-3 right-3">
-                  <span className="px-2.5 py-1 rounded-md font-display text-xs font-bold uppercase shadow-xs bg-emerald-100 text-emerald-800 border border-emerald-300 flex items-center gap-1">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>Verified Project</span>
-                  </span>
+                <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-xs px-3 py-1 rounded-full border border-[#E8DDD0] text-[11px] font-heading font-bold text-[#3D352D] flex items-center gap-1.5 uppercase tracking-wider">
+                  <HardHat className="w-3.5 h-3.5 text-[#C96F1B]" />
+                  <span>{project.vendorRole}</span>
                 </div>
               </div>
 
-              {/* Content */}
-              <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                <div>
-                  <h3 className="font-heading font-bold text-lg text-[#2D2D2D] mb-2 group-hover:text-[#FFB300] transition-colors leading-snug">
+              <div className="p-6 sm:p-8 space-y-5">
+                <div className="space-y-1">
+                  <span className="font-heading text-xs text-[#C96F1B] font-bold uppercase tracking-wider block">
+                    WORK ORDER: {project.workOrderNumber}
+                  </span>
+                  <h3 className="font-heading font-bold text-2xl sm:text-3xl text-[#3D352D] tracking-tight group-hover:text-[#C96F1B] transition-colors">
                     {project.title}
                   </h3>
-
-                  <div className="flex flex-wrap gap-2 text-xs text-[#5D5D5D] font-body mb-3">
-                    <span className="flex items-center gap-1">
-                      <MapPin className="w-3.5 h-3.5 text-[#FFB300]" />
-                      {project.location}
-                    </span>
-                    <span>•</span>
-                    <span className="flex items-center gap-1">
-                      <Building2 className="w-3.5 h-3.5 text-[#FFB300]" />
-                      {project.client}
-                    </span>
-                  </div>
-
-                  <p className="text-xs text-[#5D5D5D] font-body line-clamp-2 bg-[#F9F7F2] p-3 rounded-md border border-[#E7E7E7]">
-                    {project.scope}
-                  </p>
                 </div>
 
-                {/* Actions */}
-                <div className="flex gap-2 pt-2">
-                  <button
-                    onClick={() => setSelectedProject(project)}
-                    className="flex-1 py-2.5 px-3 rounded-md bg-[#F9F7F2] hover:bg-[#E7E7E7] border border-[#E7E7E7] text-[#2D2D2D] font-heading text-xs font-bold uppercase tracking-wider transition-colors"
-                  >
-                    Quick Summary
-                  </button>
+                <p className="text-sm text-[#6B5E4E] font-body leading-relaxed">
+                  {project.scope}
+                </p>
 
-                  <Link
-                    to={`/projects/${project.id}`}
-                    className="py-2.5 px-3 rounded-md bg-[#2D2D2D] hover:bg-[#444444] text-white font-heading text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1 transition-colors"
-                  >
-                    <span>Full Case</span>
-                    <ArrowUpRight className="w-4 h-4 text-[#FFB300]" />
-                  </Link>
+                <div className="pt-3 border-t border-[#E8DDD0] grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-body text-[#3D352D]">
+                  <div className="p-3 bg-[#F5EEE5] rounded-xl border border-[#E8DDD0] flex items-start gap-2">
+                    <Building2 className="w-4 h-4 text-[#C96F1B] shrink-0 mt-0.5" />
+                    <div>
+                      <span className="text-[10px] font-heading font-semibold text-[#6B5E4E] uppercase block">Client</span>
+                      <span className="font-semibold">{project.client}</span>
+                    </div>
+                  </div>
+
+                  <div className="p-3 bg-[#F5EEE5] rounded-xl border border-[#E8DDD0] flex items-start gap-2">
+                    <MapPin className="w-4 h-4 text-[#C96F1B] shrink-0 mt-0.5" />
+                    <div>
+                      <span className="text-[10px] font-heading font-semibold text-[#6B5E4E] uppercase block">Location</span>
+                      <span className="font-semibold">{project.location}</span>
+                    </div>
+                  </div>
+
+                  <div className="p-3 bg-[#F5EEE5] rounded-xl border border-[#E8DDD0] flex items-start gap-2">
+                    <Calendar className="w-4 h-4 text-[#C96F1B] shrink-0 mt-0.5" />
+                    <div>
+                      <span className="text-[10px] font-heading font-semibold text-[#6B5E4E] uppercase block">Order Date</span>
+                      <span className="font-body font-bold">{project.orderDate}</span>
+                    </div>
+                  </div>
+
+                  <div className="p-3 bg-[#F5EEE5] rounded-xl border border-[#E8DDD0] flex items-start gap-2">
+                    <Calendar className="w-4 h-4 text-[#C96F1B] shrink-0 mt-0.5" />
+                    <div>
+                      <span className="text-[10px] font-heading font-semibold text-[#6B5E4E] uppercase block">Scheduled Completion</span>
+                      <span className="font-body font-bold">{project.scheduledCompletion}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          ))}
+
+            <div className="p-6 sm:p-8 pt-0 flex flex-col sm:flex-row items-center gap-3">
+              <Link
+                to={`/projects/${project.slug}`}
+                className="w-full sm:w-1/2 py-3.5 px-5 rounded-lg bg-[#3D352D] hover:bg-[#2D2620] text-white font-heading text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-xs"
+              >
+                <span>View Project Details</span>
+                <ArrowRight className="w-4 h-4 text-[#C96F1B]" />
+              </Link>
+
+              <Link
+                to="/request-quote?requirement=construction-contracting"
+                className="w-full sm:w-1/2 py-3.5 px-5 rounded-lg bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-xs"
+              >
+                <FileText className="w-4 h-4" />
+                <span>Discuss a Project Requirement</span>
+              </Link>
+            </div>
+          </div>
         </div>
 
       </div>
-
-      {/* Detail Modal */}
-      <ProjectDetailModal 
-        project={selectedProject} 
-        onClose={() => setSelectedProject(null)} 
-      />
     </section>
   );
 };

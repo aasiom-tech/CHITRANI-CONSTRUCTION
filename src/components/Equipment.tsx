@@ -1,144 +1,105 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Truck, CheckCircle, Clock, ArrowRight, ArrowUpRight } from 'lucide-react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Truck, CheckCircle2, ArrowRight, FileText } from 'lucide-react';
 import { equipmentData } from '../data/equipment';
-import { EquipmentItem } from '../types';
 
 export const Equipment: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<string>('All');
-  const navigate = useNavigate();
-
-  const categories = [
-    { label: 'All Machinery', key: 'All' },
-    { label: 'Concrete Equipment', key: 'Concrete Boom Placer' },
-  ];
-
-  const filteredEquipment = equipmentData.filter((item) => {
-    if (activeCategory === 'All') return true;
-    return item.category === activeCategory;
-  });
-
-  const handleRentalClick = (item: EquipmentItem) => {
-    navigate(`/request-quote?requirement=Equipment+Rental&equipment=${encodeURIComponent(item.name)}`);
-  };
+  const item = equipmentData[0];
+  const altText = "Putzmeister M42-5 concrete boom placer positioned for concrete placement at a construction site";
+  const quoteLink = `/request-quote?requirement=equipment-rental&equipment=${encodeURIComponent(item.slug)}`;
 
   return (
-    <section id="equipment" className="py-16 sm:py-24 bg-white text-[#2D2D2D] border-t border-[#E7E7E7]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="equipment" className="py-16 sm:py-24 bg-[#F5EEE5] text-[#3D352D] border-t border-[#E8DDD0]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-          <span className="font-display text-xs text-[#FFB300] font-bold tracking-wider uppercase block mb-2">
-            MACHINERY FLEET & PLANT RENTAL
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <span className="font-display text-xs text-[#C96F1B] font-bold tracking-wider uppercase block">
+            EQUIPMENT SUPPORT
           </span>
-          <h2 className="font-heading font-bold text-3xl sm:text-4xl text-[#2D2D2D] tracking-tight">
-            Construction Equipment Rental Fleet
+          <h2 className="font-heading font-bold text-3xl sm:text-4xl text-[#3D352D] tracking-tight">
+            Concrete Placement Equipment for Construction Projects
           </h2>
-          <p className="mt-3 text-base text-[#5D5D5D] font-body">
-            High-efficiency concrete pumps, heavy excavators, cranes, mixers, and site utilities with experienced operators.
+          <p className="text-sm sm:text-base text-[#6B5E4E] font-body leading-relaxed">
+            Chitrani Construction provides structured concrete boom placer rental for sites requiring high-capacity concrete-placement support.
           </p>
         </div>
 
-        {/* Category Filters */}
-        <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-4 mb-10 no-scrollbar">
-          {categories.map((cat) => (
-            <button
-              key={cat.key}
-              onClick={() => setActiveCategory(cat.key)}
-              className={`px-4 py-2 rounded-md font-heading text-xs tracking-wider uppercase transition-all whitespace-nowrap shrink-0 ${
-                activeCategory === cat.key
-                  ? 'bg-[#FFB300] text-white font-bold shadow-xs'
-                  : 'bg-[#F9F7F2] text-[#5D5D5D] hover:text-[#2D2D2D] border border-[#E7E7E7]'
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Equipment Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredEquipment.map((item) => (
-            <div 
-              key={item.id}
-              className="bg-white rounded-[20px] overflow-hidden border border-[#E7E7E7] hover:-translate-y-1 hover:border-[#FFB300] hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] transition-all duration-300 flex flex-col justify-between group shadow-[0_15px_35px_rgba(0,0,0,0.08)]"
-            >
-              {/* Image & Status Badge */}
-              <div className="relative h-48 overflow-hidden bg-[#F9F7F2]">
-                <img 
-                  src={item.image} 
-                  alt={item.name}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 filter brightness-95"
+        {/* Single Equipment Card Container */}
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white rounded-[18px] border border-[#E8DDD0] shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:border-[#C96F1B] motion-safe:hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group">
+            <div>
+              <div className="relative aspect-[16/9] overflow-hidden bg-[#F5EEE5]">
+                <img
+                  src={item.image}
+                  alt={altText}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                
-                <div className="absolute top-3 left-3">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/90 text-[#2D2D2D] border border-[#E7E7E7] font-display text-xs font-bold uppercase tracking-wider shadow-xs">
-                    <Truck className="w-3.5 h-3.5 text-[#FFB300]" />
-                    <span>{item.category}</span>
-                  </span>
-                </div>
-
-                <div className="absolute bottom-3 right-3">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md font-display text-xs font-bold uppercase shadow-xs bg-emerald-100 text-emerald-800 border border-emerald-300">
-                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>Available for Deployment</span>
-                  </span>
+                <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-xs px-3 py-1 rounded-full border border-[#E8DDD0] text-[11px] font-heading font-bold text-[#3D352D] flex items-center gap-1.5 uppercase tracking-wider">
+                  <Truck className="w-3.5 h-3.5 text-[#C96F1B]" />
+                  <span>{item.category}</span>
                 </div>
               </div>
 
-              {/* Card Details */}
-              <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                <div>
-                  <h3 className="font-heading font-bold text-lg text-[#2D2D2D] mb-2 leading-snug group-hover:text-[#FFB300] transition-colors">
-                    {item.name}
-                  </h3>
+              <div className="p-6 sm:p-8 space-y-5">
+                <h3 className="font-heading font-bold text-2xl sm:text-3xl text-[#3D352D] tracking-tight group-hover:text-[#C96F1B] transition-colors">
+                  {item.name}
+                </h3>
 
-                  <p className="text-xs text-[#5D5D5D] font-body mb-4 line-clamp-2">
-                    {item.description}
-                  </p>
+                <p className="text-sm text-[#6B5E4E] font-body leading-relaxed">
+                  {item.clientScopeSummary}
+                </p>
 
-                  {/* Tech Specs */}
-                  <div className="bg-[#F9F7F2] p-3 rounded-md border border-[#E7E7E7] space-y-1.5 text-xs font-body mb-4">
-                    <div className="flex justify-between items-center text-[#5D5D5D]">
-                      <span className="text-[11px] text-[#7D7D7D] font-heading uppercase">Capacity / Output:</span>
-                      <span className="font-bold text-[#2D2D2D]">{item.capacity}</span>
-                    </div>
-                    <div className="flex justify-between items-center text-[#5D5D5D]">
-                      <span className="text-[11px] text-[#7D7D7D] font-heading uppercase">Boom Reach:</span>
-                      <span className="font-bold text-[#2D2D2D]">{item.boomReach}</span>
-                    </div>
-                    <div className="flex justify-between items-center text-[#5D5D5D] pt-1.5 border-t border-[#E7E7E7]">
-                      <span className="text-[11px] text-[#7D7D7D] font-heading uppercase flex items-center gap-1">
-                        <Clock className="w-3 h-3 text-[#FFB300]" /> Rental Structure:
-                      </span>
-                      <span className="text-[11px] text-[#FFB300] font-bold font-heading">{item.rentalStructure}</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Actions */}
-                <div className="flex gap-2">
-                  <Link
-                    to={`/equipment/${item.id}`}
-                    className="py-3 px-3 rounded-md bg-[#F9F7F2] hover:bg-[#E7E7E7] border border-[#E7E7E7] text-[#2D2D2D] font-heading text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1 transition-colors"
-                  >
-                    <span>Specs</span>
-                    <ArrowUpRight className="w-4 h-4 text-[#FFB300]" />
-                  </Link>
-
-                  <button
-                    onClick={() => handleRentalClick(item)}
-                    className="flex-1 py-3 px-4 rounded-md bg-[#FFB300] hover:bg-[#E59A00] text-white font-heading text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors shadow-xs"
-                  >
-                    <span>Request Rental</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
+                <div className="pt-3 border-t border-[#E8DDD0] space-y-2.5">
+                  <h4 className="font-heading text-xs text-[#3D352D] font-bold uppercase tracking-wider">
+                    Verified Specifications
+                  </h4>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#6B5E4E] font-body">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#C96F1B] shrink-0" />
+                      <span><strong>42 m</strong> boom reach</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#C96F1B] shrink-0" />
+                      <span><strong>90 m³</strong> capacity</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#C96F1B] shrink-0" />
+                      <span>Manufactured in <strong>2020</strong></span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#C96F1B] shrink-0" />
+                      <span><strong>AdBlue</strong> equipped</span>
+                    </li>
+                    <li className="flex items-center gap-2 sm:col-span-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#C96F1B] shrink-0" />
+                      <span><strong>Operator and helper</strong> included</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
-          ))}
+
+            <div className="p-6 sm:p-8 pt-0 flex flex-col sm:flex-row items-center gap-3">
+              <Link
+                to={`/equipment/${item.slug}`}
+                className="w-full sm:w-1/2 py-3.5 px-5 rounded-lg bg-[#3D352D] hover:bg-[#2D2620] text-white font-heading text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-xs"
+              >
+                <span>View Equipment Details</span>
+                <ArrowRight className="w-4 h-4 text-[#C96F1B]" />
+              </Link>
+
+              <Link
+                to={quoteLink}
+                className="w-full sm:w-1/2 py-3.5 px-5 rounded-lg bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-xs"
+              >
+                <FileText className="w-4 h-4" />
+                <span>Request Rental Quote</span>
+              </Link>
+            </div>
+          </div>
         </div>
 
       </div>

@@ -1,4 +1,6 @@
 import { ServiceItem } from '../types';
+import contractingImg from '../assets/images/services/construction-contracting-service.webp';
+import boomPlacerImg from '../assets/images/services/boom-placer-rental-service.webp';
 
 export const servicesData: ServiceItem[] = [
   {
@@ -7,25 +9,35 @@ export const servicesData: ServiceItem[] = [
     title: 'Construction Contracting',
     category: 'Civil Contracting',
     iconName: 'Building2',
-    description: 'Comprehensive structural construction contracting for residential, commercial, and heavy civil works.',
-    image: 'https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?auto=format&fit=crop&w=1200&q=80',
+    description: 'Structural and civil construction support for public and private sector requirements, with emphasis on organised execution, site coordination, concrete-intensive works, and project-specific resource planning.',
+    image: contractingImg,
     details: [
-      'Structural RCC framing and foundation execution',
-      'High-rise residential and commercial civil works',
-      'Quality shuttering and reinforcement steel tying',
-      'Contract supervision and on-site EHS compliance'
+      'Structural construction support',
+      'Civil construction works',
+      'Residential and commercial requirements',
+      'Infrastructure-related civil support',
+      'Site and resource coordination',
+      'Concrete-intensive project execution'
     ],
     capabilities: [
-      'End-to-End RCC Structural Framework Execution',
-      'Substructure Raft, Footings & Column Casting',
-      'Mivan & Conventional Formwork Engineering',
-      'Strict Quality Inspection & Slab Integrity Checks'
+      'Structural construction support',
+      'Civil construction works',
+      'Residential building requirements',
+      'Commercial building requirements',
+      'Infrastructure-related civil works',
+      'Concrete-intensive execution',
+      'Site coordination',
+      'Resource planning',
+      'Machinery coordination',
+      'Public and private sector support'
     ],
     applications: [
-      'Multi-storey Residential Towers',
-      'Commercial Plazas & Tech Hubs',
-      'Industrial Sheds & PEB Substructures',
-      'Civic & Infrastructure Works'
+      'Residential developments',
+      'Commercial building works',
+      'Concrete-intensive construction',
+      'Structural execution support',
+      'Infrastructure-linked civil requirements',
+      'Contractor support requiring machinery coordination'
     ]
   },
   {
@@ -34,25 +46,31 @@ export const servicesData: ServiceItem[] = [
     title: 'Concrete Boom Placer Rental',
     category: 'Machinery Rental',
     iconName: 'Truck',
-    description: 'High-capacity Putzmeister M42-5 Concrete Boom Placer rental complete with certified operator and helper for uninterrupted concrete pours.',
-    image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1200&q=80',
+    description: 'Putzmeister M42-5 concrete boom placer rental with an operator and helper for sites requiring dependable, high-capacity concrete-placement support.',
+    image: boomPlacerImg,
     details: [
-      'Putzmeister M42-5 Truck-Mounted Boom Placer',
-      '42m vertical reach & 160 m³/h output capacity',
-      'Full operator and maintenance helper crew included',
-      'Flexible shift, weekly, and monthly rental terms'
+      '42-metre boom reach',
+      '90 m³ capacity',
+      'Operator and helper included',
+      'Monthly single-shift deployment',
+      'High-rise and large-pour applications',
+      'Contractor equipment support'
     ],
     capabilities: [
-      'Mass Foundation & Heavy Raft Concrete Pouring',
-      'High-Rise Vertical Concrete Placement',
-      'Precision Placement with Reduced Manual Labor',
-      'AdBlue Compliant Low-Emission Engine Execution'
+      '42-metre boom reach',
+      '90 m³ capacity',
+      'Operator and helper included',
+      'Monthly single-shift deployment',
+      'High-rise and large-pour applications',
+      'Contractor equipment support'
     ],
     applications: [
-      'High-Rise Residential Slabs',
-      'Bridge & Flyover Deck Casting',
-      'Industrial Superflat Floor Slabs',
-      'Commercial Basement Raft Pours'
+      'High-rise concrete placement',
+      'Large-volume concrete pours',
+      'Residential building projects',
+      'Commercial construction',
+      'Infrastructure-related concrete work',
+      'Contractor equipment support'
     ]
   }
 ];
