@@ -5,11 +5,11 @@ import { companyConfig } from '../config/companyConfig';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#3D352D] text-white border-t border-[#E8DDD0]/20 pt-12 pb-20 sm:pb-12">
+    <footer className="bg-[#3D352D] text-white border-t border-[rgba(216,204,188,0.18)] pt-12 pb-20 sm:pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-12 border-b border-[#E8DDD0]/20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-12 border-b border-[rgba(216,204,188,0.18)]">
           
           {/* Col 1: Company Profile (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
@@ -26,13 +26,13 @@ export const Footer: React.FC = () => {
               Chitrani Construction provides structural contracting and concrete boom placer rental support for construction and infrastructure requirements across Maharashtra. Putzmeister M42-5 concrete boom placer rental with an operator and helper.
             </p>
 
-            <div className="bg-white/5 p-3 rounded-xl border border-white/10 space-y-1 font-body text-[11px]">
-              <div className="text-[#C96F1B] font-semibold flex items-center gap-1.5 uppercase font-heading">
+            <div className="bg-[rgba(201,111,27,0.14)] p-3 rounded-xl border border-[rgba(201,111,27,0.38)] space-y-1 font-body text-[11px]">
+              <div className="text-white font-semibold flex items-center gap-1.5 uppercase font-heading">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#C96F1B]" />
                 <span>GST-Registered Enterprise</span>
               </div>
-              <div className="text-[#D8CCBC]"><strong>GSTIN:</strong> 27CLUPB6299K2Z6</div>
-              <div className="text-[#D8CCBC]"><strong>Legal Name:</strong> Mrunali Dipak Sonawane</div>
+              <div className="text-[#D8CCBC]"><strong>GSTIN:</strong> {companyConfig.gstin}</div>
+              <div className="text-[#D8CCBC]"><strong>Legal Name:</strong> {companyConfig.legalName}</div>
             </div>
           </div>
 
@@ -96,7 +96,7 @@ export const Footer: React.FC = () => {
                   <MapPin className="w-3.5 h-3.5 text-[#C96F1B]" /> Operating Office (Mumbai):
                 </div>
                 <p className="text-[11px] text-[#D8CCBC] leading-tight pl-4">
-                  Shop No. 13, Vijay Nagar Society, Sahar Road, Near D Mart, Andheri East, Mumbai – 400069
+                  {companyConfig.operatingOffice}
                 </p>
               </div>
 
@@ -105,31 +105,31 @@ export const Footer: React.FC = () => {
                   <MapPin className="w-3.5 h-3.5 text-[#C96F1B]" /> Registered Office (Jalgaon):
                 </div>
                 <p className="text-[11px] text-[#D8CCBC] leading-tight pl-4">
-                  Plot No. 15, Gat No. 146, Nehru Nagar, Mahabal Road, Ramanand Nagar, Jalgaon, Maharashtra – 425001
+                  {companyConfig.registeredOffice}
                 </p>
               </div>
 
               <div className="pt-2 space-y-1.5">
                 <a 
-                  href="tel:+919833706666" 
+                  href={`tel:${companyConfig.phoneRaw}`} 
                   className="flex items-center gap-2 text-[#D8CCBC] hover:text-[#C96F1B] transition-colors"
                 >
                   <Phone className="w-3.5 h-3.5 text-[#C96F1B]" />
-                  <span>+91 9833706666</span>
+                  <span>{companyConfig.phone}</span>
                 </a>
                 <a 
-                  href="tel:+917387801051" 
+                  href={`tel:${companyConfig.secondaryPhoneRaw}`} 
                   className="flex items-center gap-2 text-[#D8CCBC] hover:text-[#C96F1B] transition-colors"
                 >
                   <Phone className="w-3.5 h-3.5 text-[#C96F1B]" />
-                  <span>+91 73878 01051</span>
+                  <span>{companyConfig.secondaryPhone}</span>
                 </a>
                 <a 
-                  href="mailto:chitraniconstruction@gmail.com" 
+                  href={`mailto:${companyConfig.email}`} 
                   className="flex items-center gap-2 text-[#D8CCBC] hover:text-[#C96F1B] transition-colors truncate"
                 >
                   <Mail className="w-3.5 h-3.5 text-[#C96F1B]" />
-                  <span className="truncate">chitraniconstruction@gmail.com</span>
+                  <span className="truncate">{companyConfig.email}</span>
                 </a>
               </div>
             </div>
@@ -138,9 +138,9 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar: Copyright & Legal */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-body text-xs text-[#7E7267]">
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-body text-xs text-[#9D9287]">
           <div>
-            © {new Date().getFullYear()} Chitrani Construction (Mrunali Dipak Sonawane). All rights reserved.
+            © {new Date().getFullYear()} Chitrani Construction ({companyConfig.legalName}). All rights reserved.
           </div>
 
           <div className="flex items-center gap-4">

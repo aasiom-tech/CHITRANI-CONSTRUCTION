@@ -5,23 +5,23 @@ import capabilityImg from '../../assets/images/chitrani-construction-capability.
 
 export const CompanyIntroPreview: React.FC = () => {
   return (
-    <section className="py-20 sm:py-28 bg-white text-[#2D2D2D] border-b border-[#E7E7E7]">
+    <section className="py-20 sm:py-28 bg-white text-[#3D352D] border-b border-[#E8DDD0]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
           {/* Left: Content */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[10px] bg-[#F9F7F2] border border-[#E7E7E7] text-[#FFB300] font-heading text-xs font-semibold uppercase tracking-wider">
-              <HardHat className="w-4 h-4 text-[#FFB300]" />
-              <span className="text-[#2D2D2D]">ABOUT CHITRANI</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[10px] bg-[#F5EEE5] border border-[#E8DDD0] text-[#C96F1B] font-heading text-xs font-semibold uppercase tracking-wider">
+              <HardHat className="w-4 h-4 text-[#C96F1B]" />
+              <span className="text-[#3D352D]">ABOUT CHITRANI</span>
             </div>
 
-            <h2 className="text-2xl sm:text-4xl font-heading font-semibold text-[#2D2D2D] tracking-tight leading-snug">
+            <h2 className="text-2xl sm:text-4xl font-heading font-semibold text-[#3D352D] tracking-tight leading-snug">
               Construction Capability and Equipment Support Under One Roof
             </h2>
 
-            <div className="space-y-4 text-sm sm:text-base text-[#5D5D5D] leading-relaxed font-body">
+            <div className="space-y-4 text-sm sm:text-base text-[#6B5E4E] leading-relaxed font-body">
               <p>
                 Chitrani Construction is a Maharashtra-based construction and equipment-support enterprise serving the Mumbai construction market.
               </p>
@@ -36,17 +36,17 @@ export const CompanyIntroPreview: React.FC = () => {
             <div className="pt-2">
               <Link
                 to="/about"
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-[12px] bg-[#FFB300] hover:bg-[#E59A00] text-[#2D2D2D] font-heading text-xs font-semibold uppercase tracking-wider transition-all shadow-xs hover:-translate-y-0.5 focus:outline-hidden focus:ring-2 focus:ring-[#FFB300]"
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-[12px] bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs font-semibold uppercase tracking-wider transition-all shadow-[0_10px_30px_rgba(201,111,27,0.25)] hover:-translate-y-0.5 focus:outline-hidden focus:ring-2 focus:ring-[#C96F1B]"
               >
                 <span>Learn More About Us</span>
-                <ArrowRight className="w-4 h-4 text-[#2D2D2D]" />
+                <ArrowRight className="w-4 h-4 text-white" />
               </Link>
             </div>
           </div>
 
           {/* Right: Construction Capability Imagery */}
           <div className="lg:col-span-5 relative">
-            <div className="relative rounded-[20px] overflow-hidden border border-[#E7E7E7] shadow-[0_10px_30px_rgba(45,45,45,0.06)] bg-white group aspect-[4/3] sm:aspect-auto">
+            <div className="relative rounded-[20px] overflow-hidden border border-[#E8DDD0] shadow-[0_10px_30px_rgba(61,53,45,0.06)] bg-white group aspect-[4/3] sm:aspect-auto">
               <img 
                 src={capabilityImg} 
                 alt="Chitrani Construction safety helmet, structural blueprints and digital building model at an active construction site"

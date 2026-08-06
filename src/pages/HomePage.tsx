@@ -20,7 +20,7 @@ export const HomePage: React.FC = () => {
         canonical="https://chitraniconstruction.com/"
       />
 
-      <div className="bg-[#F9F7F2] space-y-0 text-[#2D2D2D]">
+      <div className="bg-[#EADBC8] space-y-0 text-[#3D352D]">
         
         {/* 1. Hero */}
         <Hero />
