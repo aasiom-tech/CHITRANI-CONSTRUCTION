@@ -1,30 +1,34 @@
 import { EquipmentItem } from '../types';
+import equipmentImg from '../assets/images/equipment/putzmeister-m42-5-equipment.webp';
 
 export const equipmentData: EquipmentItem[] = [
   {
     id: 'putzmeister-m42-5',
     slug: 'putzmeister-m42-5',
     name: 'Putzmeister M42-5 Concrete Boom Placer',
-    model: 'Putzmeister M42-5 (5-Arm RZ Boom)',
-    category: 'Concrete Boom Placer',
-    boomReach: '42 Meters Vertical Reach',
-    capacity: 'Up to 160 m³/h Output Rate',
-    manufactureYear: '2023 Fleet Model',
-    adBlueStatus: 'AdBlue BS6 Compliant (Low Emission)',
-    operatorInclusion: '1 Certified Senior Operator + 1 Maintenance Helper Included',
-    rentalStructure: 'Shift Basis / Monthly Contract / Project Period',
-    clientScopeSummary: 'The Putzmeister M42-5 delivers exceptional reach and flexible 5-arm RZ boom kinematics, allowing seamless concrete placement in tight urban spaces, high-rise slabs, and mass raft foundations.',
-    image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1200&q=80',
-    description: 'Engineering excellence engineered by Putzmeister. Features Ergonic 2.0 control system, robust 5-arm RZ folding boom for minimal unfold height, high-pressure concrete pump kit, and low setup footprint.',
+    model: 'Putzmeister M42-5',
+    category: 'Concrete Placement Equipment',
+    boomReach: '42 metres',
+    capacity: '90 m³',
+    manufactureYear: '2020',
+    adBlueStatus: 'AdBlue equipped',
+    operatorInclusion: 'Operator and helper included',
+    rentalStructure: 'Monthly deployment (12-hour shift, 26 working days per month, Sundays excluded)',
+    clientScopeSummary: 'A 42-metre concrete boom placer suited to high-rise construction, large concrete pours, commercial developments, residential projects, and infrastructure-related concrete-placement requirements.',
+    image: equipmentImg,
+    description: 'Chitrani Construction provides the Putzmeister M42-5 concrete boom placer on structured monthly rental with an operator and helper for sites requiring dependable, high-capacity concrete-placement support.',
     keySpecs: [
-      { label: 'Vertical Reach', value: '41.6 m' },
-      { label: 'Horizontal Reach', value: '37.3 m' },
-      { label: 'Delivery Cylinder Diameter', value: '230 mm' },
-      { label: 'Max Concrete Pressure', value: '85 Bar' },
-      { label: 'Boom Folding System', value: '5-Arm RZ-Fold' },
-      { label: 'Chassis Type', value: 'Heavy Duty Multi-Axle' },
-      { label: 'Engine Emission Standard', value: 'AdBlue BS6 Compliant' },
-      { label: 'Crew Provision', value: 'Certified Operator & Helper Included' }
+      { label: 'Equipment', value: 'Putzmeister M42-5 Concrete Boom Placer' },
+      { label: 'Boom Reach', value: '42 metres' },
+      { label: 'Capacity', value: '90 m³' },
+      { label: 'Year of Manufacture', value: '2020' },
+      { label: 'AdBlue Equipped', value: 'Yes' },
+      { label: 'Operator', value: 'Included' },
+      { label: 'Helper', value: 'Included' },
+      { label: 'Rental Model', value: 'Monthly deployment' },
+      { label: 'Shift', value: 'One fixed 12-hour shift' },
+      { label: 'Working Days', value: '26 working days per month' },
+      { label: 'Sundays', value: 'Excluded' }
     ]
   }
 ];

@@ -3,154 +3,94 @@ import { Link } from 'react-router-dom';
 import { PageHeader } from '../components/common/PageHeader';
 import { SEO } from '../components/common/SEO';
 import { projectsData } from '../data/projects';
-import { FinalCTA } from '../components/FinalCTA';
-import { 
-  Building2, 
-  MapPin, 
-  FileText, 
-  Calendar, 
-  ArrowRight, 
-  CheckCircle2, 
-  HardHat,
-  ShieldCheck
-} from 'lucide-react';
+import { ProjectCard } from '../components/projects/ProjectCard';
+import { ProjectEngagement } from '../components/projects/ProjectEngagement';
+import { Building2, ArrowRight, FileText } from 'lucide-react';
 
 export const ProjectsPage: React.FC = () => {
-  const project = projectsData[0]; // Ocean Star Project
+  const project = projectsData[0];
 
   return (
-    <div>
+    <div className="bg-[#F5EEE5] text-[#3D352D] min-h-screen">
       <SEO 
-        title="Featured Projects | Ocean Star Project | Chitrani Construction"
-        description="Ocean Star Project by Chitrani Construction — structural contracting and concrete boom placer operations in Maharashtra."
+        title="Verified Project Experience | Chitrani Construction"
+        description="Review Chitrani Construction's verified project engagement record, including the Ocean Star development project in Mumbai."
         canonical="https://chitraniconstruction.com/projects"
       />
 
+      {/* Page Header */}
       <PageHeader
-        title="Featured Projects & Case Studies"
-        subtitle="Verified structural civil contracting and equipment deployment showcase."
-        badge="PROJECT EXECUTION RECORD"
+        title="Verified Project Engagement"
+        subtitle="Chitrani Construction’s project portfolio is presented using verified client and work-order information. The current listed engagement reflects the company’s role as a construction vendor for a Mumbai development project."
+        badge="PROJECT EXPERIENCE"
       />
 
-      <section className="py-16 sm:py-24 bg-[#F5F2EB] text-[#181A1B]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="font-mono text-xs text-[#A9472B] font-bold uppercase tracking-widest block">
-              [VERIFIED PROJECT FEATURE]
+      {/* Main Content Container */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-16 sm:space-y-20">
+        
+        {/* Single Premium Project Card */}
+        <section aria-label="Project Directory">
+          <div className="max-w-4xl mx-auto">
+            <ProjectCard project={project} />
+          </div>
+        </section>
+
+        {/* Project Engagement & Responsible Information Note */}
+        <section className="max-w-4xl mx-auto">
+          <ProjectEngagement />
+        </section>
+
+        {/* Construction Capability Link */}
+        <section className="max-w-4xl mx-auto bg-white rounded-[18px] border border-[#E8DDD0] p-6 sm:p-8 space-y-4 shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="space-y-1">
+              <span className="font-display text-xs text-[#C96F1B] font-bold tracking-wider uppercase block">
+                CAPABILITY REFERENCE
+              </span>
+              <h3 className="font-heading font-bold text-xl sm:text-2xl text-[#3D352D]">
+                Construction Contracting
+              </h3>
+              <p className="text-sm text-[#6B5E4E] font-body leading-relaxed">
+                Review the structural and civil construction support offered by Chitrani Construction.
+              </p>
+            </div>
+
+            <Link
+              to="/services/construction-contracting"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#F5EEE5] hover:bg-[#EADBC8] text-[#3D352D] font-heading text-xs font-bold uppercase tracking-wider transition-colors border border-[#E8DDD0] shrink-0"
+            >
+              <span>Explore Capability</span>
+              <ArrowRight className="w-4 h-4 text-[#C96F1B]" />
+            </Link>
+          </div>
+        </section>
+
+        {/* Final Project Enquiry CTA */}
+        <section className="bg-[#3D352D] rounded-[18px] p-8 sm:p-12 text-white text-center space-y-6 shadow-xl max-w-4xl mx-auto">
+          <div className="max-w-2xl mx-auto space-y-3">
+            <span className="font-display text-xs text-[#C96F1B] font-bold tracking-wider uppercase block">
+              COMMERCIAL CONSULTATION
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold font-heading text-[#181A1B]">
-              Ocean Star Project
+            <h2 className="font-heading font-bold text-3xl sm:text-4xl text-white">
+              Discuss Your Project Requirements
             </h2>
-            <p className="text-sm text-[#666A6C] leading-relaxed">
-              Demonstrating turnkey structural execution and Putzmeister M42-5 concrete boom placer operations.
+            <p className="text-sm text-[#D1C5B0] font-body leading-relaxed">
+              Contact our engineering team to discuss structural civil contracting support or machinery deployment parameters.
             </p>
           </div>
 
-          {/* Featured Ocean Star Editorial Panel */}
-          <div className="bg-white rounded-xs border border-[#D8D4CC] shadow-md overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-0">
-            
-            {/* Visual Column */}
-            <div className="lg:col-span-6 relative bg-[#181A1B] min-h-[360px] lg:min-h-full">
-              <img
-                src={project.image}
-                alt={project.title}
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover filter brightness-90"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#181A1B] via-transparent to-transparent opacity-80" />
-              
-              <div className="absolute top-4 left-4 bg-[#242729] text-[#E3AA20] px-3 py-1 rounded-xs font-mono text-xs font-bold uppercase border border-[#73787A]/30">
-                {project.category}
-              </div>
-
-              <div className="absolute bottom-4 left-4 right-4 text-white p-4 bg-[#242729]/90 backdrop-blur-xs rounded-xs border border-[#73787A]/30">
-                <div className="font-mono text-[10px] text-[#E3AA20] uppercase font-bold">
-                  Work Order: {project.workOrderNumber}
-                </div>
-                <div className="font-heading font-bold text-lg text-white">
-                  {project.title}
-                </div>
-              </div>
-            </div>
-
-            {/* Content Column */}
-            <div className="lg:col-span-6 p-6 sm:p-10 flex flex-col justify-between space-y-6">
-              <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-[#F5F2EB] text-[#A9472B] font-mono text-[11px] font-bold uppercase rounded-xs border border-[#D8D4CC]">
-                  <HardHat className="w-3.5 h-3.5" />
-                  <span>CONTRACTOR SCOPE VERIFIED</span>
-                </div>
-
-                <h3 className="text-2xl font-bold font-heading text-[#181A1B]">
-                  {project.title}
-                </h3>
-
-                <p className="text-sm text-[#666A6C] leading-relaxed">
-                  {project.scope}
-                </p>
-
-                {/* Grid Info */}
-                <div className="grid grid-cols-2 gap-3 pt-2 font-mono text-xs text-[#181A1B]">
-                  <div className="p-3 bg-[#F5F2EB] rounded-xs border border-[#D8D4CC]">
-                    <div className="text-[10px] text-[#666A6C] uppercase">Client:</div>
-                    <div className="font-bold truncate">{project.client}</div>
-                  </div>
-
-                  <div className="p-3 bg-[#F5F2EB] rounded-xs border border-[#D8D4CC]">
-                    <div className="text-[10px] text-[#666A6C] uppercase">Location:</div>
-                    <div className="font-bold truncate">{project.location}</div>
-                  </div>
-
-                  <div className="p-3 bg-[#F5F2EB] rounded-xs border border-[#D8D4CC]">
-                    <div className="text-[10px] text-[#666A6C] uppercase">Order Date:</div>
-                    <div className="font-bold">{project.orderDate}</div>
-                  </div>
-
-                  <div className="p-3 bg-[#F5F2EB] rounded-xs border border-[#D8D4CC]">
-                    <div className="text-[10px] text-[#666A6C] uppercase">Role:</div>
-                    <div className="font-bold truncate">{project.vendorRole}</div>
-                  </div>
-                </div>
-
-                {/* Highlight */}
-                <div className="p-4 bg-[#181A1B] text-white rounded-xs border border-[#242729] space-y-1">
-                  <div className="font-mono text-[10px] text-[#E3AA20] uppercase font-bold flex items-center gap-1.5">
-                    <ShieldCheck className="w-3.5 h-3.5 text-[#A9472B]" />
-                    <span>Engineering Highlight</span>
-                  </div>
-                  <p className="text-xs text-[#D9D7D1] leading-relaxed">
-                    {project.engineeringHighlight}
-                  </p>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="pt-4 border-t border-[#D8D4CC] flex flex-col sm:flex-row items-center gap-3">
-                <Link
-                  to="/projects/ocean-star"
-                  className="w-full sm:w-1/2 py-3 px-4 bg-[#181A1B] hover:bg-[#242729] text-white font-mono text-xs font-bold uppercase tracking-wider text-center rounded-xs transition-colors flex items-center justify-center gap-2"
-                >
-                  <span>Detailed Project Case</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-[#E3AA20]" />
-                </Link>
-
-                <Link
-                  to={`/request-quote?requirement=${encodeURIComponent('Ocean Star Similar Project')}`}
-                  className="w-full sm:w-1/2 py-3 px-4 bg-[#A9472B] hover:bg-[#7F3422] text-white font-mono text-xs font-bold uppercase tracking-wider text-center rounded-xs transition-colors flex items-center justify-center gap-2"
-                >
-                  <FileText className="w-3.5 h-3.5 text-[#E3AA20]" />
-                  <span>Request Proposal</span>
-                </Link>
-              </div>
-            </div>
-
+          <div className="flex justify-center">
+            <Link
+              to="/request-quote?requirement=construction-contracting"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs font-bold uppercase tracking-wider transition-all shadow-md"
+            >
+              <FileText className="w-4 h-4" />
+              <span>Discuss a Project Requirement</span>
+            </Link>
           </div>
+        </section>
 
-        </div>
-      </section>
-
-      <FinalCTA />
+      </div>
     </div>
   );
 };

@@ -1,168 +1,173 @@
 import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { PageHeader } from '../components/common/PageHeader';
 import { SEO } from '../components/common/SEO';
 import { equipmentData } from '../data/equipment';
-import { FinalCTA } from '../components/FinalCTA';
-import { 
-  Truck, 
-  Clock, 
-  CheckCircle2, 
-  ArrowRight, 
-  ChevronLeft, 
-  ShieldAlert,
-  ShieldCheck,
-  FileText,
-  Users
-} from 'lucide-react';
+import { EquipmentHero } from '../components/equipment/EquipmentHero';
+import { EquipmentSpecifications } from '../components/equipment/EquipmentSpecifications';
+import { EquipmentApplications } from '../components/equipment/EquipmentApplications';
+import { RentalStructure } from '../components/equipment/RentalStructure';
+import { ClientScopePanel } from '../components/equipment/ClientScopePanel';
+import { EquipmentCTA } from '../components/equipment/EquipmentCTA';
+import { Truck, ShieldCheck, UserCheck, AlertCircle, ExternalLink } from 'lucide-react';
 
 export const EquipmentDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
 
-  const item = equipmentData.find(
-    (e) => e.id === slug || e.slug === slug || slug === 'putzmeister-m42-5'
-  );
+  // Validate allowed slug strictly
+  if (slug !== 'putzmeister-m42-5') {
+    return <Navigate to="/404" replace />;
+  }
 
+  const item = equipmentData.find((e) => e.slug === slug);
   if (!item) {
     return <Navigate to="/404" replace />;
   }
 
+  const altText = "Putzmeister M42-5 concrete boom placer positioned for concrete placement at a construction site";
+
   return (
-    <div>
+    <div className="bg-[#F5EEE5] text-[#3D352D] min-h-screen">
       <SEO 
-        title={`${item.name} Technical Specifications | Chitrani Construction`}
-        description={`Technical specifications for ${item.name}. ${item.boomReach}, ${item.capacity}, BS6 AdBlue compliant with certified operator and helper.`}
-        canonical={`https://chitraniconstruction.com/equipment/${item.slug}`}
+        title="Putzmeister M42-5 Boom Placer Rental | Chitrani Construction"
+        description="Review verified specifications, rental structure, applications, crew inclusion, and quotation information for the Putzmeister M42-5 concrete boom placer."
+        canonical="https://chitraniconstruction.com/equipment/putzmeister-m42-5"
       />
 
-      <PageHeader
-        title={item.name}
-        subtitle={`${item.model} — ${item.boomReach} and ${item.capacity}. Includes operator and maintenance helper.`}
-        badge={item.category}
-        breadcrumb={[
-          { label: 'Home', href: '/' },
-          { label: 'Equipment Rental', href: '/equipment' }
-        ]}
+      <EquipmentHero
+        title="Putzmeister M42-5 Concrete Boom Placer"
+        badge="CONCRETE PLACEMENT EQUIPMENT"
+        intro="Chitrani Construction provides the Putzmeister M42-5 concrete boom placer on structured monthly rental with an operator and helper for sites requiring dependable, high-capacity concrete-placement support."
       />
 
-      <section className="py-16 bg-[#F5F2EB] text-[#181A1B]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12 sm:space-y-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          {/* Main Specs Column */}
+          <div className="lg:col-span-8 space-y-10">
             
-            {/* Left Column: Machinery Specs */}
-            <div className="lg:col-span-8 space-y-8">
-              
-              {/* Image Showcase */}
-              <div className="relative rounded-xs overflow-hidden border border-[#D8D4CC] shadow-md bg-[#181A1B] h-[360px] sm:h-[440px]">
+            {/* Equipment Overview & Image */}
+            <section className="bg-white rounded-[18px] border border-[#E8DDD0] p-6 sm:p-8 space-y-6 shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center shrink-0">
+                  <Truck className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="font-display text-xs text-[#C96F1B] font-bold tracking-wider uppercase block">
+                    FLEET OVERVIEW
+                  </span>
+                  <h2 className="font-heading font-bold text-2xl sm:text-3xl text-[#3D352D]">
+                    Equipment Overview
+                  </h2>
+                </div>
+              </div>
+
+              <p className="text-sm sm:text-base text-[#6B5E4E] font-body leading-relaxed">
+                The Putzmeister M42-5 is offered for project requirements involving elevated concrete placement, large concrete pours, high-rise developments, commercial construction, and infrastructure-related concrete work. Rental deployment remains subject to site requirements, requested dates, and confirmation through the quotation process.
+              </p>
+
+              <div className="aspect-[16/9] rounded-xl overflow-hidden border border-[#E8DDD0]">
                 <img
                   src={item.image}
-                  alt={item.name}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover filter brightness-95"
+                  alt={altText}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#181A1B] via-transparent to-transparent opacity-80" />
-                
-                <div className="absolute top-4 left-4 flex gap-2">
-                  <span className="px-3 py-1 rounded-xs bg-[#181A1B] text-[#E3AA20] border border-[#73787A]/30 font-mono text-xs font-bold uppercase flex items-center gap-1.5">
-                    <Truck className="w-3.5 h-3.5" />
-                    <span>{item.category}</span>
-                  </span>
-                  <span className="px-3 py-1 rounded-xs bg-[#A9472B] text-white font-mono text-xs font-bold uppercase">
-                    BS6 AdBlue Compliant
-                  </span>
-                </div>
+              </div>
+            </section>
+
+            {/* Verified Specifications */}
+            <section>
+              <EquipmentSpecifications />
+            </section>
+
+            {/* Rental Structure */}
+            <section>
+              <RentalStructure />
+            </section>
+
+            {/* Suitable Applications */}
+            <section>
+              <EquipmentApplications
+                title="Suitable Applications"
+                intro="This equipment may support requirements involving:"
+              />
+            </section>
+
+            {/* Operating Crew */}
+            <section className="bg-white rounded-[18px] border border-[#E8DDD0] p-6 sm:p-8 space-y-4 shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
+              <div className="flex items-center gap-3 border-b border-[#E8DDD0] pb-4">
+                <UserCheck className="w-6 h-6 text-[#C96F1B] shrink-0" />
+                <h3 className="font-heading font-bold text-2xl text-[#3D352D]">
+                  Operating Crew
+                </h3>
+              </div>
+              <p className="text-sm text-[#6B5E4E] font-body leading-relaxed">
+                The equipment is supplied with an operator and helper to support organised machinery deployment. Their inclusion does not replace the client’s responsibility for site readiness, coordination, safety arrangements, or other items confirmed in the commercial agreement.
+              </p>
+            </section>
+
+            {/* Client Responsibilities */}
+            <section>
+              <ClientScopePanel />
+            </section>
+
+            {/* Availability and Commercial Terms */}
+            <section className="bg-white rounded-[18px] border border-[#E8DDD0] p-6 sm:p-8 space-y-4 shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
+              <div className="flex items-center gap-3 border-b border-[#E8DDD0] pb-4">
+                <AlertCircle className="w-6 h-6 text-[#C96F1B] shrink-0" />
+                <h3 className="font-heading font-bold text-2xl text-[#3D352D]">
+                  Availability and Commercial Terms
+                </h3>
               </div>
 
-              {/* Technical Specifications Matrix */}
-              <div className="bg-white p-6 sm:p-8 rounded-xs border border-[#D8D4CC] space-y-6 shadow-xs">
-                <h3 className="text-xl font-heading font-bold text-[#181A1B] border-b border-[#D8D4CC] pb-3">
-                  Technical Specifications & Key Parameters
-                </h3>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 font-mono text-xs">
-                  {item.keySpecs.map((spec, idx) => (
-                    <div key={idx} className="bg-[#F5F2EB] p-3.5 rounded-xs border border-[#D8D4CC] space-y-1">
-                      <div className="text-[#666A6C] text-[10px] uppercase font-semibold">[{spec.label}]:</div>
-                      <div className="font-bold text-[#181A1B] text-sm">{spec.value}</div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="p-4 bg-[#181A1B] text-white rounded-xs border border-[#242729] space-y-2">
-                  <div className="font-mono text-xs text-[#E3AA20] font-bold uppercase flex items-center gap-2">
-                    <Users className="w-4 h-4 text-[#A9472B]" />
-                    <span>Operator & Helper Included</span>
-                  </div>
-                  <p className="text-xs text-[#D9D7D1] leading-relaxed">
-                    {item.operatorInclusion}. Dedicated site personnel ensure zero delay in boom unfolding, pipe coupling, and continuous concrete discharge.
-                  </p>
-                </div>
-
-                <div className="pt-2 text-sm text-[#666A6C] leading-relaxed">
-                  {item.description}
-                </div>
-              </div>
-
-              {/* Scope & Deployment Terms */}
-              <div className="bg-white p-6 sm:p-8 rounded-xs border border-[#D8D4CC] space-y-4 shadow-xs">
-                <h3 className="text-lg font-heading font-bold text-[#181A1B] border-b border-[#D8D4CC] pb-3 flex items-center gap-2">
-                  <ShieldCheck className="w-5 h-5 text-[#A9472B]" />
-                  <span>Rental Terms & Client Scope Summary</span>
-                </h3>
-
-                <ul className="space-y-2.5 text-xs sm:text-sm text-[#181A1B] font-mono">
-                  <li className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#A9472B] shrink-0 mt-0.5" />
-                    <span><strong>Rental Structure:</strong> {item.rentalStructure}</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#A9472B] shrink-0 mt-0.5" />
-                    <span><strong>Mobilization:</strong> Rapid dispatch from Mumbai or Jalgaon operating hubs.</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#A9472B] shrink-0 mt-0.5" />
-                    <span><strong>Site Scope:</strong> Client to provide diesel, raw concrete delivery via transit mixers, and safe outrigger pad grounds.</span>
-                  </li>
-                </ul>
-              </div>
-
-            </div>
-
-            {/* Right Column: Rental Inquiry */}
-            <div className="lg:col-span-4 space-y-6">
-              
-              <div className="bg-[#181A1B] text-white p-6 sm:p-8 rounded-xs border border-[#242729] space-y-4 shadow-md">
-                <div className="flex items-center gap-2 text-[#E3AA20] font-mono text-xs font-bold uppercase">
-                  <FileText className="w-4 h-4 text-[#A9472B]" />
-                  <span>DIRECT RENTAL DISPATCH</span>
-                </div>
-
-                <h3 className="text-xl font-heading font-bold text-white">
-                  Rent {item.name}
-                </h3>
-
-                <p className="text-xs text-[#D9D7D1] leading-relaxed">
-                  Request shift rates, monthly contract rates, and equipment mobilization dates for your site.
+              <div className="space-y-3 text-sm text-[#6B5E4E] font-body leading-relaxed">
+                <p className="font-semibold text-[#3D352D]">
+                  Availability is subject to confirmation for the requested project period.
                 </p>
-
-                <Link
-                  to={`/request-quote?requirement=concrete-boom-placer-rental&equipment=${encodeURIComponent(item.slug)}`}
-                  className="w-full py-3.5 px-4 rounded-xs bg-[#A9472B] hover:bg-[#7F3422] text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors focus:outline-hidden focus:ring-2 focus:ring-[#E3AA20]"
-                >
-                  <span>Request Rental Quote</span>
-                  <ArrowRight className="w-4 h-4 text-[#E3AA20]" />
-                </Link>
+                <p>
+                  Pricing, mobilization, payment terms, client responsibilities, and deployment conditions are provided through a project-specific quotation.
+                </p>
               </div>
+            </section>
 
-            </div>
+            {/* Related Service */}
+            <section className="bg-white rounded-[18px] border border-[#E8DDD0] p-6 sm:p-8 space-y-4 shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
+              <span className="font-display text-xs text-[#C96F1B] font-bold tracking-wider uppercase block">
+                SERVICE REFERENCE
+              </span>
+              <h3 className="font-heading font-bold text-2xl text-[#3D352D]">
+                Related Service
+              </h3>
+
+              <div className="p-5 bg-[#F5EEE5] rounded-xl border border-[#E8DDD0] space-y-3">
+                <div className="flex items-center justify-between">
+                  <h4 className="font-heading font-bold text-xl text-[#3D352D]">
+                    Concrete Boom Placer Rental
+                  </h4>
+                  <Link
+                    to="/services/concrete-boom-placer-rental"
+                    className="inline-flex items-center gap-1.5 text-xs font-heading font-bold text-[#C96F1B] hover:text-[#B35E17] uppercase tracking-wider"
+                  >
+                    <span>View Service</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+                <p className="text-sm text-[#6B5E4E] font-body leading-relaxed">
+                  Review the complete rental service, operating crew, applications, and commercial-scope information.
+                </p>
+              </div>
+            </section>
 
           </div>
 
-        </div>
-      </section>
+          {/* Sidebar CTA */}
+          <div className="lg:col-span-4 space-y-6">
+            <EquipmentCTA />
+          </div>
 
-      <FinalCTA />
+        </div>
+      </div>
     </div>
   );
 };
