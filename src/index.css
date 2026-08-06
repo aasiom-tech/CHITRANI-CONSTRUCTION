@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Design System Color Palette */
+    --color-primary: #C96F1B;
+    --color-primary-hover: #B35E17;
+    --color-warm-cream: #EADBC8;
+    --color-sandstone: #D1C5B0;
+    --color-earth-brown: #6B5E4E;
+    --color-charcoal: #3D352D;
+    --color-white: #FFFFFF;
+    --color-border: #E8DDD0;
+    --color-card-border: #EFE8DE;
+    --color-input-border: #D8CCBC;
+    --color-placeholder: #9D9287;
+    --color-small-text: #7E7267;
+    --color-icon-circle: #F5EEE5;
+
+    /* Fonts */
+    --font-heading: "Poppins", sans-serif;
+    --font-body: "Inter", sans-serif;
+    --font-stats: "Manrope", sans-serif;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: #FFFFFF;
+    color: var(--color-earth-brown);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--color-charcoal);
+    letter-spacing: -0.01em;
+  }
+
+  .font-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+
+  .font-stats {
+    font-family: var(--font-stats);
+    font-weight: 600;
+  }
+}
+
+/* Design System Component Styles */
+
+/* Primary Button */
+.btn-primary {
+  background-color: #C96F1B;
+  color: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(201, 111, 27, 0.25);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: #B35E17;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background-color: transparent;
+  border: 1px solid #C96F1B;
+  color: #C96F1B;
+  border-radius: 12px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-secondary:hover {
+  background-color: #C96F1B;
+  color: #FFFFFF;
+}
+
+/* Card Styling */
+.card-ds {
+  background-color: #FFFFFF;
+  border: 1px solid #EFE8DE;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  padding: 32px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.card-ds:hover {
+  border-color: #C96F1B;
+  box-shadow: 0 15px 35px rgba(201, 111, 27, 0.1);
+}
+
+/* Input / Form Styling */
+.input-ds {
+  background-color: #FFFFFF;
+  border: 1px solid #D8CCBC;
+  color: #3D352D;
+  border-radius: 10px;
+}
+
+.input-ds::placeholder {
+  color: #9D9287;
+}
+
+.input-ds:focus {
+  border-color: #C96F1B;
+  outline: none;
+  ring: 2px solid rgba(201, 111, 27, 0.2);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #EADBC8;
+}
+::-webkit-scrollbar-thumb {
+  background: #D1C5B0;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6B5E4E;
+}
+
+/* Safe area padding for mobile notch and bottom bar */
+.pb-safe-action {
+  padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+.pt-safe-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* Focus styles for keyboard accessibility */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid #C96F1B;
+  outline-offset: 2px;
+}
+
+/* Disable scrollbar on category filters */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
