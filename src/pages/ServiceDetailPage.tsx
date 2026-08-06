@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import { PageHeader } from '../components/common/PageHeader';
 import { SEO } from '../components/common/SEO';
 import { servicesData } from '../data/services';
@@ -23,24 +23,7 @@ export const ServiceDetailPage: React.FC = () => {
   );
 
   if (!service) {
-    return (
-      <div className="py-24 bg-[#181A1B] text-white text-center">
-        <div className="max-w-md mx-auto px-4 space-y-4">
-          <Wrench className="w-16 h-16 text-[#E3AA20] mx-auto" />
-          <h1 className="text-2xl font-bold font-heading">Service Not Found</h1>
-          <p className="text-sm text-[#D9D7D1]">
-            The requested service details could not be found or may have been relocated.
-          </p>
-          <Link
-            to="/services"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xs bg-[#A9472B] text-white font-mono text-xs font-bold uppercase tracking-wider"
-          >
-            <ChevronLeft className="w-4 h-4 text-[#E3AA20]" />
-            <span>Back to All Services</span>
-          </Link>
-        </div>
-      </div>
-    );
+    return <Navigate to="/404" replace />;
   }
 
   const IconComponent = service.slug === 'concrete-boom-placer-rental' ? Truck : Building2;

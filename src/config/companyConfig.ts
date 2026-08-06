@@ -11,6 +11,8 @@ export interface CompanyConfig {
   subtagline: string;
   phone: string;
   phoneRaw: string;
+  secondaryPhone: string;
+  secondaryPhoneRaw: string;
   whatsapp: string;
   whatsappRaw: string;
   email: string;
@@ -31,6 +33,8 @@ export const companyConfig: CompanyConfig = {
   subtagline: "Structural civil contracting and high-capacity equipment rental across Maharashtra.",
   phone: "+91 98337 06666",
   phoneRaw: "+919833706666",
+  secondaryPhone: "+91 73878 01051",
+  secondaryPhoneRaw: "+917387801051",
   whatsapp: "+91 98337 06666",
   whatsappRaw: "919833706666",
   email: "chitraniconstruction@gmail.com",
@@ -44,7 +48,7 @@ export const companyConfig: CompanyConfig = {
     },
     {
       title: "Concrete Equipment Rental",
-      description: "Putzmeister M42-5 Concrete Boom Placer available with certified operator and helper team."
+      description: "Putzmeister M42-5 Concrete Boom Placer available with operator and helper team."
     },
     {
       title: "GST-Registered Enterprise",
@@ -56,11 +60,11 @@ export const companyConfig: CompanyConfig = {
     },
     {
       title: "Operator & Helper Included",
-      description: "Equipment rentals delivered with experienced on-site operators for continuous pours."
+      description: "Equipment rentals delivered with experienced on-site operating personnel for continuous pours."
     },
     {
       title: "Public & Private Sector Support",
-      description: "Proven record supporting major developers, government contractors, and infrastructure teams."
+      description: "Supporting developers, government contractors, and civil infrastructure project teams."
     }
   ]
 };

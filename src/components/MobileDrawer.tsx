@@ -64,7 +64,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) =
     <>
       {/* Backdrop */}
       <div 
-        className="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 transition-opacity animate-fade-in"
+        className="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 transition-opacity animate-fade-in"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -75,25 +75,25 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) =
         role="dialog"
         aria-modal="true"
         aria-label="Navigation Menu"
-        className="fixed inset-y-0 left-0 w-[min(85vw,340px)] bg-white text-[#3D352D] z-50 shadow-2xl flex flex-col border-r border-[#E8DDD0] animate-slide-right font-body"
+        className="fixed inset-y-0 left-0 w-[min(85vw,340px)] bg-white text-[#2D2D2D] z-50 shadow-2xl flex flex-col border-r border-[#E7E7E7] animate-slide-right font-body"
       >
         {/* Drawer Header */}
-        <div className="p-4 border-b border-[#E8DDD0] flex items-center justify-between bg-[#F5EEE5]">
+        <div className="p-4 border-b border-[#E7E7E7] flex items-center justify-between bg-[#F9F7F2]">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-[#C96F1B] text-white flex items-center justify-center font-bold">
-              <HardHat className="w-4 h-4" />
+            <div className="w-8 h-8 rounded-[10px] bg-[#FFB300] text-[#2D2D2D] flex items-center justify-center font-bold">
+              <HardHat className="w-4 h-4 text-[#2D2D2D]" />
             </div>
             <div>
-              <div className="font-heading text-[11px] text-[#C96F1B] tracking-widest uppercase font-semibold">NAVIGATION</div>
-              <div className="font-semibold font-heading text-base tracking-tight text-[#3D352D]">{companyConfig.shortName}</div>
+              <div className="font-heading text-[11px] text-[#FFB300] tracking-widest uppercase font-bold">NAVIGATION</div>
+              <div className="font-bold font-heading text-base tracking-tight text-[#2D2D2D]">{companyConfig.shortName}</div>
             </div>
           </div>
           <button 
             onClick={onClose}
             aria-label="Close navigation menu"
-            className="p-2 rounded-xl bg-white hover:bg-[#C96F1B] text-[#3D352D] hover:text-white transition-colors border border-[#E8DDD0] focus:outline-hidden focus:ring-2 focus:ring-[#C96F1B] min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="p-2 rounded-[10px] bg-white hover:bg-[#FFB300] text-[#2D2D2D] transition-colors border border-[#E7E7E7] focus:outline-hidden focus:ring-2 focus:ring-[#FFB300] min-h-[44px] min-w-[44px] flex items-center justify-center"
           >
-            <X className="w-5 h-5" />
+            <X className="w-5 h-5 text-[#2D2D2D]" />
           </button>
         </div>
 
@@ -109,9 +109,9 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) =
                   key={item.href}
                   to={item.href}
                   onClick={onClose}
-                  className="mt-4 flex items-center gap-3 px-4 py-3.5 rounded-[12px] bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs font-semibold uppercase tracking-wider shadow-[0_10px_30px_rgba(201,111,27,0.25)] transition-all min-h-[48px] focus:outline-hidden focus:ring-2 focus:ring-[#C96F1B]"
+                  className="mt-4 flex items-center gap-3 px-4 py-3.5 rounded-[12px] bg-[#FFB300] hover:bg-[#E59A00] text-[#2D2D2D] font-heading text-xs font-bold uppercase tracking-wider shadow-xs transition-all min-h-[48px] focus:outline-hidden focus:ring-2 focus:ring-[#FFB300]"
                 >
-                  <Icon className="w-4 h-4 text-white" />
+                  <Icon className="w-4 h-4 text-[#2D2D2D]" />
                   <span>{item.label}</span>
                 </Link>
               );
@@ -122,13 +122,13 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) =
                 key={item.href}
                 to={item.href}
                 onClick={onClose}
-                className={`flex items-center gap-3 px-3.5 py-3 rounded-xl transition-all font-heading text-xs uppercase tracking-wider min-h-[44px] ${
+                className={`flex items-center gap-3 px-3.5 py-3 rounded-[10px] transition-all font-heading text-xs uppercase tracking-wider min-h-[44px] ${
                   isActive 
-                    ? 'bg-[#F5EEE5] text-[#C96F1B] font-semibold' 
-                    : 'text-[#3D352D] hover:bg-[#F5EEE5] hover:text-[#C96F1B]'
+                    ? 'bg-[#F9F7F2] text-[#FFB300] font-bold border-l-3 border-[#FFB300]' 
+                    : 'text-[#2D2D2D] hover:bg-[#F9F7F2] hover:text-[#FFB300]'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-[#C96F1B]' : 'text-[#7E7267]'}`} />
+                <Icon className={`w-4 h-4 ${isActive ? 'text-[#FFB300]' : 'text-[#7D7D7D]'}`} />
                 <span>{item.label}</span>
               </Link>
             );
@@ -136,21 +136,21 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) =
         </div>
 
         {/* Footer Quick Connect */}
-        <div className="p-4 border-t border-[#E8DDD0] bg-[#F5EEE5] space-y-2">
-          <div className="font-heading text-[11px] text-[#7E7267] mb-1 uppercase tracking-wider font-semibold">DIRECT DISPATCH</div>
+        <div className="p-4 border-t border-[#E7E7E7] bg-[#F9F7F2] space-y-2">
+          <div className="font-heading text-[11px] text-[#7D7D7D] mb-1 uppercase tracking-wider font-semibold">DIRECT DISPATCH</div>
           <div className="grid grid-cols-2 gap-2">
             <a 
               href={`tel:${companyConfig.phoneRaw}`} 
-              className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-white hover:bg-[#C96F1B] text-xs font-heading font-semibold text-[#3D352D] hover:text-white border border-[#E8DDD0] transition-colors uppercase min-h-[44px]"
+              className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-[10px] bg-white hover:bg-[#FFB300] text-xs font-heading font-semibold text-[#2D2D2D] border border-[#E7E7E7] transition-colors uppercase min-h-[44px]"
             >
-              <Phone className="w-3.5 h-3.5 text-[#C96F1B]" />
+              <Phone className="w-3.5 h-3.5 text-[#2D2D2D]" />
               <span>Call</span>
             </a>
             <a 
               href={`https://wa.me/${companyConfig.whatsappRaw}`} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-white hover:bg-emerald-600 text-xs font-heading font-semibold text-emerald-700 hover:text-white border border-[#E8DDD0] transition-colors uppercase min-h-[44px]"
+              className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-[10px] bg-white hover:bg-emerald-600 text-xs font-heading font-semibold text-emerald-700 hover:text-white border border-[#E7E7E7] transition-colors uppercase min-h-[44px]"
             >
               <MessageSquare className="w-3.5 h-3.5 text-emerald-600" />
               <span>WhatsApp</span>

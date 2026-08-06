@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import { PageHeader } from '../components/common/PageHeader';
 import { SEO } from '../components/common/SEO';
 import { equipmentData } from '../data/equipment';
@@ -24,24 +24,7 @@ export const EquipmentDetailPage: React.FC = () => {
   );
 
   if (!item) {
-    return (
-      <div className="py-24 bg-[#181A1B] text-white text-center">
-        <div className="max-w-md mx-auto px-4 space-y-4">
-          <ShieldAlert className="w-16 h-16 text-[#E3AA20] mx-auto" />
-          <h1 className="text-2xl font-bold font-heading">Equipment Not Found</h1>
-          <p className="text-sm text-[#D9D7D1]">
-            The requested machinery specification could not be found or may have been relocated.
-          </p>
-          <Link
-            to="/equipment"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xs bg-[#A9472B] text-white font-mono text-xs font-bold uppercase tracking-wider"
-          >
-            <ChevronLeft className="w-4 h-4 text-[#E3AA20]" />
-            <span>Back to Equipment Showcase</span>
-          </Link>
-        </div>
-      </div>
-    );
+    return <Navigate to="/404" replace />;
   }
 
   return (
