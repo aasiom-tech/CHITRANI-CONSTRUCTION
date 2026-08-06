@@ -16,11 +16,7 @@ export const Hero: React.FC = () => {
           referrerPolicy="no-referrer"
           loading="eager"
           fetchPriority="high"
-          className="w-full h-full object-cover"
-          style={{
-            objectFit: 'cover',
-            objectPosition: '55% 72%',
-          }}
+          className="hero-img absolute inset-0 h-full w-full object-cover scale-[0.97] origin-center"
         />
 
         {/* Sky blue — color blend so it works regardless of underlying warm tones */}

@@ -229,3 +229,29 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     scroll-behavior: auto !important;
   }
 }
+/* ─── Hero image responsive focal point ─────────────────────────────────────
+   Shifts the crop downward on larger viewports so both construction workers,
+   the excavator, and the lower site are fully visible.
+   Mobile default (< 640px): balanced sky + ground at 62% 68%
+   Tablet (≥ 640px):         55% 74%
+   Desktop (≥ 1024px):       55% 78%
+   Wide (≥ 1280px):          55% 80%
+──────────────────────────────────────────────────────────────────────────── */
+.hero-img {
+  object-position: 62% 68%;
+}
+@media (min-width: 640px) {
+  .hero-img {
+    object-position: 55% 74%;
+  }
+}
+@media (min-width: 1024px) {
+  .hero-img {
+    object-position: 55% 78%;
+  }
+}
+@media (min-width: 1280px) {
+  .hero-img {
+    object-position: 55% 80%;
+  }
+}
