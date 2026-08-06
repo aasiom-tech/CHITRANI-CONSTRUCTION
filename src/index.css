@@ -19,11 +19,12 @@
     --color-success-background: #E8F4EA;
     --color-success-text: #2E7D32;
 
-    /* Smart Header Layout Tokens */
-    --header-expanded-height: 88px;
-    --header-compact-height: 64px;
-    --header-expanded-offset: 124px;
-    --header-compact-offset: 76px;
+    /* Header & Layout Positioning System */
+    --header-top-offset: 18px;
+    --header-expanded-height-desktop: 88px;
+    --header-expanded-height-mobile: 84px;
+    --header-clearance-desktop: 128px; /* 18px top + 88px header + 22px gap */
+    --header-clearance-mobile: 118px; /* 18px top + 84px header + 16px gap */
 
     /* Approved Typography System */
     --font-heading: "Space Grotesk", sans-serif;

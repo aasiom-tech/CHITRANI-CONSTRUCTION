@@ -4,7 +4,7 @@ import { Home, ArrowRight, Phone, FileText, Truck, Building2 } from 'lucide-reac
 
 export const NotFoundContent: React.FC = () => {
   return (
-    <div className="min-h-[75vh] bg-[#EADBC8] text-[#3D352D] py-20 px-4 flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-[75vh] bg-[#EADBC8] text-[#3D352D] pt-[128px] pb-16 px-4 flex items-center justify-center relative overflow-hidden">
       
       {/* Blueprint Grid Background Pattern */}
       <div 

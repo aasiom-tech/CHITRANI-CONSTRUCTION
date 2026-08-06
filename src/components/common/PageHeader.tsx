@@ -25,7 +25,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
     : [{ label: 'Home', href: '/' }];
 
   return (
-    <section className="bg-[#EADBC8] text-[#3D352D] pt-20 pb-12 sm:pt-24 sm:pb-16 border-b border-[#E8DDD0] relative overflow-hidden">
+    <section className="bg-[#EADBC8] text-[#3D352D] pt-[118px] pb-10 sm:pt-[128px] sm:pb-12 lg:pb-14 border-b border-[#E8DDD0] relative overflow-hidden">
       {/* Background Subtle Pattern */}
       <div 
         className="absolute inset-0 opacity-15 pointer-events-none"
@@ -37,7 +37,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Breadcrumb Navigation */}
-        <nav aria-label="Breadcrumb" className="mb-4">
+        <nav aria-label="Breadcrumb" className="mb-3.5 sm:mb-4">
           <ol className="flex items-center gap-1.5 flex-wrap text-xs font-body text-[#6B5E4E]">
             {breadcrumbItems.map((item, index) => (
               <li key={index} className="flex items-center gap-1.5">
@@ -70,12 +70,12 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
         )}
 
         {/* Title */}
-        <h1 className="text-2xl sm:text-4xl lg:text-5xl font-heading font-semibold text-[#3D352D] tracking-tight leading-tight max-w-4xl">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-[42px] font-heading font-semibold text-[#3D352D] tracking-tight leading-[1.18] max-w-4xl">
           {title}
         </h1>
 
         {/* Accent Bar */}
-        <div className="w-16 h-1 bg-[#C96F1B] my-4 rounded-full" />
+        <div className="w-16 h-1 bg-[#C96F1B] my-3 sm:my-4 rounded-full" />
 
         {/* Subtitle */}
         {subtitle && (
