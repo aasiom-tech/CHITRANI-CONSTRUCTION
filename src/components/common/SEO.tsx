@@ -6,17 +6,28 @@ interface SEOProps {
   description?: string;
   canonical?: string;
   jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>;
+  noindex?: boolean;
 }
 
 export const SEO: React.FC<SEOProps> = ({
   title,
   description = "Chitrani Construction delivers structural civil contracting and Putzmeister M42-5 concrete boom placer rental for complex projects across Maharashtra.",
   canonical,
-  jsonLd
+  jsonLd,
+  noindex = false
 }) => {
   useEffect(() => {
     // 1. Update Document Title
     document.title = title;
+
+    // 1b. Update Meta Robots
+    let metaRobots = document.querySelector('meta[name="robots"]');
+    if (!metaRobots) {
+      metaRobots = document.createElement('meta');
+      metaRobots.setAttribute('name', 'robots');
+      document.head.appendChild(metaRobots);
+    }
+    metaRobots.setAttribute('content', noindex ? 'noindex, follow' : 'index, follow');
 
     // 2. Update Meta Description
     let metaDescription = document.querySelector('meta[name="description"]');

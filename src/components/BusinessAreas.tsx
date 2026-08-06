@@ -11,7 +11,7 @@ export const BusinessAreas: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="font-heading text-xs text-[#C96F1B] font-semibold tracking-wider uppercase block mb-2">
+          <span className="font-heading text-xs text-[#C96F1B] font-bold tracking-wider uppercase block mb-2">
             OPERATIONAL FOCUS
           </span>
           <h2 className="font-heading font-semibold text-2xl sm:text-4xl text-[#3D352D] tracking-tight">
@@ -23,7 +23,7 @@ export const BusinessAreas: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
           {/* Capability 1: Construction Contracting */}
-          <div className="bg-white rounded-[20px] border border-[#EFE8DE] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)] flex flex-col justify-between hover:border-[#C96F1B] hover:shadow-[0_22px_45px_rgba(45,45,45,0.12)] hover:-translate-y-1 transition-all duration-300 group focus-within:ring-2 focus-within:ring-[#C96F1B] focus-within:ring-offset-2">
+          <div className="bg-white rounded-[20px] border border-[#E8DDD0] overflow-hidden shadow-[0_10px_30px_rgba(61,53,45,0.06)] flex flex-col justify-between hover:border-[rgba(201,111,27,0.55)] hover:shadow-[0_16px_38px_rgba(61,53,45,0.11)] hover:-translate-y-1 transition-all duration-300 group focus-within:ring-2 focus-within:ring-[#C96F1B] focus-within:ring-offset-2">
             <div>
               <div className="relative h-60 sm:h-64 overflow-hidden bg-[#F5EEE5] rounded-t-[20px]">
                 <img 
@@ -40,14 +40,14 @@ export const BusinessAreas: React.FC = () => {
                     objectPosition: '45% 65%',
                   }}
                 />
-                <div className="absolute top-4 left-4 p-2.5 rounded-xl bg-[#F5EEE5] text-[#C96F1B] border border-[#E8DDD0] shadow-xs">
+                <div className="absolute top-4 left-4 p-2.5 rounded-[12px] bg-white text-[#C96F1B] border border-[#E8DDD0] shadow-xs">
                   <Building2 className="w-5 h-5 text-[#C96F1B]" />
                 </div>
               </div>
 
               <div className="p-7 sm:p-9 space-y-4">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-[#F5EEE5] border border-[#E8DDD0] text-[#C96F1B] font-heading text-xs font-semibold uppercase tracking-wider">
-                  <span>STRUCTURAL & CIVIL CONTRACTS</span>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-[10px] bg-[#F5EEE5] border border-[#E8DDD0] text-[#C96F1B] font-heading text-xs font-semibold uppercase tracking-wider">
+                  <span className="text-[#3D352D]">STRUCTURAL & CIVIL CONTRACTS</span>
                 </div>
 
                 <h3 className="font-heading font-semibold text-2xl text-[#3D352D]">
@@ -55,7 +55,7 @@ export const BusinessAreas: React.FC = () => {
                 </h3>
 
                 <p className="text-sm text-[#6B5E4E] font-body leading-relaxed">
-                  We undertake structural and civil construction contracts for public and private sector clients, supporting organised project execution, site coordination, structural works, and concrete-intensive construction requirements.
+                  Civil and structural construction support for public and private sector requirements, with focus on organised execution, concrete-intensive works, site coordination and project-specific resource planning.
                 </p>
 
                 <div className="pt-2 space-y-2">
@@ -64,11 +64,11 @@ export const BusinessAreas: React.FC = () => {
                   </span>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#6B5E4E] font-body">
                     {[
-                      'Structural contract execution',
-                      'Civil construction works',
-                      'Building construction support',
-                      'Heavy concrete logistics',
-                      'Public and private sector requirements'
+                      'Structural construction support',
+                      'Civil construction requirements',
+                      'Residential and commercial projects',
+                      'Infrastructure-linked civil support',
+                      'Site and resource coordination'
                     ].map((item, idx) => (
                       <li key={idx} className="flex items-center gap-2">
                         <CheckCircle2 className="w-4 h-4 text-[#C96F1B] shrink-0" />
@@ -83,7 +83,7 @@ export const BusinessAreas: React.FC = () => {
             <div className="p-7 sm:p-9 pt-0">
               <Link
                 to="/services/construction-contracting"
-                className="inline-flex items-center justify-between w-full px-6 py-3.5 rounded-[12px] bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs font-semibold tracking-wider uppercase transition-colors shadow-[0_10px_30px_rgba(201,111,27,0.25)] focus:outline-hidden focus:ring-2 focus:ring-[#C96F1B]"
+                className="inline-flex items-center justify-between w-full px-6 py-3.5 rounded-[12px] bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs font-semibold tracking-wider uppercase transition-all shadow-[0_10px_30px_rgba(201,111,27,0.25)] hover:-translate-y-0.5 focus:outline-hidden focus:ring-2 focus:ring-[#C96F1B]"
               >
                 <span>Explore Contracting Services</span>
                 <ArrowRight className="w-4 h-4 text-white" />
@@ -92,7 +92,7 @@ export const BusinessAreas: React.FC = () => {
           </div>
 
           {/* Capability 2: Concrete Boom Placer Rental */}
-          <div className="bg-white rounded-[20px] border border-[#EFE8DE] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)] flex flex-col justify-between hover:border-[#C96F1B] hover:shadow-[0_22px_45px_rgba(45,45,45,0.12)] hover:-translate-y-1 transition-all duration-300 group focus-within:ring-2 focus-within:ring-[#C96F1B] focus-within:ring-offset-2">
+          <div className="bg-white rounded-[20px] border border-[#E8DDD0] overflow-hidden shadow-[0_10px_30px_rgba(61,53,45,0.06)] flex flex-col justify-between hover:border-[rgba(201,111,27,0.55)] hover:shadow-[0_16px_38px_rgba(61,53,45,0.11)] hover:-translate-y-1 transition-all duration-300 group focus-within:ring-2 focus-within:ring-[#C96F1B] focus-within:ring-offset-2">
             <div>
               <div className="relative h-60 sm:h-64 overflow-hidden bg-[#F5EEE5] rounded-t-[20px]">
                 <img 
@@ -109,14 +109,14 @@ export const BusinessAreas: React.FC = () => {
                     objectPosition: 'center center',
                   }}
                 />
-                <div className="absolute top-4 left-4 p-2.5 rounded-xl bg-[#F5EEE5] text-[#C96F1B] border border-[#E8DDD0] shadow-xs">
+                <div className="absolute top-4 left-4 p-2.5 rounded-[12px] bg-white text-[#C96F1B] border border-[#E8DDD0] shadow-xs">
                   <Truck className="w-5 h-5 text-[#C96F1B]" />
                 </div>
               </div>
 
               <div className="p-7 sm:p-9 space-y-4">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-[#F5EEE5] border border-[#E8DDD0] text-[#C96F1B] font-heading text-xs font-semibold uppercase tracking-wider">
-                  <span>EQUIPMENT RENTAL</span>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-[10px] bg-[#F5EEE5] border border-[#E8DDD0] text-[#C96F1B] font-heading text-xs font-semibold uppercase tracking-wider">
+                  <span className="text-[#3D352D]">EQUIPMENT RENTAL</span>
                 </div>
 
                 <h3 className="font-heading font-semibold text-2xl text-[#3D352D]">
@@ -124,7 +124,7 @@ export const BusinessAreas: React.FC = () => {
                 </h3>
 
                 <p className="text-sm text-[#6B5E4E] font-body leading-relaxed">
-                  We provide a Putzmeister M42-5 concrete boom placer on rental with an operator and helper, allowing contractors to access high-capacity concrete-placement support without equipment ownership.
+                  Putzmeister M42-5 concrete boom placer rental with an operator and helper for project sites requiring dependable, high-capacity concrete-placement support.
                 </p>
 
                 <div className="pt-2 space-y-2">
@@ -137,7 +137,7 @@ export const BusinessAreas: React.FC = () => {
                       '90 m³ capacity',
                       'Operator and helper included',
                       'Monthly single-shift deployment',
-                      'Suitable for large-volume concrete placement'
+                      'Large-volume concrete-placement support'
                     ].map((item, idx) => (
                       <li key={idx} className="flex items-center gap-2">
                         <CheckCircle2 className="w-4 h-4 text-[#C96F1B] shrink-0" />
@@ -152,7 +152,7 @@ export const BusinessAreas: React.FC = () => {
             <div className="p-7 sm:p-9 pt-0">
               <Link
                 to="/services/concrete-boom-placer-rental"
-                className="inline-flex items-center justify-between w-full px-6 py-3.5 rounded-[12px] bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs font-semibold tracking-wider uppercase transition-colors shadow-[0_10px_30px_rgba(201,111,27,0.25)] focus:outline-hidden focus:ring-2 focus:ring-[#C96F1B]"
+                className="inline-flex items-center justify-between w-full px-6 py-3.5 rounded-[12px] bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs font-semibold tracking-wider uppercase transition-all shadow-[0_10px_30px_rgba(201,111,27,0.25)] hover:-translate-y-0.5 focus:outline-hidden focus:ring-2 focus:ring-[#C96F1B]"
               >
                 <span>View Rental Details</span>
                 <ArrowRight className="w-4 h-4 text-white" />

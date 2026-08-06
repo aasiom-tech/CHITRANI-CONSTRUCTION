@@ -20,6 +20,10 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   badge,
   breadcrumb = [{ label: 'Home', href: '/' }]
 }) => {
+  const breadcrumbItems = Array.isArray(breadcrumb)
+    ? breadcrumb
+    : [{ label: 'Home', href: '/' }];
+
   return (
     <section className="bg-[#EADBC8] text-[#3D352D] pt-20 pb-12 sm:pt-24 sm:pb-16 border-b border-[#E8DDD0] relative overflow-hidden">
       {/* Background Subtle Pattern */}
@@ -35,7 +39,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
         {/* Breadcrumb Navigation */}
         <nav aria-label="Breadcrumb" className="mb-4">
           <ol className="flex items-center gap-1.5 flex-wrap text-xs font-body text-[#6B5E4E]">
-            {breadcrumb.map((item, index) => (
+            {breadcrumbItems.map((item, index) => (
               <li key={index} className="flex items-center gap-1.5">
                 {index > 0 && <ChevronRight className="w-3.5 h-3.5 text-[#7E7267]" />}
                 {item.href ? (

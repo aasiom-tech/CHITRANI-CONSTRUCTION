@@ -12,9 +12,9 @@ export const CompanyIntroPreview: React.FC = () => {
           
           {/* Left: Content */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#F5EEE5] border border-[#E8DDD0] text-[#C96F1B] font-heading text-xs font-semibold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[10px] bg-[#F5EEE5] border border-[#E8DDD0] text-[#C96F1B] font-heading text-xs font-semibold uppercase tracking-wider">
               <HardHat className="w-4 h-4 text-[#C96F1B]" />
-              <span>ABOUT CHITRANI</span>
+              <span className="text-[#3D352D]">ABOUT CHITRANI</span>
             </div>
 
             <h2 className="text-2xl sm:text-4xl font-heading font-semibold text-[#3D352D] tracking-tight leading-snug">
@@ -23,17 +23,20 @@ export const CompanyIntroPreview: React.FC = () => {
 
             <div className="space-y-4 text-sm sm:text-base text-[#6B5E4E] leading-relaxed font-body">
               <p>
-                Chitrani Construction is a multidisciplinary construction, civil engineering, and equipment rental enterprise based in Maharashtra and operating across the Mumbai construction market.
+                Chitrani Construction is a Maharashtra-based construction and equipment-support enterprise serving the Mumbai construction market.
               </p>
               <p>
-                We support demanding public and private sector projects through structural contract execution, heavy concrete logistics, and high-capacity machinery deployment. Whether a client needs construction execution or a concrete boom placer with an operating crew, Chitrani brings together the equipment, people, and site coordination required to support the work.
+                The company supports public and private sector requirements through civil and structural construction, concrete-intensive work coordination and high-capacity machinery deployment.
+              </p>
+              <p>
+                Whether a client requires construction support or a concrete boom placer with an operating crew, Chitrani brings together equipment, manpower and site coordination through one enterprise.
               </p>
             </div>
 
             <div className="pt-2">
               <Link
                 to="/about"
-                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-[12px] bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs font-semibold uppercase tracking-wider transition-colors shadow-[0_10px_30px_rgba(201,111,27,0.25)]"
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-[12px] bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs font-semibold uppercase tracking-wider transition-all shadow-[0_10px_30px_rgba(201,111,27,0.25)] hover:-translate-y-0.5 focus:outline-hidden focus:ring-2 focus:ring-[#C96F1B]"
               >
                 <span>Learn More About Us</span>
                 <ArrowRight className="w-4 h-4 text-white" />
@@ -41,9 +44,9 @@ export const CompanyIntroPreview: React.FC = () => {
             </div>
           </div>
 
-          {/* Right: Construction Capability & Engineering Imagery */}
+          {/* Right: Construction Capability Imagery */}
           <div className="lg:col-span-5 relative">
-            <div className="relative rounded-[18px] overflow-hidden border border-[#EFE8DE] shadow-[0_10px_30px_rgba(0,0,0,0.08)] bg-white group aspect-[4/3] sm:aspect-auto">
+            <div className="relative rounded-[20px] overflow-hidden border border-[#E8DDD0] shadow-[0_10px_30px_rgba(61,53,45,0.06)] bg-white group aspect-[4/3] sm:aspect-auto">
               <img 
                 src={capabilityImg} 
                 alt="Chitrani Construction safety helmet, structural blueprints and digital building model at an active construction site"
@@ -52,7 +55,7 @@ export const CompanyIntroPreview: React.FC = () => {
                 decoding="async"
                 width={800}
                 height={600}
-                className="w-full h-[280px] sm:h-[400px] lg:h-[440px] object-cover filter brightness-95 scale-[1.03] sm:scale-[1.06] transition-transform duration-500"
+                className="w-full h-[280px] sm:h-[400px] lg:h-[440px] object-cover filter brightness-95 scale-[1.03] sm:scale-[1.055] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
                 style={{
                   objectFit: 'cover',
                   objectPosition: '42% 70%',
