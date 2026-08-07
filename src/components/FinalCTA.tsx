@@ -29,11 +29,11 @@ export const FinalCTA: React.FC = () => {
             </div>
 
             <h2 className="font-heading font-semibold text-2xl sm:text-4xl text-white tracking-tight max-w-3xl mx-auto leading-tight">
-              Have a Project or Equipment Requirement?
+              Discuss Your Construction Requirement
             </h2>
 
             <p className="text-sm sm:text-base text-white/90 max-w-2xl mx-auto font-body leading-relaxed">
-              Share your construction-contracting or concrete boom placer requirement with Chitrani Construction. The team will review your site, schedule and service needs before preparing a relevant proposal.
+              Share your civil contracting, structural package or concrete boom placer requirement with Chitrani Construction. Our team will review your site schedule and scope to prepare a structured commercial proposal.
             </p>
 
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
@@ -41,17 +41,17 @@ export const FinalCTA: React.FC = () => {
                 to="/request-quote"
                 className="w-full sm:w-auto px-8 py-3.5 rounded-[12px] bg-white hover:bg-[#F5EEE5] text-[#C96F1B] font-heading text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md hover:-translate-y-0.5 focus:outline-hidden focus:ring-2 focus:ring-white"
               >
-                <span>Request a Quote</span>
+                <span>Request a Quotation</span>
                 <ArrowRight className="w-4 h-4 text-[#C96F1B]" />
               </Link>
 
-              <a
-                href={`tel:${companyConfig.phoneRaw}`}
+              <Link
+                to="/contact"
                 className="w-full sm:w-auto px-8 py-3.5 rounded-[12px] bg-transparent border-2 border-white/85 text-white hover:bg-white hover:text-[#C96F1B] font-heading text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all focus:outline-hidden focus:ring-2 focus:ring-white"
               >
                 <Phone className="w-4 h-4" />
-                <span>Call Us</span>
-              </a>
+                <span>Contact Chitrani</span>
+              </Link>
             </div>
           </div>
 

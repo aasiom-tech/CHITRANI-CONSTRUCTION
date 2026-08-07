@@ -13,8 +13,8 @@ export interface CompanyConfig {
   phoneRaw: string;
   secondaryPhone: string;
   secondaryPhoneRaw: string;
-  whatsapp: string;
-  whatsappRaw: string;
+  whatsapp: string | null;
+  whatsappRaw: string | null;
   email: string;
   operatingOffice: string;
   registeredOffice: string;
@@ -35,8 +35,8 @@ export const companyConfig: CompanyConfig = {
   phoneRaw: "+919833706666",
   secondaryPhone: "+91 73878 01051",
   secondaryPhoneRaw: "+917387801051",
-  whatsapp: "+91 98337 06666",
-  whatsappRaw: "919833706666",
+  whatsapp: null,
+  whatsappRaw: null,
   email: "chitraniconstruction@gmail.com",
   operatingOffice: "Shop No. 13, Vijay Nagar Society, Sahar Road, Near D Mart, Andheri East, Mumbai – 400069",
   registeredOffice: "Plot No. 15, Gat No. 146, Nehru Nagar, Mahabal Road, Ramanand Nagar, Jalgaon, Maharashtra – 425001",

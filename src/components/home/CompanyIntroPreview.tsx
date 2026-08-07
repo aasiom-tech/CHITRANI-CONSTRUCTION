@@ -23,13 +23,13 @@ export const CompanyIntroPreview: React.FC = () => {
 
             <div className="space-y-4 text-sm sm:text-base text-[#6B5E4E] leading-relaxed font-body">
               <p>
-                Chitrani Construction is a Maharashtra-based construction and equipment-support enterprise serving the Mumbai construction market.
+                Chitrani Construction is a Maharashtra-based construction execution and equipment support enterprise serving developers, contractors and institutional project requirements.
               </p>
               <p>
-                The company supports public and private sector requirements through civil and structural construction, concrete-intensive work coordination and high-capacity machinery deployment.
+                We support structural construction, civil execution and high-capacity equipment deployment across commercial, residential and infrastructure-linked developments in Mumbai and Maharashtra.
               </p>
               <p>
-                Whether a client requires construction support or a concrete boom placer with an operating crew, Chitrani brings together equipment, manpower and site coordination through one enterprise.
+                By combining skilled workforce supervision, disciplined site management and heavy machinery support like concrete boom placers, Chitrani brings reliable execution under one responsible partner.
               </p>
             </div>
 
@@ -38,7 +38,7 @@ export const CompanyIntroPreview: React.FC = () => {
                 to="/about"
                 className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-[12px] bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs font-semibold uppercase tracking-wider transition-all shadow-[0_10px_30px_rgba(201,111,27,0.25)] hover:-translate-y-0.5 focus:outline-hidden focus:ring-2 focus:ring-[#C96F1B]"
               >
-                <span>Learn More About Us</span>
+                <span>View Company Profile</span>
                 <ArrowRight className="w-4 h-4 text-white" />
               </Link>
             </div>

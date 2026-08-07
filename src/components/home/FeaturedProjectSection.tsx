@@ -82,12 +82,12 @@ export const FeaturedProjectSection: React.FC = () => {
 
                 <div className="space-y-1.5 pt-3 sm:pt-4 sm:border-t sm:border-[#E8DDD0] sm:pr-4">
                   <span className="text-[#6B5E4E] font-bold uppercase tracking-wider font-heading text-[11px] block">
-                    WORK ORDER
+                    ENGAGEMENT ROLE
                   </span>
                   <div className="flex items-center gap-1.5 text-[#3D352D]">
                     <FileText className="w-4 h-4 text-[#C96F1B] shrink-0" />
                     <span className="font-heading font-semibold text-xs sm:text-sm tracking-wide">
-                      OSWOJ0002126-27
+                      Construction Vendor
                     </span>
                   </div>
                 </div>

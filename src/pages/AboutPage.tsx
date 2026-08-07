@@ -2,62 +2,54 @@ import React from 'react';
 import { PageHeader } from '../components/common/PageHeader';
 import { SEO } from '../components/common/SEO';
 import { AboutCompanyOverview } from '../components/about/AboutCompanyOverview';
-import { AboutCompanyStory } from '../components/about/AboutCompanyStory';
 import { AboutMissionVision } from '../components/about/AboutMissionVision';
 import { AboutCoreStrengths } from '../components/about/AboutCoreStrengths';
 import { AboutConnectedCapabilities } from '../components/about/AboutConnectedCapabilities';
 import { AboutSafetyQuality } from '../components/about/AboutSafetyQuality';
 import { AboutLegalInformation } from '../components/about/AboutLegalInformation';
 import { AboutOperatingPresence } from '../components/about/AboutOperatingPresence';
-import { AboutFutureDirection } from '../components/about/AboutFutureDirection';
 import { AboutFinalCTA } from '../components/about/AboutFinalCTA';
 
 export const AboutPage: React.FC = () => {
   return (
     <>
       <SEO 
-        title="About Chitrani Construction | Construction & Equipment Support"
-        description="Learn about Chitrani Construction, a Maharashtra-based enterprise providing civil and structural construction support and Putzmeister M42-5 boom placer rental."
-        canonical="https://chitraniconstruction.com/about"
+        title="About Chitrani Construction | Construction Capability in Maharashtra"
+        description="Learn about Chitrani Construction's construction execution, manpower coordination, equipment support, operating presence and project-focused approach in Maharashtra."
+        canonicalPath="/about"
       />
 
       <div className="bg-[#EADBC8] space-y-0 text-[#3D352D]">
-        {/* 1. Shared PageHeader */}
+        {/* 01. Shared PageHeader */}
         <PageHeader
           badge="ABOUT CHITRANI"
-          title="Construction Capability Built Around Practical Project Support"
-          subtitle="Learn how Chitrani Construction combines civil and structural contracting with concrete boom placer rental to support construction requirements across Maharashtra."
+          title="Construction Capability Built Around Responsible Project Execution"
+          subtitle="Chitrani Construction supports civil and structural construction execution, skilled manpower coordination and concrete boom placer rental for project-based work across Maharashtra."
           breadcrumb={[{ label: 'Home', href: '/' }]}
         />
 
-        {/* 2. Company Overview */}
+        {/* 02. Company Overview */}
         <AboutCompanyOverview />
 
-        {/* 3. Company Story */}
-        <AboutCompanyStory />
-
-        {/* 4. Mission and Vision */}
+        {/* 03. Mission and Vision */}
         <AboutMissionVision />
 
-        {/* 5. Core Strengths */}
+        {/* 04. Our Values */}
         <AboutCoreStrengths />
 
-        {/* 6. Two Connected Business Capabilities */}
+        {/* 05. Construction Capabilities */}
         <AboutConnectedCapabilities />
 
-        {/* 7. Safety and Quality Approach */}
-        <AboutSafetyQuality />
-
-        {/* 8. Legal and Business Information */}
-        <AboutLegalInformation />
-
-        {/* 9. Operating Presence */}
+        {/* 06. Areas Served / Operating Presence */}
         <AboutOperatingPresence />
 
-        {/* 10. Future Direction */}
-        <AboutFutureDirection />
+        {/* 07. Safety & Quality Approach */}
+        <AboutSafetyQuality />
 
-        {/* 11. Final Enquiry CTA */}
+        {/* 08. Registered Business Information */}
+        <AboutLegalInformation />
+
+        {/* 09. Discuss Your Project CTA */}
         <AboutFinalCTA />
 
       </div>

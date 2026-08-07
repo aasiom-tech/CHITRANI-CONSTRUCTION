@@ -30,7 +30,7 @@ export const AboutMissionVision: React.FC = () => {
                 Our Mission
               </h3>
               <p className="text-sm sm:text-base text-[#6B5E4E] font-body leading-relaxed">
-                To provide dependable construction execution and equipment support by combining quality-focused workmanship, appropriate machinery, trained operating manpower, transparent communication and responsible site coordination.
+                To support construction requirements through responsible execution, quality-focused workmanship, appropriate resource coordination and transparent communication.
               </p>
             </div>
           </div>
@@ -45,7 +45,7 @@ export const AboutMissionVision: React.FC = () => {
                 Our Vision
               </h3>
               <p className="text-sm sm:text-base text-[#6B5E4E] font-body leading-relaxed">
-                To grow as a trusted construction and equipment-support enterprise serving developers, contractors, infrastructure companies and public-sector requirements across Maharashtra.
+                To strengthen Chitrani Construction as a dependable construction and equipment-support enterprise for project requirements across Maharashtra.
               </p>
             </div>
           </div>

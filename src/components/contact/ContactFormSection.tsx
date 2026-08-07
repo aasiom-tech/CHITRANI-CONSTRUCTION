@@ -1,16 +1,29 @@
 import React, { useState, useRef } from 'react';
-import { Mail, Phone, AlertCircle, ExternalLink, CheckCircle2 } from 'lucide-react';
+import { Mail, Phone, AlertCircle, ExternalLink, CheckCircle2, Building2 } from 'lucide-react';
 import { companyConfig } from '../../config/companyConfig';
+
+export type ContactEnquiryPayload = {
+  name: string;
+  company?: string;
+  designation?: string;
+  mobile: string;
+  email: string;
+  projectName?: string;
+  projectLocation?: string;
+  service: string;
+  message: string;
+};
 
 export const ContactFormSection: React.FC = () => {
   const [fullName, setFullName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
   const [companyName, setCompanyName] = useState('');
-  const [enquiryType, setEnquiryType] = useState('Construction Contracting');
+  const [designation, setDesignation] = useState('');
+  const [mobileNumber, setMobileNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [projectName, setProjectName] = useState('');
   const [projectLocation, setProjectLocation] = useState('');
+  const [service, setService] = useState('RCC Work');
   const [message, setMessage] = useState('');
-  const [consent, setConsent] = useState(false);
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isPrepared, setIsPrepared] = useState(false);
@@ -18,12 +31,11 @@ export const ContactFormSection: React.FC = () => {
 
   // Field refs for focus management
   const fullNameRef = useRef<HTMLInputElement>(null);
-  const phoneRef = useRef<HTMLInputElement>(null);
+  const mobileRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
-  const enquiryTypeRef = useRef<HTMLSelectElement>(null);
+  const serviceRef = useRef<HTMLSelectElement>(null);
   const locationRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
-  const consentRef = useRef<HTMLInputElement>(null);
 
   const validate = () => {
     const errs: Record<string, string> = {};
@@ -32,12 +44,12 @@ export const ContactFormSection: React.FC = () => {
       errs.fullName = 'Full Name is required (minimum 2 characters).';
     }
 
-    const cleanPhone = phone.trim().replace(/[\s-]/g, '');
-    const indianPhoneRegex = /^(?:\+91|91)?[6-9]\d{9}$/;
-    if (!phone.trim()) {
-      errs.phone = 'Phone Number is required.';
-    } else if (!indianPhoneRegex.test(cleanPhone)) {
-      errs.phone = 'Please enter a valid 10-digit Indian mobile number (e.g. +91 9833706666).';
+    const cleanMobile = mobileNumber.trim().replace(/[\s-]/g, '');
+    const indianMobileRegex = /^(?:\+91|91)?[6-9]\d{9}$/;
+    if (!mobileNumber.trim()) {
+      errs.mobileNumber = 'Mobile Number is required.';
+    } else if (!indianMobileRegex.test(cleanMobile)) {
+      errs.mobileNumber = 'Please enter a valid 10-digit Indian mobile number (e.g. +91 9833706666).';
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -47,20 +59,16 @@ export const ContactFormSection: React.FC = () => {
       errs.email = 'Please enter a valid email address.';
     }
 
-    if (!enquiryType) {
-      errs.enquiryType = 'Please select an Enquiry Type.';
+    if (!service) {
+      errs.service = 'Please select a Required Service.';
     }
 
-    if (!projectLocation.trim()) {
-      errs.projectLocation = 'Project Location is required.';
+    if (service !== 'Other' && service !== 'General Enquiry' && !projectLocation.trim()) {
+      errs.projectLocation = 'Project Location is required for the selected service.';
     }
 
-    if (!message.trim() || message.trim().length < 20) {
-      errs.message = 'Please describe your requirement (minimum 20 characters).';
-    }
-
-    if (!consent) {
-      errs.consent = 'You must agree to the data usage terms to proceed.';
+    if (!message.trim() || message.trim().length < 10) {
+      errs.message = 'Please provide details about your requirement (minimum 10 characters).';
     }
 
     setErrors(errs);
@@ -68,12 +76,11 @@ export const ContactFormSection: React.FC = () => {
     if (Object.keys(errs).length > 0) {
       // Focus first invalid field
       if (errs.fullName && fullNameRef.current) fullNameRef.current.focus();
-      else if (errs.phone && phoneRef.current) phoneRef.current.focus();
+      else if (errs.mobileNumber && mobileRef.current) mobileRef.current.focus();
       else if (errs.email && emailRef.current) emailRef.current.focus();
-      else if (errs.enquiryType && enquiryTypeRef.current) enquiryTypeRef.current.focus();
+      else if (errs.service && serviceRef.current) serviceRef.current.focus();
       else if (errs.projectLocation && locationRef.current) locationRef.current.focus();
       else if (errs.message && messageRef.current) messageRef.current.focus();
-      else if (errs.consent && consentRef.current) consentRef.current.focus();
 
       return false;
     }
@@ -85,20 +92,34 @@ export const ContactFormSection: React.FC = () => {
     e.preventDefault();
     if (!validate()) return;
 
-    // Construct structured mailto link
-    const subject = `Website Enquiry – ${enquiryType} – ${fullName.trim()}`;
-    const bodyLines = [
-      `Enquiry Details:`,
+    const payload: ContactEnquiryPayload = {
+      name: fullName.trim(),
+      company: companyName.trim() || undefined,
+      designation: designation.trim() || undefined,
+      mobile: mobileNumber.trim(),
+      email: email.trim(),
+      projectName: projectName.trim() || undefined,
+      projectLocation: projectLocation.trim() || undefined,
+      service,
+      message: message.trim()
+    };
+
+    // Safe mailto link construction
+    const subject = `Project Enquiry — Chitrani Construction`;
+    const bodyLines: string[] = [
+      `Project Enquiry Details:`,
       `---------------------------------`,
-      `Full Name: ${fullName.trim()}`,
-      `Company Name: ${companyName.trim() || 'N/A'}`,
-      `Phone: ${phone.trim()}`,
-      `Email: ${email.trim()}`,
-      `Enquiry Type: ${enquiryType}`,
-      `Project Location: ${projectLocation.trim()}`,
+      `Name: ${payload.name}`,
+      `Company: ${payload.company || 'N/A'}`,
+      `Designation: ${payload.designation || 'N/A'}`,
+      `Mobile: ${payload.mobile}`,
+      `Email: ${payload.email}`,
+      `Project Name: ${payload.projectName || 'N/A'}`,
+      `Project Location: ${payload.projectLocation || 'N/A'}`,
+      `Required Service: ${payload.service}`,
       `---------------------------------`,
-      `Message / Scope:`,
-      `${message.trim()}`
+      `Requirement / Message:`,
+      `${payload.message}`
     ];
 
     const encodedSubject = encodeURIComponent(subject);
@@ -108,7 +129,7 @@ export const ContactFormSection: React.FC = () => {
     setMailtoUrl(url);
     setIsPrepared(true);
 
-    // Open mailto window directly
+    // Trigger mailto application
     window.location.href = url;
   };
 
@@ -120,13 +141,13 @@ export const ContactFormSection: React.FC = () => {
           
           <div className="space-y-2 border-b border-[#E8DDD0] pb-6">
             <span className="font-heading text-xs text-[#C96F1B] font-bold tracking-wider uppercase block">
-              DIRECTORY ENQUIRY FORM
+              PROJECT ENQUIRY FORM
             </span>
             <h2 className="font-heading font-semibold text-2xl sm:text-3xl text-[#3D352D]">
-              Send an Enquiry
+              Send a Project Enquiry
             </h2>
             <p className="text-xs sm:text-sm text-[#6B5E4E] font-body">
-              Fill in your enquiry details to prepare an email request to Chitrani Construction.
+              Fill in your details below to prepare an enquiry email to Chitrani Construction.
             </p>
           </div>
 
@@ -137,16 +158,16 @@ export const ContactFormSection: React.FC = () => {
                 <div>
                   <h3 className="font-heading font-bold text-lg text-[#2E7D32]">Enquiry Prepared</h3>
                   <p className="text-xs text-[#2E7D32]">
-                    Your email client should open automatically. If it did not open, click the button below to complete sending.
+                    Your email client will open automatically. If it did not open, click the button below to send your enquiry.
                   </p>
                 </div>
               </div>
 
               <div className="p-4 bg-white rounded-[12px] border border-[#A5D6A7] text-xs text-[#3D352D] space-y-1">
-                <div><strong>Enquiry Type:</strong> {enquiryType}</div>
+                <div><strong>Required Service:</strong> {service}</div>
                 <div><strong>Name:</strong> {fullName}</div>
-                <div><strong>Project Location:</strong> {projectLocation}</div>
-                <div><strong>Email Target:</strong> {companyConfig.email}</div>
+                <div><strong>Mobile:</strong> {mobileNumber}</div>
+                <div><strong>Target Email:</strong> {companyConfig.email}</div>
               </div>
 
               <div className="pt-2 flex flex-col sm:flex-row gap-3">
@@ -183,7 +204,7 @@ export const ContactFormSection: React.FC = () => {
                 >
                   <AlertCircle className="w-5 h-5 text-[#B42318] shrink-0 mt-0.5" />
                   <div>
-                    <strong className="block font-bold text-sm">Please correct the following errors before submitting:</strong>
+                    <strong className="block font-bold text-sm">Please correct the following errors:</strong>
                     <ul className="list-disc list-inside mt-1 space-y-1">
                       {Object.values(errors).map((err, idx) => (
                         <li key={idx}>{err}</li>
@@ -193,7 +214,7 @@ export const ContactFormSection: React.FC = () => {
                 </div>
               )}
 
-              {/* Full Name & Company Name */}
+              {/* Name & Company */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="contact-fullname" className="block text-xs font-heading font-semibold text-[#3D352D] mb-1 uppercase tracking-wider">
@@ -237,34 +258,52 @@ export const ContactFormSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Phone & Email */}
+              {/* Designation & Mobile */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="contact-phone" className="block text-xs font-heading font-semibold text-[#3D352D] mb-1 uppercase tracking-wider">
-                    Phone Number <span className="text-[#C96F1B]">*</span>
+                  <label htmlFor="contact-designation" className="block text-xs font-heading font-semibold text-[#3D352D] mb-1 uppercase tracking-wider">
+                    Designation (Optional)
                   </label>
                   <input
-                    ref={phoneRef}
-                    id="contact-phone"
+                    id="contact-designation"
+                    type="text"
+                    autoComplete="organization-title"
+                    value={designation}
+                    onChange={(e) => setDesignation(e.target.value)}
+                    placeholder="e.g. Project Manager / Contracting Lead"
+                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-[10px] bg-white text-[#3D352D] text-sm border border-[#D8CCBC] font-body placeholder-[#9D9287] focus:outline-hidden focus:border-[#C96F1B] focus:ring-2 focus:ring-[#C96F1B]/30 transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="contact-mobile" className="block text-xs font-heading font-semibold text-[#3D352D] mb-1 uppercase tracking-wider">
+                    Mobile Number <span className="text-[#C96F1B]">*</span>
+                  </label>
+                  <input
+                    ref={mobileRef}
+                    id="contact-mobile"
                     type="tel"
                     autoComplete="tel"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    placeholder="+91 9833706666"
-                    aria-invalid={!!errors.phone}
-                    aria-describedby={errors.phone ? "err-phone" : undefined}
+                    value={mobileNumber}
+                    onChange={(e) => setMobileNumber(e.target.value)}
+                    placeholder="+91 98337 06666"
+                    aria-invalid={!!errors.mobileNumber}
+                    aria-describedby={errors.mobileNumber ? "err-mobile" : undefined}
                     className={`w-full min-h-[48px] px-3.5 py-2.5 rounded-[10px] bg-white text-[#3D352D] text-sm border font-body placeholder-[#9D9287] focus:outline-hidden focus:border-[#C96F1B] focus:ring-2 focus:ring-[#C96F1B]/30 transition-all ${
-                      errors.phone ? 'border-[#B42318]' : 'border-[#D8CCBC]'
+                      errors.mobileNumber ? 'border-[#B42318]' : 'border-[#D8CCBC]'
                     }`}
                   />
-                  {errors.phone && (
-                    <p id="err-phone" className="text-[11px] text-[#B42318] mt-1 font-body flex items-center gap-1">
+                  {errors.mobileNumber && (
+                    <p id="err-mobile" className="text-[11px] text-[#B42318] mt-1 font-body flex items-center gap-1">
                       <AlertCircle className="w-3 h-3 text-[#B42318]" />
-                      <span>{errors.phone}</span>
+                      <span>{errors.mobileNumber}</span>
                     </p>
                   )}
                 </div>
+              </div>
 
+              {/* Email & Required Service */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="contact-email" className="block text-xs font-heading font-semibold text-[#3D352D] mb-1 uppercase tracking-wider">
                     Email Address <span className="text-[#C96F1B]">*</span>
@@ -290,31 +329,48 @@ export const ContactFormSection: React.FC = () => {
                     </p>
                   )}
                 </div>
-              </div>
 
-              {/* Enquiry Type & Project Location */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="contact-enquiry-type" className="block text-xs font-heading font-semibold text-[#3D352D] mb-1 uppercase tracking-wider">
-                    Enquiry Type <span className="text-[#C96F1B]">*</span>
+                  <label htmlFor="contact-service" className="block text-xs font-heading font-semibold text-[#3D352D] mb-1 uppercase tracking-wider">
+                    Required Service <span className="text-[#C96F1B]">*</span>
                   </label>
                   <select
-                    ref={enquiryTypeRef}
-                    id="contact-enquiry-type"
-                    value={enquiryType}
-                    onChange={(e) => setEnquiryType(e.target.value)}
-                    aria-invalid={!!errors.enquiryType}
+                    ref={serviceRef}
+                    id="contact-service"
+                    value={service}
+                    onChange={(e) => setService(e.target.value)}
+                    aria-invalid={!!errors.service}
                     className="w-full min-h-[48px] px-3.5 py-2.5 rounded-[10px] bg-white text-[#3D352D] text-sm border border-[#D8CCBC] font-body focus:outline-hidden focus:border-[#C96F1B] focus:ring-2 focus:ring-[#C96F1B]/30 transition-all"
                   >
-                    <option value="Construction Contracting">Construction Contracting</option>
-                    <option value="Concrete Boom Placer Rental">Concrete Boom Placer Rental</option>
-                    <option value="General Enquiry">General Enquiry</option>
+                    <option value="RCC Work">RCC Work</option>
+                    <option value="Civil Work">Civil Work</option>
+                    <option value="Brickwork / Blockwork">Brickwork / Blockwork</option>
+                    <option value="Labour Contract">Labour Contract</option>
+                    <option value="Boom Placer Rental">Boom Placer Rental</option>
+                    <option value="Other">Other</option>
                   </select>
+                </div>
+              </div>
+
+              {/* Project Name & Project Location */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="contact-project-name" className="block text-xs font-heading font-semibold text-[#3D352D] mb-1 uppercase tracking-wider">
+                    Project Name (Optional)
+                  </label>
+                  <input
+                    id="contact-project-name"
+                    type="text"
+                    value={projectName}
+                    onChange={(e) => setProjectName(e.target.value)}
+                    placeholder="e.g. Ocean Star Tower B"
+                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-[10px] bg-white text-[#3D352D] text-sm border border-[#D8CCBC] font-body placeholder-[#9D9287] focus:outline-hidden focus:border-[#C96F1B] focus:ring-2 focus:ring-[#C96F1B]/30 transition-all"
+                  />
                 </div>
 
                 <div>
                   <label htmlFor="contact-location" className="block text-xs font-heading font-semibold text-[#3D352D] mb-1 uppercase tracking-wider">
-                    Project Location <span className="text-[#C96F1B]">*</span>
+                    Project Location {service !== 'Other' && <span className="text-[#C96F1B]">*</span>}
                   </label>
                   <input
                     ref={locationRef}
@@ -339,10 +395,10 @@ export const ContactFormSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Message */}
+              {/* Requirement Message */}
               <div>
                 <label htmlFor="contact-message" className="block text-xs font-heading font-semibold text-[#3D352D] mb-1 uppercase tracking-wider">
-                  Message / Project Scope <span className="text-[#C96F1B]">*</span>
+                  Requirement Details <span className="text-[#C96F1B]">*</span>
                 </label>
                 <textarea
                   ref={messageRef}
@@ -350,10 +406,10 @@ export const ContactFormSection: React.FC = () => {
                   rows={4}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Provide details about your project site, concrete placement scope, schedule..."
+                  placeholder="Provide details about your project site, scope of work, timeline, or equipment requirement..."
                   aria-invalid={!!errors.message}
                   aria-describedby={errors.message ? "err-message" : undefined}
-                  className={`w-full min-h-[130px] p-3.5 rounded-[10px] bg-white text-[#3D352D] text-sm border font-body placeholder-[#9D9287] focus:outline-hidden focus:border-[#C96F1B] focus:ring-2 focus:ring-[#C96F1B]/30 transition-all resize-y ${
+                  className={`w-full min-h-[120px] p-3.5 rounded-[10px] bg-white text-[#3D352D] text-sm border font-body placeholder-[#9D9287] focus:outline-hidden focus:border-[#C96F1B] focus:ring-2 focus:ring-[#C96F1B]/30 transition-all resize-y ${
                     errors.message ? 'border-[#B42318]' : 'border-[#D8CCBC]'
                   }`}
                 />
@@ -365,31 +421,7 @@ export const ContactFormSection: React.FC = () => {
                 )}
               </div>
 
-              {/* Consent Checkbox */}
-              <div className="pt-1">
-                <label className="flex items-start gap-3 cursor-pointer">
-                  <input
-                    ref={consentRef}
-                    type="checkbox"
-                    checked={consent}
-                    onChange={(e) => setConsent(e.target.checked)}
-                    aria-invalid={!!errors.consent}
-                    aria-describedby={errors.consent ? "err-consent" : undefined}
-                    className="w-4 h-4 rounded-xs border-[#D8CCBC] text-[#C96F1B] focus:ring-[#C96F1B] mt-0.5"
-                  />
-                  <span className="text-xs text-[#6B5E4E] font-body leading-tight">
-                    I agree that Chitrani Construction may use the information provided to respond to this enquiry.
-                  </span>
-                </label>
-                {errors.consent && (
-                  <p id="err-consent" className="text-[11px] text-[#B42318] mt-1 font-body flex items-center gap-1 pl-7">
-                    <AlertCircle className="w-3 h-3 text-[#B42318]" />
-                    <span>{errors.consent}</span>
-                  </p>
-                )}
-              </div>
-
-              {/* Action Button */}
+              {/* Submit Button */}
               <div className="pt-2">
                 <button
                   type="submit"
@@ -403,7 +435,7 @@ export const ContactFormSection: React.FC = () => {
                 </p>
               </div>
 
-              {/* Direct Alternatives */}
+              {/* Direct Alternative Links */}
               <div className="pt-4 border-t border-[#E8DDD0] text-center text-xs text-[#6B5E4E] font-body">
                 <span>Prefer direct contact? Call us at </span>
                 <a href={`tel:${companyConfig.phoneRaw}`} className="font-semibold text-[#3D352D] underline hover:text-[#C96F1B]">

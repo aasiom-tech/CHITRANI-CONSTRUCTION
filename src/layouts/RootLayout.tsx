@@ -23,7 +23,7 @@ export const RootLayout: React.FC = () => {
       <Header />
 
       {/* Dynamic Route Outlet with Error Boundary */}
-      <main id="main-content" className="flex-1">
+      <main id="main-content" className="flex-1 pb-16 lg:pb-0">
         <ErrorBoundary>
           <Outlet />
         </ErrorBoundary>
