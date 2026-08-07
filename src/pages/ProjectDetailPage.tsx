@@ -1,53 +1,50 @@
 import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { SEO } from '../components/common/SEO';
-import { projectsData } from '../data/projects';
+import { getProjectBySlug } from '../data/projects';
 import { ProjectHero } from '../components/projects/ProjectHero';
 import { ProjectOverview } from '../components/projects/ProjectOverview';
 import { ProjectFacts } from '../components/projects/ProjectFacts';
 import { ProjectEngagement } from '../components/projects/ProjectEngagement';
 import { ProjectCTA } from '../components/projects/ProjectCTA';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Building2, Truck, ArrowRight } from 'lucide-react';
 
 export const ProjectDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
 
-  // Validate allowed slug strictly
-  if (slug !== 'ocean-star') {
-    return <Navigate to="/404" replace />;
-  }
+  // Retrieve project dynamically from data layer
+  const project = getProjectBySlug(slug || '');
 
-  const project = projectsData.find((p) => p.slug === slug);
+  // Defensive validation: unknown project slug redirects to 404
   if (!project) {
     return <Navigate to="/404" replace />;
   }
 
   return (
-    <div className="bg-[#F5EEE5] text-[#3D352D] min-h-screen">
-      <SEO 
-        title="Ocean Star Project Engagement | Chitrani Construction"
-        description="Review verified client, location, work-order, and schedule details for the Ocean Star project engagement in Mumbai."
-        canonical="https://chitraniconstruction.com/projects/ocean-star"
+    <div className="bg-[#FFFFFF] text-[#3D352D] min-h-screen">
+      <SEO
+        title={project.seoTitle || `${project.title} Project | Chitrani Construction`}
+        description={project.seoDescription || project.scope}
+        canonical={`https://chitraniconstruction.com/projects/${project.slug}`}
       />
 
+      {/* Hero / Intro Header */}
       <ProjectHero
-        title="Ocean Star"
-        badge="PROJECT ENGAGEMENT"
-        intro="Chitrani Construction was engaged as a construction vendor for the Ocean Star project at Kashinath Dhuru Marg, Mumbai."
+        title={project.title}
+        badge={project.statusBadge || 'VERIFIED VENDOR ENGAGEMENT'}
+        intro={`Chitrani Construction is documented as a construction vendor for the ${project.title} development in Mumbai.`}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12 sm:space-y-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          
           {/* Main Content Column */}
           <div className="lg:col-span-8 space-y-10">
-            
-            {/* Overview & Image */}
+            {/* Overview & Representative Image */}
             <section>
               <ProjectOverview image={project.image} />
             </section>
 
-            {/* Verified Project Facts */}
+            {/* Verified Contract Metadata Facts */}
             <section>
               <ProjectFacts />
             </section>
@@ -57,41 +54,65 @@ export const ProjectDetailPage: React.FC = () => {
               <ProjectEngagement />
             </section>
 
-            {/* Related Service */}
-            <section className="bg-white rounded-[18px] border border-[#E8DDD0] p-6 sm:p-8 space-y-4 shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
-              <span className="font-display text-xs text-[#C96F1B] font-bold tracking-wider uppercase block">
-                SERVICE REFERENCE
-              </span>
-              <h3 className="font-heading font-bold text-2xl text-[#3D352D]">
-                Related Service
-              </h3>
+            {/* Related Services Links */}
+            <section className="bg-white rounded-[18px] border border-[#E8DDD0] p-6 sm:p-8 space-y-6 shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
+              <div className="border-b border-[#E8DDD0] pb-4 space-y-1">
+                <span className="font-display text-xs text-[#C96F1B] font-semibold tracking-wider uppercase block">
+                  SERVICE INTEGRATION
+                </span>
+                <h3 className="font-heading font-semibold text-2xl text-[#3D352D]">
+                  Related Construction Services
+                </h3>
+              </div>
 
-              <div className="p-5 bg-[#F5EEE5] rounded-xl border border-[#E8DDD0] space-y-3">
-                <div className="flex items-center justify-between">
-                  <h4 className="font-heading font-bold text-xl text-[#3D352D]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Link
+                  to="/services/construction-contracting"
+                  className="p-5 bg-[#F5EEE5] hover:bg-[#EADBC8]/60 rounded-xl border border-[#E8DDD0] space-y-2 group transition-all"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="w-8 h-8 rounded-full bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center">
+                      <Building2 className="w-4 h-4" />
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-[#C96F1B] group-hover:translate-x-1 transition-transform" />
+                  </div>
+                  <h4 className="font-heading font-semibold text-base text-[#3D352D] group-hover:text-[#C96F1B] transition-colors">
                     Construction Contracting
                   </h4>
-                  <Link
-                    to="/services/construction-contracting"
-                    className="inline-flex items-center gap-1.5 text-xs font-heading font-bold text-[#C96F1B] hover:text-[#B35E17] uppercase tracking-wider"
-                  >
-                    <span>View Service</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-                <p className="text-sm text-[#6B5E4E] font-body leading-relaxed">
-                  Review the structural and civil construction support offered by Chitrani Construction.
-                </p>
+                  <p className="text-xs text-[#6B5E4E] font-body">
+                    Civil and structural contracting support for building construction requirements.
+                  </p>
+                </Link>
+
+                <Link
+                  to="/services/concrete-boom-placer-rental"
+                  className="p-5 bg-[#F5EEE5] hover:bg-[#EADBC8]/60 rounded-xl border border-[#E8DDD0] space-y-2 group transition-all"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="w-8 h-8 rounded-full bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center">
+                      <Truck className="w-4 h-4" />
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-[#C96F1B] group-hover:translate-x-1 transition-transform" />
+                  </div>
+                  <h4 className="font-heading font-semibold text-base text-[#3D352D] group-hover:text-[#C96F1B] transition-colors">
+                    Concrete Boom Placer Rental
+                  </h4>
+                  <p className="text-xs text-[#6B5E4E] font-body">
+                    Putzmeister M42-5 monthly rental with operator and helper for high-volume pours.
+                  </p>
+                </Link>
               </div>
             </section>
-
           </div>
 
-          {/* Sidebar CTA */}
+          {/* Sidebar Column */}
           <div className="lg:col-span-4 space-y-6">
-            <ProjectCTA />
+            <ProjectCTA
+              title="Inquire About Vendor Capabilities"
+              description="Discuss contracting support, site coordination, and machinery rental for your project."
+              quoteLink="/request-quote?service=construction-contracting"
+            />
           </div>
-
         </div>
       </div>
     </div>
