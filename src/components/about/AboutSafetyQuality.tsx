@@ -3,12 +3,12 @@ import { ShieldCheck, CheckCircle2, Info } from 'lucide-react';
 
 export const AboutSafetyQuality: React.FC = () => {
   const points = [
-    'PPE usage and site-safety awareness',
-    'Site supervision and workforce coordination',
-    'Quality inspections',
-    'Preventive machinery maintenance',
-    'Responsible equipment deployment',
-    'Documented project communication'
+    'PPE usage and mandatory site-safety protocols',
+    'Housekeeping and site clutter management',
+    'Execution strictly as per approved drawings and line/level',
+    'Quality inspection coordination at every stage',
+    'Workmanship checks and curing support',
+    'Preventive machinery and equipment maintenance'
   ];
 
   return (

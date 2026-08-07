@@ -4,6 +4,7 @@ import { companyConfig } from '../../config/companyConfig';
 interface SEOProps {
   title: string;
   description?: string;
+  canonicalPath?: string;
   canonical?: string;
   jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>;
   noindex?: boolean;
@@ -12,6 +13,7 @@ interface SEOProps {
 export const SEO: React.FC<SEOProps> = ({
   title,
   description = "Chitrani Construction delivers structural civil contracting and Putzmeister M42-5 concrete boom placer rental for complex projects across Maharashtra.",
+  canonicalPath,
   canonical,
   jsonLd,
   noindex = false
@@ -38,7 +40,7 @@ export const SEO: React.FC<SEOProps> = ({
     }
     metaDescription.setAttribute('content', description);
 
-    // 3. Update OG Title
+    // 3. Update OG Title & Type
     let ogTitle = document.querySelector('meta[property="og:title"]');
     if (!ogTitle) {
       ogTitle = document.createElement('meta');
@@ -46,6 +48,14 @@ export const SEO: React.FC<SEOProps> = ({
       document.head.appendChild(ogTitle);
     }
     ogTitle.setAttribute('content', title);
+
+    let ogType = document.querySelector('meta[property="og:type"]');
+    if (!ogType) {
+      ogType = document.createElement('meta');
+      ogType.setAttribute('property', 'og:type');
+      document.head.appendChild(ogType);
+    }
+    ogType.setAttribute('content', 'website');
 
     // 4. Update OG Description
     let ogDesc = document.querySelector('meta[property="og:description"]');
@@ -56,28 +66,61 @@ export const SEO: React.FC<SEOProps> = ({
     }
     ogDesc.setAttribute('content', description);
 
-    // 5. Update Canonical URL
+    // Twitter Card Metadata
+    let twitterCard = document.querySelector('meta[name="twitter:card"]');
+    if (!twitterCard) {
+      twitterCard = document.createElement('meta');
+      twitterCard.setAttribute('name', 'twitter:card');
+      document.head.appendChild(twitterCard);
+    }
+    twitterCard.setAttribute('content', 'summary_large_image');
+
+    let twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    if (!twitterTitle) {
+      twitterTitle = document.createElement('meta');
+      twitterTitle.setAttribute('name', 'twitter:title');
+      document.head.appendChild(twitterTitle);
+    }
+    twitterTitle.setAttribute('content', title);
+
+    let twitterDesc = document.querySelector('meta[name="twitter:description"]');
+    if (!twitterDesc) {
+      twitterDesc = document.createElement('meta');
+      twitterDesc.setAttribute('name', 'twitter:description');
+      document.head.appendChild(twitterDesc);
+    }
+    twitterDesc.setAttribute('content', description);
+
+    // 5. Environment-Aware Canonical URL (Omit unverified hostnames)
+    const siteUrl = (import.meta.env.VITE_SITE_URL as string | undefined)?.replace(/\/$/, '') || '';
+    let resolvedCanonical: string | null = null;
+
+    if (siteUrl && canonicalPath) {
+      resolvedCanonical = `${siteUrl}${canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`}`;
+    } else if (canonical && !canonical.includes('chitraniconstruction.com')) {
+      resolvedCanonical = canonical;
+    }
+
     let linkCanonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) {
+    if (resolvedCanonical) {
       if (!linkCanonical) {
         linkCanonical = document.createElement('link');
         linkCanonical.setAttribute('rel', 'canonical');
         document.head.appendChild(linkCanonical);
       }
-      linkCanonical.setAttribute('href', canonical);
+      linkCanonical.setAttribute('href', resolvedCanonical);
     } else if (linkCanonical) {
       linkCanonical.remove();
     }
 
-    // 6. Inject JSON-LD
+    // 6. Inject JSON-LD (Factual Organization properties only)
     const scriptId = 'json-ld-structured-data';
     let scriptTag = document.getElementById(scriptId) as HTMLScriptElement | null;
     if (scriptTag) {
       scriptTag.remove();
     }
 
-    // Default Organization JSON-LD + Page specific JSON-LD
-    const defaultOrgLd = {
+    const defaultOrgLd: Record<string, unknown> = {
       "@context": "https://schema.org",
       "@type": "GeneralContractor",
       "name": companyConfig.name,
@@ -85,6 +128,7 @@ export const SEO: React.FC<SEOProps> = ({
       "email": companyConfig.email,
       "telephone": companyConfig.phone,
       "taxID": companyConfig.gstin,
+      "areaServed": "Maharashtra",
       "address": [
         {
           "@type": "PostalAddress",
@@ -105,6 +149,10 @@ export const SEO: React.FC<SEOProps> = ({
       ]
     };
 
+    if (siteUrl) {
+      defaultOrgLd.url = siteUrl;
+    }
+
     const combinedLd = jsonLd ? [defaultOrgLd, jsonLd] : [defaultOrgLd];
 
     scriptTag = document.createElement('script');
@@ -114,11 +162,10 @@ export const SEO: React.FC<SEOProps> = ({
     document.head.appendChild(scriptTag);
 
     return () => {
-      // Clean up injected script if unmounting
       const tag = document.getElementById(scriptId);
       if (tag) tag.remove();
     };
-  }, [title, description, canonical, jsonLd]);
+  }, [title, description, canonicalPath, canonical, jsonLd, noindex]);
 
   return null;
 };

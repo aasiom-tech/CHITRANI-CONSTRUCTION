@@ -137,7 +137,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) =
 
         {/* Footer Quick Connect */}
         <div className="p-4 border-t border-[#E8DDD0] bg-[#F5EEE5] space-y-2">
-          <div className="font-heading text-[11px] text-[#6B5E4E] mb-1 uppercase tracking-wider font-semibold">DIRECT DISPATCH</div>
+          <div className="font-heading text-[11px] text-[#6B5E4E] mb-1 uppercase tracking-wider font-semibold">DIRECT CONTACT</div>
           <div className="grid grid-cols-2 gap-2">
             <a 
               href={`tel:${companyConfig.phoneRaw}`} 
@@ -147,13 +147,11 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) =
               <span>Call</span>
             </a>
             <a 
-              href={`https://wa.me/${companyConfig.whatsappRaw}`} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-[10px] bg-white hover:bg-emerald-600 text-xs font-heading font-semibold text-emerald-700 hover:text-white border border-[#E8DDD0] transition-colors uppercase min-h-[44px]"
+              href={`mailto:${companyConfig.email}`}
+              className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-[10px] bg-white hover:bg-[#C96F1B] hover:text-white text-xs font-heading font-semibold text-[#3D352D] border border-[#E8DDD0] transition-colors uppercase min-h-[44px]"
             >
-              <MessageSquare className="w-3.5 h-3.5 text-emerald-600" />
-              <span>WhatsApp</span>
+              <FileText className="w-3.5 h-3.5 text-[#C96F1B]" />
+              <span>Email</span>
             </a>
           </div>
         </div>

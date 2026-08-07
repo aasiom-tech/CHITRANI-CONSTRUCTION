@@ -28,11 +28,11 @@ export const ContactFinalCTA: React.FC = () => {
             </div>
 
             <h2 className="font-heading font-semibold text-2xl sm:text-4xl text-white tracking-tight max-w-3xl mx-auto leading-tight">
-              Need a Detailed Commercial Proposal?
+              Need a Detailed Quotation?
             </h2>
 
             <p className="text-sm sm:text-base text-white/90 max-w-2xl mx-auto font-body leading-relaxed">
-              Use the Request Quote form to provide structured project, equipment, duration and scheduling information.
+              For structured packages, equipment specifications, duration and scheduling options, use our full quotation workflow.
             </p>
 
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
@@ -40,7 +40,7 @@ export const ContactFinalCTA: React.FC = () => {
                 to="/request-quote"
                 className="w-full sm:w-auto px-8 py-3.5 rounded-[12px] bg-white hover:bg-[#F5EEE5] text-[#C96F1B] font-heading text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md hover:-translate-y-0.5 focus:outline-hidden focus:ring-2 focus:ring-white"
               >
-                <span>Request a Quote</span>
+                <span>Request a Quotation</span>
                 <ArrowRight className="w-4 h-4 text-[#C96F1B]" />
               </Link>
 

@@ -11,7 +11,7 @@ export const PrivacyPolicyPage: React.FC = () => {
       <SEO 
         title="Privacy Policy | Chitrani Construction"
         description="Read how Chitrani Construction handles information provided through construction, equipment-rental and quotation enquiries."
-        canonical="https://chitraniconstruction.com/privacy-policy"
+        canonicalPath="/privacy-policy"
       />
 
       <div className="bg-[#EADBC8] space-y-0 text-[#3D352D]">

@@ -1,74 +1,55 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { PageHeader } from '../components/common/PageHeader';
 import { SEO } from '../components/common/SEO';
 import { QuoteIntro } from '../components/quote/QuoteIntro';
-import { QuoteRequirementSelector } from '../components/quote/QuoteRequirementSelector';
 import { QuoteFormContainer } from '../components/quote/QuoteFormContainer';
 import { QuoteClarification } from '../components/quote/QuoteClarification';
 
 type RequirementType = 'construction-contracting' | 'equipment-rental';
 
 export const RequestQuotePage: React.FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const rawParam = searchParams.get('requirement') || 'construction-contracting';
+  const [searchParams] = useSearchParams();
+  const rawParam = searchParams.get('requirement') || '';
 
-  const [requirement, setRequirement] = useState<RequirementType>(
-    rawParam.toLowerCase().includes('equipment') || rawParam.toLowerCase().includes('rental') || rawParam.toLowerCase().includes('placer')
+  const initialRequirement: 'construction-contracting' | 'equipment-rental' =
+    rawParam.toLowerCase().includes('equipment') ||
+    rawParam.toLowerCase().includes('rental') ||
+    rawParam.toLowerCase().includes('placer') ||
+    rawParam.toLowerCase().includes('boom')
       ? 'equipment-rental'
-      : 'construction-contracting'
-  );
-
-  useEffect(() => {
-    const raw = searchParams.get('requirement') || '';
-    if (raw.toLowerCase().includes('equipment') || raw.toLowerCase().includes('rental') || raw.toLowerCase().includes('placer')) {
-      setRequirement('equipment-rental');
-    } else if (raw.toLowerCase().includes('construction') || raw.toLowerCase().includes('contracting')) {
-      setRequirement('construction-contracting');
-    }
-  }, [searchParams]);
-
-  const handleSelectRequirement = (val: RequirementType) => {
-    setRequirement(val);
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set('requirement', val);
-    setSearchParams(newParams);
-  };
+      : 'construction-contracting';
 
   return (
     <>
       <SEO 
-        title="Request a Quote | Chitrani Construction"
-        description="Request a detailed commercial quote for civil contracting or concrete boom placer rental in Maharashtra."
-        canonical="https://chitraniconstruction.com/request-quote"
+        title="Request a Quotation | Chitrani Construction"
+        description="Share your construction, labour, civil work or boom placer rental requirement with Chitrani Construction for project discussion in Maharashtra."
+        canonicalPath="/request-quote"
       />
 
       <div className="bg-[#EADBC8] space-y-0 text-[#3D352D]">
         {/* 1. Shared PageHeader */}
         <PageHeader
-          badge="REQUEST A QUOTE"
-          title="Share Your Project or Equipment Requirement"
-          subtitle="Provide the project, location, service, schedule and equipment information required for Chitrani Construction to review your enquiry."
+          badge="REQUEST A QUOTATION"
+          title="Tell Us About Your Project Requirement"
+          subtitle="Provide the basic project, service and timeline information Chitrani Construction would need for a commercial discussion."
           breadcrumb={[{ label: 'Home', href: '/' }]}
         />
 
         {/* 2. Overview Intro */}
         <QuoteIntro />
 
-        {/* 3. Requirement Selector */}
-        <QuoteRequirementSelector
-          selected={requirement}
-          onSelect={handleSelectRequirement}
-        />
-
-        {/* 4. Interactive Quotation Experience */}
+        {/* 3. Interactive Multi-Step Quotation Form Container */}
         <QuoteFormContainer
-          initialRequirement={requirement}
+          initialRequirement={initialRequirement}
         />
 
-        {/* 5. Commercial Clarification Callout */}
+        {/* 4. Commercial Policy Clarification Callout */}
         <QuoteClarification />
       </div>
     </>
   );
 };
+
+export default RequestQuotePage;
