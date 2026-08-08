@@ -19,6 +19,7 @@ export const TermsConditionsPage: React.FC = () => {
           badge="LEGAL INFORMATION"
           title="Terms and Conditions"
           subtitle="These Terms and Conditions explain the general rules for using the Chitrani Construction website and submitting construction or equipment-rental enquiries."
+          accentType="legal"
           breadcrumb={[{ label: 'Home', href: '/' }]}
         />
 

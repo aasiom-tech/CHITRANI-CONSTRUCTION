@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Reveal, SectionEyebrow } from '../common/Motion';
 
 export const SafetyQualitySection: React.FC = () => {
   const highlights = [
@@ -13,20 +14,13 @@ export const SafetyQualitySection: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 sm:py-28 bg-[#F5EEE5] text-[#3D352D] border-b border-[#E8DDD0]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div className="bg-white rounded-[20px] border border-[#E8DDD0] p-8 sm:p-12 shadow-[0_10px_30px_rgba(61,53,45,0.05)] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          
+    <section className="py-20 sm:py-28 bg-[#F5EEE5] text-[#3D352D] border-b border-[#E8DDD0] relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <Reveal className="bg-white rounded-3xl border border-[#E8DDD0] p-8 sm:p-14 shadow-[0_10px_30px_rgba(61,53,45,0.05)] grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[10px] bg-[#F5EEE5] border border-[#E8DDD0] text-[#C96F1B]">
-              <ShieldCheck className="w-4 h-4 text-[#C96F1B]" />
-              <span className="font-heading text-xs font-bold tracking-wider uppercase text-[#3D352D]">
-                RESPONSIBLE SITE SUPPORT
-              </span>
-            </div>
+            <SectionEyebrow badge="RESPONSIBLE SITE SUPPORT" className="mb-1" />
 
-            <h2 className="font-heading font-semibold text-2xl sm:text-3xl text-[#3D352D] tracking-tight">
+            <h2 className="font-heading font-semibold text-2xl sm:text-3xl lg:text-4xl text-[#3D352D] tracking-tight">
               Safety and Quality in Everyday Site Coordination
             </h2>
 
@@ -37,7 +31,7 @@ export const SafetyQualitySection: React.FC = () => {
             <div className="pt-2">
               <Link
                 to="/about"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-[12px] bg-white border-2 border-[#C96F1B] text-[#C96F1B] hover:bg-[#C96F1B] hover:text-white font-heading text-xs font-semibold uppercase tracking-wider transition-all shadow-xs"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white border-2 border-[#C96F1B] text-[#C96F1B] hover:bg-[#C96F1B] hover:text-white font-heading text-xs font-semibold uppercase tracking-wider transition-all shadow-xs min-h-[44px]"
               >
                 <span>Learn About Our Approach</span>
                 <ArrowRight className="w-4 h-4" />
@@ -45,8 +39,8 @@ export const SafetyQualitySection: React.FC = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-5 bg-[#F5EEE5] p-6 sm:p-8 rounded-[16px] border border-[#E8DDD0] space-y-4">
-            <span className="font-heading text-xs font-bold text-[#3D352D] uppercase tracking-wider block">
+          <div className="lg:col-span-5 bg-[#F5EEE5] p-6 sm:p-8 rounded-2xl border border-[#E8DDD0] space-y-4">
+            <span className="font-heading text-xs font-semibold text-[#3D352D] uppercase tracking-wider block">
               Core Site Principles:
             </span>
 
@@ -59,9 +53,7 @@ export const SafetyQualitySection: React.FC = () => {
               ))}
             </ul>
           </div>
-
-        </div>
-
+        </Reveal>
       </div>
     </section>
   );

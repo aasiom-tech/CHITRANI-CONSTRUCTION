@@ -16,9 +16,9 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
   const altText = service.imageAlt || `${service.title} activity at a construction site`;
 
   return (
-    <div className="bg-white rounded-[18px] border border-[#E8DDD0] shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:border-[#C96F1B] motion-safe:hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group h-full">
+    <div className="bg-white rounded-2xl border border-[#E8DDD0] shadow-[0_10px_30px_rgba(61,53,45,0.04)] hover:shadow-[0_20px_40px_rgba(61,53,45,0.09)] hover:border-[#C96F1B]/60 transition-all duration-300 flex flex-col justify-between overflow-hidden group h-full">
       <div>
-        {/* Image Wrapper */}
+        {/* Image Wrapper with Subtle Zoom */}
         <div className="relative aspect-[16/9] overflow-hidden bg-[#F5EEE5]">
           <img
             src={service.image}
@@ -27,14 +27,14 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
             decoding="async"
             className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
           />
-          <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs px-3 py-1 rounded-full border border-[#E8DDD0] text-[11px] font-heading font-semibold text-[#3D352D] flex items-center gap-1.5 uppercase tracking-wider shadow-xs">
+          <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs px-3 py-1 rounded-xl border border-[#E8DDD0] text-[11px] font-heading font-semibold text-[#3D352D] flex items-center gap-1.5 uppercase tracking-wider shadow-2xs">
             <Icon className="w-3.5 h-3.5 text-[#C96F1B]" />
             <span>{service.category}</span>
           </div>
         </div>
 
         {/* Content Body */}
-        <div className="p-6 space-y-4">
+        <div className="p-6 sm:p-7 space-y-4">
           <h3 className="font-heading font-semibold text-xl sm:text-2xl text-[#3D352D] tracking-tight group-hover:text-[#C96F1B] transition-colors">
             {service.title}
           </h3>
@@ -44,9 +44,10 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
           </p>
 
           {/* Key Scope Points */}
-          <div className="pt-3 border-t border-[#E8DDD0] space-y-2">
-            <h4 className="font-heading text-[11px] text-[#3D352D] font-semibold uppercase tracking-wider">
-              Key Scope & Capabilities
+          <div className="pt-3 border-t border-[#E8DDD0]/70 space-y-2">
+            <h4 className="font-heading text-[11px] text-[#3D352D] font-semibold uppercase tracking-wider flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C96F1B]" />
+              <span>Key Scope & Capabilities</span>
             </h4>
             <ul className="space-y-1.5 text-xs text-[#6B5E4E] font-body">
               {highlights.slice(0, 4).map((highlight, idx) => (
@@ -61,10 +62,10 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
       </div>
 
       {/* Action Button */}
-      <div className="p-6 pt-0">
+      <div className="p-6 sm:p-7 pt-0">
         <Link
           to={`/services/${service.slug}`}
-          className="w-full min-h-[44px] py-3 px-4 rounded-lg bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-xs focus:outline-hidden focus:ring-2 focus:ring-[#C96F1B]"
+          className="w-full min-h-[44px] py-3 px-4 rounded-xl bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-xs focus:outline-hidden focus:ring-2 focus:ring-[#C96F1B]"
         >
           <span>VIEW SERVICE</span>
           <ArrowRight className="w-3.5 h-3.5" />
