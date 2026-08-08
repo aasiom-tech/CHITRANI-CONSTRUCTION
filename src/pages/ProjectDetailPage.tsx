@@ -1,118 +1,120 @@
 import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { SEO } from '../components/common/SEO';
-import { getProjectBySlug } from '../data/projects';
+import { projectsData } from '../data/projects';
 import { ProjectHero } from '../components/projects/ProjectHero';
 import { ProjectOverview } from '../components/projects/ProjectOverview';
 import { ProjectFacts } from '../components/projects/ProjectFacts';
 import { ProjectEngagement } from '../components/projects/ProjectEngagement';
 import { ProjectCTA } from '../components/projects/ProjectCTA';
-import { ExternalLink, Building2, Truck, ArrowRight } from 'lucide-react';
+import { ExternalLink, ShieldCheck, FileText, ChevronRight } from 'lucide-react';
 
 export const ProjectDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
 
-  // Retrieve project dynamically from data layer
-  const project = getProjectBySlug(slug || '');
+  // Validate allowed slug strictly (only Ocean Star is public)
+  if (!slug || slug !== 'ocean-star') {
+    return <Navigate to="/404" replace />;
+  }
 
-  // Defensive validation: unknown project slug redirects to 404
+  const project = projectsData.find((p) => p.slug === slug);
   if (!project) {
     return <Navigate to="/404" replace />;
   }
 
+  // SEO title for Ocean Star page
+  const seoTitle = 'Ocean Star Concrete Pump Engagement | Chitrani Construction';
+
+  const isConfirmed = project.status === 'confirmed';
+
   return (
-    <div className="bg-[#FFFFFF] text-[#3D352D] min-h-screen">
+    <div className="bg-[#F5EEE5] text-[#3D352D] min-h-screen">
       <SEO
-        title={project.seoTitle || `${project.title} Project | Chitrani Construction`}
-        description={project.seoDescription || project.scope}
-        canonical={`https://chitraniconstruction.com/projects/${project.slug}`}
+        title={seoTitle}
+        description={project.description}
+        canonicalPath={`/projects/${project.slug}`}
       />
 
-      {/* Hero / Intro Header */}
       <ProjectHero
         title={project.title}
-        badge={project.statusBadge || 'VERIFIED VENDOR ENGAGEMENT'}
-        intro={`Chitrani Construction is documented as a construction vendor for the ${project.title} development in Mumbai.`}
+        badge={project.statusLabel.toUpperCase()}
+        intro={project.shortDescription}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12 sm:space-y-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          
           {/* Main Content Column */}
           <div className="lg:col-span-8 space-y-10">
-            {/* Overview & Representative Image */}
+            
+            {/* Overview & Image */}
             <section>
-              <ProjectOverview image={project.image} />
+              <ProjectOverview project={project} />
             </section>
 
-            {/* Verified Contract Metadata Facts */}
+            {/* Verified Project Facts */}
             <section>
-              <ProjectFacts />
+              <ProjectFacts project={project} />
             </section>
 
-            {/* Vendor Engagement & Responsible Information Note */}
+            {/* Governance & Responsible Disclosure Note */}
             <section>
               <ProjectEngagement />
             </section>
 
-            {/* Related Services Links */}
-            <section className="bg-white rounded-[18px] border border-[#E8DDD0] p-6 sm:p-8 space-y-6 shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
-              <div className="border-b border-[#E8DDD0] pb-4 space-y-1">
-                <span className="font-display text-xs text-[#C96F1B] font-semibold tracking-wider uppercase block">
-                  SERVICE INTEGRATION
-                </span>
-                <h3 className="font-heading font-semibold text-2xl text-[#3D352D]">
-                  Related Construction Services
-                </h3>
-              </div>
+            {/* Related Service Contextual Reference */}
+            <section className="bg-white rounded-[20px] border border-[#E8DDD0] p-6 sm:p-8 space-y-4 shadow-[0_10px_30px_rgba(61,53,45,0.04)]">
+              <span className="font-heading text-xs text-[#C96F1B] font-bold tracking-wider uppercase block">
+                SERVICE REFERENCE
+              </span>
+              <h3 className="font-heading font-bold text-2xl text-[#3D352D]">
+                Related Concrete Placement Service
+              </h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Link
-                  to="/services/construction-contracting"
-                  className="p-5 bg-[#F5EEE5] hover:bg-[#EADBC8]/60 rounded-xl border border-[#E8DDD0] space-y-2 group transition-all"
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="w-8 h-8 rounded-full bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center">
-                      <Building2 className="w-4 h-4" />
-                    </div>
-                    <ArrowRight className="w-4 h-4 text-[#C96F1B] group-hover:translate-x-1 transition-transform" />
-                  </div>
-                  <h4 className="font-heading font-semibold text-base text-[#3D352D] group-hover:text-[#C96F1B] transition-colors">
-                    Construction Contracting
+              <div className="p-5 bg-[#F5EEE5] rounded-xl border border-[#E8DDD0] space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <h4 className="font-heading font-bold text-lg sm:text-xl text-[#3D352D]">
+                    Concrete Equipment & Pumping Solutions
                   </h4>
-                  <p className="text-xs text-[#6B5E4E] font-body">
-                    Civil and structural contracting support for building construction requirements.
-                  </p>
-                </Link>
-
-                <Link
-                  to="/services/concrete-boom-placer-rental"
-                  className="p-5 bg-[#F5EEE5] hover:bg-[#EADBC8]/60 rounded-xl border border-[#E8DDD0] space-y-2 group transition-all"
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="w-8 h-8 rounded-full bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center">
-                      <Truck className="w-4 h-4" />
-                    </div>
-                    <ArrowRight className="w-4 h-4 text-[#C96F1B] group-hover:translate-x-1 transition-transform" />
-                  </div>
-                  <h4 className="font-heading font-semibold text-base text-[#3D352D] group-hover:text-[#C96F1B] transition-colors">
-                    Concrete Boom Placer Rental
-                  </h4>
-                  <p className="text-xs text-[#6B5E4E] font-body">
-                    Putzmeister M42-5 monthly rental with operator and helper for high-volume pours.
-                  </p>
-                </Link>
+                  <Link
+                    to="/services/concrete-boom-placer-rental"
+                    className="inline-flex items-center gap-1.5 text-xs font-heading font-bold text-[#C96F1B] hover:text-[#B35E17] uppercase tracking-wider shrink-0"
+                  >
+                    <span>Explore Equipment Services</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+                <p className="text-xs sm:text-sm text-[#6B5E4E] font-body leading-relaxed">
+                  Explore Chitrani Construction’s current concrete-placement equipment services, including Putzmeister concrete placer rentals and site pumping support.
+                </p>
               </div>
             </section>
+
           </div>
 
-          {/* Sidebar Column */}
+          {/* Sidebar CTA */}
           <div className="lg:col-span-4 space-y-6">
             <ProjectCTA
-              title="Inquire About Vendor Capabilities"
-              description="Discuss contracting support, site coordination, and machinery rental for your project."
-              quoteLink="/request-quote?service=construction-contracting"
+              title="Have a Similar Project Requirement?"
+              description="Discuss concrete pumping parameters, equipment configuration, or civil execution support with our site engineering team."
+              quoteLink="/request-quote?requirement=equipment-rental"
             />
+
+            {/* Navigation back to all projects */}
+            <div className="p-6 bg-white rounded-[20px] border border-[#E8DDD0] space-y-3 text-xs font-body">
+              <span className="font-heading font-bold text-[#3D352D] uppercase tracking-wider block">
+                Portfolio Navigation
+              </span>
+              <Link
+                to="/projects"
+                className="inline-flex items-center gap-1.5 font-heading font-bold text-[#C96F1B] hover:text-[#B35E17] uppercase tracking-wider"
+              >
+                <span>Back to Projects & Client Engagements</span>
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
+
         </div>
       </div>
     </div>
