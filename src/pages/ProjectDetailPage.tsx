@@ -7,7 +7,8 @@ import { ProjectOverview } from '../components/projects/ProjectOverview';
 import { ProjectFacts } from '../components/projects/ProjectFacts';
 import { ProjectEngagement } from '../components/projects/ProjectEngagement';
 import { ProjectCTA } from '../components/projects/ProjectCTA';
-import { ExternalLink, ShieldCheck, FileText, ChevronRight } from 'lucide-react';
+import { ChevronRight, Building2, Truck, ArrowRight } from 'lucide-react';
+import { Reveal, SectionEyebrow } from '../components/common/Motion';
 
 export const ProjectDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -25,8 +26,6 @@ export const ProjectDetailPage: React.FC = () => {
   // SEO title for Ocean Star page
   const seoTitle = 'Ocean Star Concrete Pump Engagement | Chitrani Construction';
 
-  const isConfirmed = project.status === 'confirmed';
-
   return (
     <div className="bg-[#F5EEE5] text-[#3D352D] min-h-screen">
       <SEO
@@ -37,59 +36,77 @@ export const ProjectDetailPage: React.FC = () => {
 
       <ProjectHero
         title={project.title}
-        badge={project.statusLabel.toUpperCase()}
+        badge={project.statusLabel?.toUpperCase() || 'VERIFIED VENDOR ENGAGEMENT'}
         intro={project.shortDescription}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12 sm:space-y-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 space-y-12 sm:space-y-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           
           {/* Main Content Column */}
           <div className="lg:col-span-8 space-y-10">
-            
             {/* Overview & Image */}
-            <section>
+            <Reveal>
               <ProjectOverview project={project} />
-            </section>
+            </Reveal>
 
             {/* Verified Project Facts */}
-            <section>
+            <Reveal delay={0.1}>
               <ProjectFacts project={project} />
-            </section>
+            </Reveal>
 
-            {/* Governance & Responsible Disclosure Note */}
-            <section>
+            {/* Vendor Engagement & Responsible Information Note */}
+            <Reveal delay={0.15}>
               <ProjectEngagement />
-            </section>
+            </Reveal>
 
-            {/* Related Service Contextual Reference */}
-            <section className="bg-white rounded-[20px] border border-[#E8DDD0] p-6 sm:p-8 space-y-4 shadow-[0_10px_30px_rgba(61,53,45,0.04)]">
-              <span className="font-heading text-xs text-[#C96F1B] font-bold tracking-wider uppercase block">
-                SERVICE REFERENCE
-              </span>
-              <h3 className="font-heading font-bold text-2xl text-[#3D352D]">
-                Related Concrete Placement Service
-              </h3>
-
-              <div className="p-5 bg-[#F5EEE5] rounded-xl border border-[#E8DDD0] space-y-3">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <h4 className="font-heading font-bold text-lg sm:text-xl text-[#3D352D]">
-                    Concrete Equipment & Pumping Solutions
-                  </h4>
-                  <Link
-                    to="/services/concrete-boom-placer-rental"
-                    className="inline-flex items-center gap-1.5 text-xs font-heading font-bold text-[#C96F1B] hover:text-[#B35E17] uppercase tracking-wider shrink-0"
-                  >
-                    <span>Explore Equipment Services</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-                <p className="text-xs sm:text-sm text-[#6B5E4E] font-body leading-relaxed">
-                  Explore Chitrani Construction’s current concrete-placement equipment services, including Putzmeister concrete placer rentals and site pumping support.
-                </p>
+            {/* Related Services Links */}
+            <Reveal delay={0.2} className="bg-white rounded-2xl border border-[#E8DDD0] p-6 sm:p-10 space-y-6 shadow-sm">
+              <div className="border-b border-[#E8DDD0] pb-4">
+                <SectionEyebrow badge="SERVICE INTEGRATION" className="mb-1" />
+                <h3 className="font-heading font-semibold text-2xl text-[#3D352D]">
+                  Related Construction Services
+                </h3>
               </div>
-            </section>
 
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                <Link
+                  to="/services/construction-contracting"
+                  className="p-5 bg-[#F5EEE5] hover:bg-[#EADBC8]/60 rounded-xl border border-[#E8DDD0] space-y-2 group transition-all"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="w-10 h-10 rounded-xl bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center">
+                      <Building2 className="w-5 h-5" />
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-[#C96F1B] group-hover:translate-x-1 transition-transform" />
+                  </div>
+                  <h4 className="font-heading font-semibold text-base text-[#3D352D] group-hover:text-[#C96F1B] transition-colors">
+                    Construction Contracting
+                  </h4>
+                  <p className="text-xs text-[#6B5E4E] font-body">
+                    Civil and structural contracting support for building construction requirements.
+                  </p>
+                </Link>
+
+                <Link
+                  to="/services/concrete-boom-placer-rental"
+                  className="p-5 bg-[#F5EEE5] hover:bg-[#EADBC8]/60 rounded-xl border border-[#E8DDD0] space-y-2 group transition-all"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="w-10 h-10 rounded-xl bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center">
+                      <Truck className="w-5 h-5" />
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-[#C96F1B] group-hover:translate-x-1 transition-transform" />
+                  </div>
+                  <h4 className="font-heading font-semibold text-base text-[#3D352D] group-hover:text-[#C96F1B] transition-colors">
+                    Concrete Boom Placer Rental
+                  </h4>
+                  <p className="text-xs text-[#6B5E4E] font-body">
+                    Putzmeister M42-5 monthly rental with operator and helper for high-volume pours.
+                  </p>
+                </Link>
+              </div>
+            </Reveal>
           </div>
 
           {/* Sidebar CTA */}
@@ -109,7 +126,7 @@ export const ProjectDetailPage: React.FC = () => {
                 to="/projects"
                 className="inline-flex items-center gap-1.5 font-heading font-bold text-[#C96F1B] hover:text-[#B35E17] uppercase tracking-wider"
               >
-                <span>Back to Projects & Client Engagements</span>
+                <span>Back to Projects &amp; Client Engagements</span>
                 <ChevronRight className="w-4 h-4" />
               </Link>
             </div>

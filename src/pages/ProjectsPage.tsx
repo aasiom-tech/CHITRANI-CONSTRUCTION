@@ -4,140 +4,243 @@ import { PageHeader } from '../components/common/PageHeader';
 import { SEO } from '../components/common/SEO';
 import { projectsData } from '../data/projects';
 import { ProjectCard } from '../components/projects/ProjectCard';
-import { ProjectEngagement } from '../components/projects/ProjectEngagement';
-import { ArrowRight, FileText, Building2, Truck } from 'lucide-react';
-import { motion } from 'motion/react';
+import { Reveal, SectionEyebrow, StaggerGroup, StaggerItem } from '../components/common/Motion';
+import {
+  Building2,
+  Truck,
+  ArrowRight,
+  FileText,
+  PhoneCall,
+  FileCheck
+} from 'lucide-react';
 
 export const ProjectsPage: React.FC = () => {
   const oceanStar = projectsData.find((p) => p.slug === 'ocean-star') || projectsData[0];
-  const supportingProjects = projectsData.filter((p) => p.slug !== 'ocean-star');
+
+  const projectsHeroVisual = (
+    <div className="relative rounded-2xl overflow-hidden border border-[#E8DDD0] bg-[#F5EEE5] shadow-md group aspect-[16/10] max-h-[300px] sm:max-h-[340px]">
+      <img
+        src={oceanStar.image}
+        alt={oceanStar.imageAlt || 'Representative visual of Ocean Star documented high-rise project engagement'}
+        loading="eager"
+        decoding="async"
+        className="w-full h-full object-cover filter brightness-95 group-hover:scale-[1.025] transition-transform duration-500 ease-out"
+      />
+      {/* Project Timeline Accent Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-[11px] font-heading font-medium">
+        <span className="bg-black/60 backdrop-blur-xs px-2.5 py-1 rounded-md border border-white/20">
+          OCEAN STAR · MUMBAI
+        </span>
+        <span className="bg-[#C96F1B]/90 backdrop-blur-xs px-2.5 py-1 rounded-md text-white font-semibold">
+          VENDOR ENGAGEMENT
+        </span>
+      </div>
+    </div>
+  );
 
   return (
-    <div className="bg-[#F5EEE5] text-[#3D352D] min-h-screen">
-      <SEO 
-        title="Projects & Client Engagements | Chitrani Construction"
-        description="Explore the documented Ocean Star construction engagement with Chitrani Construction."
+    <div className="bg-[#FFFFFF] text-[#3D352D] min-h-screen">
+      <SEO
+        title="Documented Construction Projects & Vendor Engagements | Chitrani"
+        description="Explore verified and approved project information published by Chitrani Construction, including the Ocean Star development engagement in Mumbai."
         canonicalPath="/projects"
       />
 
-      {/* Page Header */}
+      {/* 1. Page Header */}
       <PageHeader
-        title="Construction and Concrete Pumping Engagements"
-        subtitle="Explore selected construction and concrete-pumping requirements supported or proposed by Chitrani Construction across Mumbai projects and client engagements."
-        badge="PROJECTS & CLIENT ENGAGEMENTS"
+        badge="PROJECTS"
+        title="Documented Project Engagement"
+        subtitle="Explore verified and approved project information published by Chitrani Construction."
+        accentType="projects"
+        customRightVisual={projectsHeroVisual}
       />
 
-      {/* Main Content Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-16 sm:space-y-20">
-        
-        {/* Projects Layout Grid */}
-        <section aria-label="Projects and Client Engagements Directory" className="space-y-10">
-          {/* Section Sub-heading */}
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#E8DDD0] pb-4">
-            <div>
-              <span className="font-heading text-xs text-[#C96F1B] font-bold tracking-wider uppercase block mb-1">
-                FEATURED & PROPOSED ENGAGEMENTS
-              </span>
-              <h2 className="font-heading font-bold text-2xl sm:text-3xl text-[#3D352D] tracking-tight">
-                Project Portfolio
-              </h2>
-            </div>
-            <p className="text-xs text-[#6B5E4E] font-body max-w-md">
-              Showing documented project deployments alongside official client requirement proposals.
+      {/* 2. Introduction Section (White Viewport Background) */}
+      <section className="py-16 sm:py-20 bg-[#FFFFFF]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <Reveal>
+            <SectionEyebrow badge="VERIFIED ENGAGEMENT" className="justify-center mb-3" />
+            <h2 className="font-heading font-semibold text-2xl sm:text-4xl text-[#3D352D] tracking-tight mb-4">
+              Documented Project Participation
+            </h2>
+            <p className="text-base sm:text-lg text-[#6B5E4E] font-body leading-relaxed max-w-3xl mx-auto">
+              Chitrani Construction presents project engagements supported by verified documentation. Project records reflect documented vendor roles, client details, and site locations.
             </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 3. Featured Project — Ocean Star (Soft Cream Viewport Background) */}
+      <section className="py-16 sm:py-24 bg-[#F5EEE5] border-y border-[#E8DDD0]/70" aria-label="Verified Project Portfolio">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="text-center max-w-2xl mx-auto">
+            <Reveal>
+              <SectionEyebrow badge="FEATURED ENGAGEMENT" className="justify-center mb-3" />
+              <h2 className="font-heading font-semibold text-2xl sm:text-3xl lg:text-4xl text-[#3D352D]">
+                Verified Construction Vendor Record
+              </h2>
+            </Reveal>
           </div>
 
-          {/* 1. Featured Card: Ocean Star */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <Reveal delay={0.1} className="max-w-4xl mx-auto">
             <ProjectCard project={oceanStar} featured={true} />
-          </div>
+          </Reveal>
+        </div>
+      </section>
 
-          {/* 2 & 3. Supporting Grid Cards: Godrej Nurture & Capacite Infra */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-            {supportingProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} featured={false} />
-            ))}
-          </div>
-
-        </section>
-
-        {/* Responsible Information & Engagement Disclosures */}
-        <section className="max-w-7xl mx-auto">
-          <ProjectEngagement />
-        </section>
-
-        {/* Capability Links */}
-        <section className="bg-white rounded-[20px] border border-[#E8DDD0] p-6 sm:p-8 shadow-[0_10px_30px_rgba(61,53,45,0.04)]">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 divide-y md:divide-y-0 md:divide-x divide-[#E8DDD0]">
-            <div className="space-y-3 pb-6 md:pb-0 md:pr-6">
-              <div className="flex items-center gap-2 text-[#C96F1B]">
-                <Building2 className="w-5 h-5" />
-                <span className="font-heading text-xs font-bold uppercase tracking-wider">Civil Execution</span>
+      {/* 4. Project Information / Verified Facts Band (White Viewport Background) */}
+      <section className="py-16 sm:py-24 bg-[#FFFFFF]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Reveal className="space-y-8">
+            <div className="flex items-center gap-3 border-b border-[#E8DDD0] pb-4">
+              <FileCheck className="w-6 h-6 text-[#C96F1B] shrink-0" />
+              <div>
+                <SectionEyebrow badge="ENGAGEMENT RECORD" className="mb-0.5" />
+                <h3 className="font-heading font-semibold text-2xl sm:text-3xl text-[#3D352D]">
+                  Ocean Star Information Summary
+                </h3>
               </div>
-              <h3 className="font-heading font-bold text-xl text-[#3D352D]">
-                Construction Contracting
-              </h3>
-              <p className="text-xs sm:text-sm text-[#6B5E4E] font-body leading-relaxed">
-                Review the structural civil contracting, RCC frame, masonry, and manpower execution support offered by Chitrani Construction.
-              </p>
+            </div>
+
+            <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs sm:text-sm font-body">
+              <StaggerItem>
+                <div className="p-5 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-1.5 hover:border-[#C96F1B]/40 transition-colors">
+                  <span className="text-[#6B5E4E] block text-[11px] font-heading font-semibold uppercase tracking-wider">Client</span>
+                  <span className="font-semibold text-[#3D352D] text-base">{oceanStar.client}</span>
+                </div>
+              </StaggerItem>
+
+              <StaggerItem>
+                <div className="p-5 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-1.5 hover:border-[#C96F1B]/40 transition-colors">
+                  <span className="text-[#6B5E4E] block text-[11px] font-heading font-semibold uppercase tracking-wider">Location</span>
+                  <span className="font-semibold text-[#3D352D] text-base">{oceanStar.location}</span>
+                </div>
+              </StaggerItem>
+
+              <StaggerItem>
+                <div className="p-5 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-1.5 hover:border-[#C96F1B]/40 transition-colors">
+                  <span className="text-[#6B5E4E] block text-[11px] font-heading font-semibold uppercase tracking-wider">Vendor Role</span>
+                  <span className="font-semibold text-[#3D352D] text-base">{oceanStar.category}</span>
+                </div>
+              </StaggerItem>
+
+              <StaggerItem>
+                <div className="p-5 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-1.5 hover:border-[#C96F1B]/40 transition-colors">
+                  <span className="text-[#6B5E4E] block text-[11px] font-heading font-semibold uppercase tracking-wider">Engagement Status</span>
+                  <span className="font-semibold text-[#3D352D] text-base">{oceanStar.statusLabel || 'Ongoing Engagement'}</span>
+                </div>
+              </StaggerItem>
+            </StaggerGroup>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 5. How Project Records Are Presented (Warm Cream Viewport Background) */}
+      <section className="py-16 sm:py-24 bg-[#EADBC8]/40 border-y border-[#E8DDD0]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <Reveal>
+            <SectionEyebrow badge="DOCUMENTATION POLICY" className="justify-center mb-3" />
+            <h2 className="font-heading font-semibold text-2xl sm:text-3xl lg:text-4xl text-[#3D352D] mb-4">
+              How Project Records Are Presented
+            </h2>
+            <p className="text-sm sm:text-base text-[#6B5E4E] font-body leading-relaxed max-w-3xl mx-auto">
+              Chitrani Construction publishes verified project engagements supported by documentation. Unconfirmed projects, unverified scope metrics, or speculative completion claims are excluded from this presentation.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 6. Related Capabilities Section (White Background) */}
+      <section className="py-16 sm:py-24 bg-[#FFFFFF]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          <Reveal className="space-y-2">
+            <SectionEyebrow badge="SERVICE INTEGRATION" className="mb-1" />
+            <h3 className="font-heading font-semibold text-2xl sm:text-3xl text-[#3D352D]">
+              Project Execution & Equipment Support
+            </h3>
+          </Reveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            <Reveal delay={0.1}>
               <Link
                 to="/services/construction-contracting"
-                className="inline-flex items-center gap-2 text-xs font-heading font-bold text-[#C96F1B] hover:text-[#B35E17] uppercase tracking-wider pt-1"
+                className="p-8 bg-[#F5EEE5]/80 hover:bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-4 group transition-all block h-full"
               >
-                <span>View Contracting Services</span>
-                <ArrowRight className="w-4 h-4" />
+                <div className="flex items-center justify-between">
+                  <div className="w-12 h-12 rounded-xl bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center">
+                    <Building2 className="w-6 h-6" />
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-[#C96F1B] group-hover:translate-x-1 transition-transform" />
+                </div>
+                <h4 className="font-heading font-semibold text-xl text-[#3D352D] group-hover:text-[#C96F1B] transition-colors">
+                  Construction Contracting
+                </h4>
+                <p className="text-xs sm:text-sm text-[#6B5E4E] font-body leading-relaxed">
+                  Structural civil contracting, RCC frame execution, masonry, and manpower support.
+                </p>
               </Link>
-            </div>
+            </Reveal>
 
-            <div className="space-y-3 pt-6 md:pt-0 md:pl-6">
-              <div className="flex items-center gap-2 text-[#C96F1B]">
-                <Truck className="w-5 h-5" />
-                <span className="font-heading text-xs font-bold uppercase tracking-wider">Equipment Fleet</span>
-              </div>
-              <h3 className="font-heading font-bold text-xl text-[#3D352D]">
-                Concrete Equipment Services
-              </h3>
-              <p className="text-xs sm:text-sm text-[#6B5E4E] font-body leading-relaxed">
-                Explore Chitrani Construction’s concrete-placement equipment rental solutions including Putzmeister concrete boom placers.
-              </p>
+            <Reveal delay={0.2}>
               <Link
                 to="/services/concrete-boom-placer-rental"
-                className="inline-flex items-center gap-2 text-xs font-heading font-bold text-[#C96F1B] hover:text-[#B35E17] uppercase tracking-wider pt-1"
+                className="p-8 bg-[#F5EEE5]/80 hover:bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-4 group transition-all block h-full"
               >
-                <span>View Equipment Solutions</span>
-                <ArrowRight className="w-4 h-4" />
+                <div className="flex items-center justify-between">
+                  <div className="w-12 h-12 rounded-xl bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center">
+                    <Truck className="w-6 h-6" />
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-[#C96F1B] group-hover:translate-x-1 transition-transform" />
+                </div>
+                <h4 className="font-heading font-semibold text-xl text-[#3D352D] group-hover:text-[#C96F1B] transition-colors">
+                  Concrete Boom Placer Rental
+                </h4>
+                <p className="text-xs sm:text-sm text-[#6B5E4E] font-body leading-relaxed">
+                  Putzmeister M42-5 monthly rental with operator and helper for high-volume pours.
+                </p>
               </Link>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Project Discussion CTA Section (Dark Charcoal Background) */}
+      <section className="py-16 sm:py-24 bg-[#FFFFFF]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Reveal className="bg-[#3D352D] rounded-3xl p-8 sm:p-16 text-white text-center space-y-8 shadow-xl max-w-5xl mx-auto relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-[#C96F1B]/15 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="space-y-4 relative z-10">
+              <SectionEyebrow badge="PROJECT ENQUIRY" className="justify-center mb-1 text-[#C96F1B]" />
+              <h2 className="font-heading font-semibold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight">
+                Have a Project Requirement?
+              </h2>
+              <p className="text-sm sm:text-base lg:text-lg text-[#D1C5B0] font-body leading-relaxed max-w-2xl mx-auto">
+                Share your site location, project requirement and expected timeline so the relevant construction contracting or machinery deployment scope can be reviewed.
+              </p>
             </div>
 
-          </div>
-        </section>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2 relative z-10">
+              <Link
+                to="/request-quote?service=construction-contracting"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all shadow-md min-h-[44px] focus:outline-hidden focus:ring-2 focus:ring-white"
+              >
+                <FileText className="w-4 h-4" />
+                <span>REQUEST A QUOTE</span>
+              </Link>
 
-        {/* Final Project Enquiry CTA */}
-        <section className="bg-[#3D352D] rounded-[20px] p-8 sm:p-12 text-white text-center space-y-6 shadow-xl max-w-7xl mx-auto">
-          <div className="max-w-2xl mx-auto space-y-3">
-            <span className="font-heading text-xs text-[#C96F1B] font-bold tracking-wider uppercase block">
-              COMMERCIAL CONSULTATION
-            </span>
-            <h2 className="font-heading font-bold text-3xl sm:text-4xl text-white tracking-tight">
-              Discuss Your Project Requirements
-            </h2>
-            <p className="text-sm text-[#D1C5B0] font-body leading-relaxed">
-              Contact our engineering team to discuss structural civil contracting support or machinery deployment parameters for your site.
-            </p>
-          </div>
-
-          <div className="flex justify-center">
-            <Link
-              to="/request-quote?requirement=equipment-rental"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs font-bold uppercase tracking-wider transition-all shadow-md hover:-translate-y-0.5"
-            >
-              <FileText className="w-4 h-4" />
-              <span>Discuss a Project Requirement</span>
-            </Link>
-          </div>
-        </section>
-
-      </div>
+              <Link
+                to="/contact"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#F5EEE5] hover:bg-[#EADBC8] text-[#3D352D] font-heading text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all border border-[#E8DDD0] min-h-[44px] focus:outline-hidden focus:ring-2 focus:ring-white"
+              >
+                <PhoneCall className="w-4 h-4 text-[#C96F1B]" />
+                <span>CONTACT US</span>
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
     </div>
   );
 };

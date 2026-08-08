@@ -8,7 +8,8 @@ import { EquipmentApplications } from '../components/equipment/EquipmentApplicat
 import { RentalStructure } from '../components/equipment/RentalStructure';
 import { ClientScopePanel } from '../components/equipment/ClientScopePanel';
 import { EquipmentCTA } from '../components/equipment/EquipmentCTA';
-import { Truck, ShieldCheck, UserCheck, AlertCircle, ExternalLink, ArrowRight } from 'lucide-react';
+import { Reveal, SectionEyebrow } from '../components/common/Motion';
+import { Truck, UserCheck, AlertCircle, ExternalLink } from 'lucide-react';
 
 export const EquipmentDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -36,22 +37,21 @@ export const EquipmentDetailPage: React.FC = () => {
         title={item.name}
         badge="CONCRETE PLACEMENT EQUIPMENT"
         intro={item.description}
+        image={item.image}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12 sm:space-y-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 space-y-12 sm:space-y-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Main Content Column */}
           <div className="lg:col-span-8 space-y-10">
             {/* Equipment Overview & Image */}
-            <section className="bg-white rounded-[18px] border border-[#E8DDD0] p-6 sm:p-8 space-y-6 shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
+            <Reveal className="bg-white rounded-2xl border border-[#E8DDD0] p-6 sm:p-10 space-y-6 shadow-sm">
               <div className="flex items-center gap-3 border-b border-[#E8DDD0] pb-4">
-                <div className="w-10 h-10 rounded-full bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center shrink-0">
+                <div className="w-11 h-11 rounded-xl bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center shrink-0">
                   <Truck className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="font-display text-xs text-[#C96F1B] font-semibold tracking-wider uppercase block">
-                    FLEET OVERVIEW
-                  </span>
+                  <SectionEyebrow badge="FLEET OVERVIEW" className="mb-0.5" />
                   <h2 className="font-heading font-semibold text-2xl sm:text-3xl text-[#3D352D]">
                     Machinery Overview
                   </h2>
@@ -62,7 +62,7 @@ export const EquipmentDetailPage: React.FC = () => {
                 The Putzmeister M42-5 is offered for project requirements involving elevated concrete placement, large concrete pours, high-rise developments, commercial construction, and infrastructure-related concrete work. Rental deployment remains subject to site requirements, requested dates, and confirmation through the quotation process.
               </p>
 
-              <div className="aspect-[16/9] rounded-xl overflow-hidden border border-[#E8DDD0] bg-[#F5EEE5]">
+              <div className="aspect-[16/9] rounded-2xl overflow-hidden border border-[#E8DDD0] bg-[#F5EEE5]">
                 <img
                   src={item.image}
                   alt={altText}
@@ -71,46 +71,46 @@ export const EquipmentDetailPage: React.FC = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-            </section>
+            </Reveal>
 
             {/* Verified Specifications Grid */}
-            <section>
+            <Reveal delay={0.1}>
               <EquipmentSpecifications />
-            </section>
+            </Reveal>
 
             {/* Rental Structure */}
-            <section>
+            <Reveal delay={0.15}>
               <RentalStructure />
-            </section>
+            </Reveal>
 
             {/* Suitable Applications */}
-            <section>
+            <Reveal delay={0.2}>
               <EquipmentApplications
                 title="Suitable Applications"
                 intro="This equipment may support requirements involving:"
               />
-            </section>
+            </Reveal>
 
             {/* Operating Crew */}
-            <section className="bg-white rounded-[18px] border border-[#E8DDD0] p-6 sm:p-8 space-y-4 shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
+            <Reveal delay={0.25} className="bg-white rounded-2xl border border-[#E8DDD0] p-6 sm:p-10 space-y-4 shadow-sm">
               <div className="flex items-center gap-3 border-b border-[#E8DDD0] pb-4">
                 <UserCheck className="w-6 h-6 text-[#C96F1B] shrink-0" />
                 <h3 className="font-heading font-semibold text-2xl text-[#3D352D]">
                   Operating Crew Inclusion
                 </h3>
               </div>
-              <p className="text-sm text-[#6B5E4E] font-body leading-relaxed">
+              <p className="text-sm sm:text-base text-[#6B5E4E] font-body leading-relaxed">
                 The equipment is supplied with an operator and helper to support organised machinery deployment. Their inclusion does not replace the client’s responsibility for site readiness, coordination, safety arrangements, or other items confirmed in the commercial agreement.
               </p>
-            </section>
+            </Reveal>
 
             {/* Client Scope Responsibilities */}
-            <section>
+            <Reveal delay={0.3}>
               <ClientScopePanel />
-            </section>
+            </Reveal>
 
             {/* Availability Disclaimer Panel */}
-            <section className="bg-white rounded-[18px] border border-[#E8DDD0] p-6 sm:p-8 space-y-4 shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
+            <Reveal delay={0.35} className="bg-white rounded-2xl border border-[#E8DDD0] p-6 sm:p-10 space-y-4 shadow-sm">
               <div className="flex items-center gap-3 border-b border-[#E8DDD0] pb-4">
                 <AlertCircle className="w-6 h-6 text-[#C96F1B] shrink-0" />
                 <h3 className="font-heading font-semibold text-2xl text-[#3D352D]">
@@ -118,7 +118,7 @@ export const EquipmentDetailPage: React.FC = () => {
                 </h3>
               </div>
 
-              <div className="space-y-3 text-sm text-[#6B5E4E] font-body leading-relaxed">
+              <div className="space-y-3 text-sm sm:text-base text-[#6B5E4E] font-body leading-relaxed">
                 <p className="font-semibold text-[#3D352D]">
                   Availability is subject to confirmation for the requested project period.
                 </p>
@@ -126,18 +126,16 @@ export const EquipmentDetailPage: React.FC = () => {
                   Pricing, mobilization, payment terms, client responsibilities, and deployment conditions are provided through a project-specific quotation.
                 </p>
               </div>
-            </section>
+            </Reveal>
 
             {/* Related Service */}
-            <section className="bg-white rounded-[18px] border border-[#E8DDD0] p-6 sm:p-8 space-y-4 shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
-              <span className="font-display text-xs text-[#C96F1B] font-semibold tracking-wider uppercase block">
-                SERVICE REFERENCE
-              </span>
+            <Reveal delay={0.4} className="bg-white rounded-2xl border border-[#E8DDD0] p-6 sm:p-10 space-y-4 shadow-sm">
+              <SectionEyebrow badge="SERVICE REFERENCE" className="mb-1" />
               <h3 className="font-heading font-semibold text-2xl text-[#3D352D]">
                 Related Construction Service
               </h3>
 
-              <div className="p-5 bg-[#F5EEE5] rounded-xl border border-[#E8DDD0] space-y-3">
+              <div className="p-6 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-3">
                 <div className="flex items-center justify-between">
                   <h4 className="font-heading font-semibold text-xl text-[#3D352D]">
                     Concrete Boom Placer Rental Service
@@ -154,12 +152,14 @@ export const EquipmentDetailPage: React.FC = () => {
                   Review the complete rental service, operating crew, applications, and commercial-scope information.
                 </p>
               </div>
-            </section>
+            </Reveal>
           </div>
 
           {/* Sidebar CTA Column */}
           <div className="lg:col-span-4 space-y-6">
-            <EquipmentCTA />
+            <Reveal delay={0.15}>
+              <EquipmentCTA />
+            </Reveal>
           </div>
         </div>
       </div>
