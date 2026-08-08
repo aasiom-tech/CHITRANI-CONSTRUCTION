@@ -5,12 +5,12 @@ import { Reveal, SectionEyebrow } from '../common/Motion';
 
 export const SafetyQualitySection: React.FC = () => {
   const highlights = [
-    'PPE and site-safety awareness',
-    'Site supervision',
-    'Quality inspections',
-    'Preventive machinery checks',
-    'Workforce coordination',
-    'Documented project communication'
+    'PPE and mandatory site-safety protocols',
+    'Housekeeping and site clutter management',
+    'Execution strictly as per approved drawings',
+    'Quality inspection coordination at every stage',
+    'Workmanship checks and curing support',
+    'Preventive machinery and equipment maintenance'
   ];
 
   return (

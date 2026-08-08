@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { HardHat, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import capabilityImg from '../../assets/images/chitrani-construction-capability.png';
 import { Reveal, SectionEyebrow } from '../common/Motion';
 
@@ -24,13 +24,13 @@ export const CompanyIntroPreview: React.FC = () => {
             <Reveal delay={0.15}>
               <div className="space-y-4 text-sm sm:text-base text-[#6B5E4E] leading-relaxed font-body">
                 <p>
-                  Chitrani Construction is a Maharashtra-based construction and equipment-support enterprise serving the Mumbai construction market.
+                  Chitrani Construction is a Maharashtra-based construction execution and equipment support enterprise serving developers, contractors and institutional project requirements.
                 </p>
                 <p>
-                  The company supports public and private sector requirements through civil and structural construction, concrete-intensive work coordination and high-capacity machinery deployment.
+                  We support structural construction, civil execution and high-capacity equipment deployment across commercial, residential and infrastructure-linked developments in Mumbai and Maharashtra.
                 </p>
                 <p>
-                  Whether a client requires construction support or a concrete boom placer with an operating crew, Chitrani brings together equipment, manpower and site coordination through one enterprise.
+                  By combining skilled workforce supervision, disciplined site management and heavy machinery support like concrete boom placers, Chitrani brings reliable execution under one responsible partner.
                 </p>
               </div>
             </Reveal>
@@ -40,13 +40,13 @@ export const CompanyIntroPreview: React.FC = () => {
                 to="/about"
                 className="inline-flex items-center gap-2.5 px-7 py-4 rounded-xl bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 focus:outline-hidden focus:ring-2 focus:ring-[#C96F1B] min-h-[44px]"
               >
-                <span>Learn More About Us</span>
+                <span>View Company Profile</span>
                 <ArrowRight className="w-4 h-4 text-white" />
               </Link>
             </Reveal>
           </div>
 
-          {/* Right: Construction Capability Imagery with Soft Desktop Overlap */}
+          {/* Right: Construction Capability Imagery */}
           <div className="lg:col-span-5 relative">
             <Reveal delay={0.2} direction="left">
               <div className="relative rounded-2xl overflow-hidden border border-[#E8DDD0] shadow-[0_16px_36px_rgba(61,53,45,0.08)] bg-white group aspect-[4/3] sm:aspect-auto">

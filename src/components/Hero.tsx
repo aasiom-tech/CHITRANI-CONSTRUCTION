@@ -70,7 +70,7 @@ export const Hero: React.FC = () => {
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 pt-[116px] sm:pt-[124px] lg:pt-[128px] pb-8 sm:pb-10 w-full my-auto">
         <div className="max-w-[720px] text-left space-y-3.5 sm:space-y-4 lg:space-y-5">
 
-          {/* Category Badge */}
+          {/* Category Badge / Eyebrow */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -79,7 +79,7 @@ export const Hero: React.FC = () => {
           >
             <span className="w-2 h-2 rounded-full bg-[#C96F1B]" />
             <span className="text-[11px] sm:text-xs font-heading text-white uppercase tracking-wider font-semibold">
-              STRUCTURAL CONTRACTING &amp; BOOM PLACER RENTAL
+              RCC • CIVIL CONSTRUCTION • LABOUR CONTRACTS • BRICKWORK • BOOM PLACER RENTAL
             </span>
           </motion.div>
 
@@ -91,9 +91,8 @@ export const Hero: React.FC = () => {
             className="text-[30px] sm:text-[42px] lg:text-[48px] xl:text-[52px] font-semibold text-white font-heading leading-[1.12] tracking-tight max-w-[700px]"
             style={{ textShadow: '0 2px 14px rgba(0,0,0,0.28)' }}
           >
-            Building and Powering <br className="hidden sm:inline" />
-            Construction Across <br className="hidden sm:inline" />
-            <span className="text-[#F5A54A]">Maharashtra</span>
+            Building With Strength. <br className="hidden sm:inline" />
+            <span className="text-[#F5A54A]">Delivering With Responsibility.</span>
           </motion.h1>
 
           {/* Description Paragraph */}
@@ -101,10 +100,10 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-sm sm:text-base lg:text-[17px] text-white/88 font-body leading-relaxed max-w-[540px]"
+            className="text-sm sm:text-base lg:text-[17px] text-white/88 font-body leading-relaxed max-w-[560px]"
             style={{ textShadow: '0 1px 8px rgba(0,0,0,0.22)' }}
           >
-            Chitrani Construction supports construction and infrastructure requirements through civil and structural contracting and high-capacity concrete boom placer rental.
+            End-to-end construction execution for developers, contractors and institutional projects, backed by skilled manpower, disciplined site management and reliable execution.
           </motion.p>
 
           {/* CTAs */}
@@ -119,38 +118,46 @@ export const Hero: React.FC = () => {
               to="/request-quote"
               className="px-6 sm:px-7 py-3 sm:py-3.5 bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading font-semibold rounded-[12px] transition-all uppercase tracking-wider text-xs sm:text-sm flex items-center justify-center gap-2 shadow-[0_10px_30px_rgba(201,111,27,0.40)] hover:-translate-y-0.5 active:translate-y-0 focus:outline-hidden focus:ring-2 focus:ring-[#C96F1B]"
             >
-              <span>Request a Quote</span>
+              <span>Request a Quotation</span>
               <ArrowRight className="w-4 h-4 text-white" />
             </Link>
 
             {/* Secondary Button */}
             <Link
-              to="/services"
+              to="/projects"
               className="px-6 sm:px-7 py-3 sm:py-3.5 bg-white/12 hover:bg-white/22 text-white border-2 border-white/55 hover:border-white font-heading font-semibold rounded-[12px] transition-all uppercase tracking-wider text-xs sm:text-sm flex items-center justify-center gap-2 focus:outline-hidden focus:ring-2 focus:ring-white backdrop-blur-sm"
             >
               <Building2 className="w-4 h-4" />
-              <span>Explore Our Services</span>
+              <span>View Our Projects</span>
             </Link>
           </motion.div>
 
-          {/* Small Factual Trust Row */}
+          {/* Factual Capability Strip */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="pt-3 border-t border-white/20 grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 text-xs text-white/80 font-body"
+            className="pt-3 border-t border-white/20 grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3 text-xs text-white/90 font-body"
           >
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-[#F5A54A] shrink-0" />
-              <span>GST-Registered Enterprise</span>
+            <div className="flex items-center gap-1.5">
+              <Building2 className="w-3.5 h-3.5 text-[#F5A54A] shrink-0" />
+              <span className="font-semibold text-[11px] sm:text-xs">RCC Execution</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Truck className="w-4 h-4 text-[#F5A54A] shrink-0" />
-              <span>Putzmeister M42-5 Boom Placer</span>
+            <div className="flex items-center gap-1.5">
+              <Truck className="w-3.5 h-3.5 text-[#F5A54A] shrink-0" />
+              <span className="font-semibold text-[11px] sm:text-xs">Skilled Workforce</span>
             </div>
-            <div className="flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-[#F5A54A] shrink-0" />
-              <span>Mumbai and Jalgaon Presence</span>
+            <div className="flex items-center gap-1.5">
+              <Truck className="w-3.5 h-3.5 text-[#F5A54A] shrink-0" />
+              <span className="font-semibold text-[11px] sm:text-xs">Machinery Support</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#F5A54A] shrink-0" />
+              <span className="font-semibold text-[11px] sm:text-xs">Safety-Focused Execution</span>
+            </div>
+            <div className="flex items-center gap-1.5 col-span-2 sm:col-span-1">
+              <MapPin className="w-3.5 h-3.5 text-[#F5A54A] shrink-0" />
+              <span className="font-semibold text-[11px] sm:text-xs">Maharashtra</span>
             </div>
           </motion.div>
 

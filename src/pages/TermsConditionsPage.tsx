@@ -11,7 +11,7 @@ export const TermsConditionsPage: React.FC = () => {
       <SEO 
         title="Terms and Conditions | Chitrani Construction"
         description="Review the general terms for using the Chitrani Construction website and submitting construction or equipment-rental enquiries."
-        canonical="https://chitraniconstruction.com/terms-and-conditions"
+        canonicalPath="/terms-and-conditions"
       />
 
       <div className="bg-[#EADBC8] space-y-0 text-[#3D352D]">

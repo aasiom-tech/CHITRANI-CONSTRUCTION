@@ -1,40 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { PageHeader } from '../components/common/PageHeader';
 import { SEO } from '../components/common/SEO';
 import { QuoteIntro } from '../components/quote/QuoteIntro';
-import { QuoteRequirementSelector } from '../components/quote/QuoteRequirementSelector';
 import { QuoteFormContainer } from '../components/quote/QuoteFormContainer';
 import { QuoteClarification } from '../components/quote/QuoteClarification';
 import { motion, useReducedMotion } from 'motion/react';
 import { FileText, CheckCircle2, Calculator, ShieldCheck } from 'lucide-react';
 
-type RequirementType = 'construction-contracting' | 'equipment-rental';
-
 export const RequestQuotePage: React.FC = () => {
   const shouldReduceMotion = useReducedMotion();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const rawParam = searchParams.get('requirement') || 'construction-contracting';
+  const [searchParams] = useSearchParams();
+  const rawParam = searchParams.get('requirement') || '';
 
-  const [requirement, setRequirement] = useState<RequirementType>(
-    rawParam.toLowerCase().includes('equipment') || rawParam.toLowerCase().includes('rental') || rawParam.toLowerCase().includes('placer')
+  const initialRequirement: 'construction-contracting' | 'equipment-rental' =
+    rawParam.toLowerCase().includes('equipment') ||
+    rawParam.toLowerCase().includes('rental') ||
+    rawParam.toLowerCase().includes('placer') ||
+    rawParam.toLowerCase().includes('boom')
       ? 'equipment-rental'
-      : 'construction-contracting'
-  );
-
-  useEffect(() => {
-    const raw = searchParams.get('requirement') || '';
-    if (raw.toLowerCase().includes('equipment') || raw.toLowerCase().includes('rental') || raw.toLowerCase().includes('placer')) {
-      setRequirement('equipment-rental');
-    } else if (raw.toLowerCase().includes('contracting') || raw.toLowerCase().includes('service') || raw.toLowerCase().includes('civil')) {
-      setRequirement('construction-contracting');
-    }
-  }, [searchParams]);
-
-  const handleSelectRequirement = (req: RequirementType) => {
-    setRequirement(req);
-    setSearchParams({ requirement: req }, { replace: true });
-  };
+      : 'construction-contracting';
 
   // Custom Specification Document / BOQ Outline Graphic (NO REUSED PHOTO, NO GIANT TEXT)
   const quoteHeroVisual = (
@@ -93,17 +78,17 @@ export const RequestQuotePage: React.FC = () => {
   return (
     <>
       <SEO
-        title="Request a Quote | Chitrani Construction"
-        description="Request a detailed commercial quote for civil contracting or concrete boom placer rental in Maharashtra."
-        canonical="https://chitraniconstruction.com/request-quote"
+        title="Request a Quotation | Chitrani Construction"
+        description="Share your construction, labour, civil work or boom placer rental requirement with Chitrani Construction for project discussion in Maharashtra."
+        canonicalPath="/request-quote"
       />
 
       <div className="bg-[#EADBC8] space-y-0 text-[#3D352D]">
         {/* 1. Shared PageHeader with Document Outline Graphic (No Reused Photo, No Giant Text) */}
         <PageHeader
-          badge="REQUEST A QUOTE"
-          title="Share Your Project or Equipment Requirement"
-          subtitle="Provide the project, location, service, schedule and equipment information required for Chitrani Construction to review your enquiry."
+          badge="REQUEST A QUOTATION"
+          title="Tell Us About Your Project Requirement"
+          subtitle="Provide the basic project, service and timeline information Chitrani Construction would need for a commercial discussion."
           accentType="quote"
           customRightVisual={quoteHeroVisual}
           breadcrumb={[{ label: 'Home', href: '/' }]}
@@ -112,18 +97,16 @@ export const RequestQuotePage: React.FC = () => {
         {/* 2. Overview Intro */}
         <QuoteIntro />
 
-        {/* 3. Requirement Selector */}
-        <QuoteRequirementSelector
-          selected={requirement}
-          onSelect={handleSelectRequirement}
+        {/* 3. Interactive Multi-Step Quotation Form Container */}
+        <QuoteFormContainer
+          initialRequirement={initialRequirement}
         />
 
-        {/* 4. Form Container */}
-        <QuoteFormContainer requirement={requirement} />
-
-        {/* 5. Quotation Process Clarification */}
+        {/* 4. Commercial Policy Clarification Callout */}
         <QuoteClarification />
       </div>
     </>
   );
 };
+
+export default RequestQuotePage;

@@ -28,11 +28,11 @@ export const AboutFinalCTA: React.FC = () => {
             </div>
 
             <h2 className="font-heading font-semibold text-2xl sm:text-4xl text-white tracking-tight max-w-3xl mx-auto leading-tight">
-              Discuss Your Construction or Equipment Requirement
+              Discuss Your Project
             </h2>
 
             <p className="text-sm sm:text-base text-white/90 max-w-2xl mx-auto font-body leading-relaxed">
-              Share your project location, construction requirement, equipment need and expected schedule with Chitrani Construction.
+              Have a structural package, civil execution requirement or concrete boom placer need? Share your project details with Chitrani Construction for a prompt commercial assessment.
             </p>
 
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
@@ -40,16 +40,16 @@ export const AboutFinalCTA: React.FC = () => {
                 to="/request-quote"
                 className="w-full sm:w-auto px-8 py-3.5 rounded-[12px] bg-white hover:bg-[#F5EEE5] text-[#C96F1B] font-heading text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md hover:-translate-y-0.5 focus:outline-hidden focus:ring-2 focus:ring-white"
               >
-                <span>Request a Quote</span>
+                <span>Request a Quotation</span>
                 <ArrowRight className="w-4 h-4 text-[#C96F1B]" />
               </Link>
 
               <Link
-                to="/contact"
+                to="/projects"
                 className="w-full sm:w-auto px-8 py-3.5 rounded-[12px] bg-transparent border-2 border-white/85 text-white hover:bg-white hover:text-[#C96F1B] font-heading text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all focus:outline-hidden focus:ring-2 focus:ring-white"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>Contact Our Team</span>
+                <span>View Our Projects</span>
               </Link>
             </div>
           </div>

@@ -39,8 +39,13 @@ export const FeaturedEquipmentSection: React.FC = () => {
             {/* Right: Equipment Specifications & Details */}
             <div className="lg:col-span-7 p-8 sm:p-12 space-y-6 flex flex-col justify-between">
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-xl bg-[#F5EEE5] text-[#C96F1B] border border-[#E8DDD0] font-heading text-xs font-semibold uppercase">
-                  <span className="text-[#3D352D]">Putzmeister M42-5</span>
+                <div className="flex flex-wrap items-center gap-2">
+                  <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-xl bg-[#F5EEE5] text-[#C96F1B] border border-[#E8DDD0] font-heading text-xs font-semibold uppercase">
+                    <span className="text-[#3D352D]">Putzmeister M42-5</span>
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-xl bg-amber-50 text-amber-800 border border-amber-200 font-heading text-xs font-semibold uppercase">
+                    <span>Availability: Subject to confirmation</span>
+                  </div>
                 </div>
 
                 <h3 className="font-heading font-semibold text-2xl sm:text-3xl text-[#3D352D]">

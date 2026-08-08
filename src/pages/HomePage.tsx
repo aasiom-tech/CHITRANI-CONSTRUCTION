@@ -2,12 +2,11 @@ import React from 'react';
 import { SEO } from '../components/common/SEO';
 import { Hero } from '../components/Hero';
 import { CompanyIntroPreview } from '../components/home/CompanyIntroPreview';
-import { BusinessAreas } from '../components/BusinessAreas';
-import { WhyChooseUs } from '../components/WhyChooseUs';
 import { CoreServicesPreview } from '../components/home/CoreServicesPreview';
 import { FeaturedProjectSection } from '../components/home/FeaturedProjectSection';
+import { WhyChooseUs } from '../components/WhyChooseUs';
 import { FeaturedEquipmentSection } from '../components/home/FeaturedEquipmentSection';
-import { IndustriesPreviewSection } from '../components/home/IndustriesPreviewSection';
+import { ExecutionProcessSection } from '../components/home/ExecutionProcessSection';
 import { SafetyQualitySection } from '../components/home/SafetyQualitySection';
 import { FinalCTA } from '../components/FinalCTA';
 
@@ -15,41 +14,38 @@ export const HomePage: React.FC = () => {
   return (
     <>
       <SEO 
-        title="Chitrani Construction | Construction & Boom Placer Rental"
-        description="Chitrani Construction provides civil and structural construction support and Putzmeister M42-5 concrete boom placer rental with an operator and helper for projects in Maharashtra."
-        canonical="https://chitraniconstruction.com/"
+        title="Chitrani Construction | Construction & Boom Placer Support in Maharashtra"
+        description="Chitrani Construction supports RCC, civil construction, brickwork, labour requirements and concrete boom placer rental for project requirements in Maharashtra."
+        canonicalPath="/"
       />
 
       <div className="bg-[#EADBC8] space-y-0 text-[#3D352D]">
         
-        {/* 1. Hero */}
+        {/* 01. Hero & Capability Strip */}
         <Hero />
 
-        {/* 2. Company Introduction */}
+        {/* 03. About Chitrani Summary */}
         <CompanyIntroPreview />
 
-        {/* 3. Two Core Capabilities */}
-        <BusinessAreas />
-
-        {/* 4. Why Chitrani */}
-        <WhyChooseUs />
-
-        {/* 5. Core Services Preview */}
+        {/* 04. Core Services */}
         <CoreServicesPreview />
 
-        {/* 6. Featured Project */}
+        {/* 05. Featured Project */}
         <FeaturedProjectSection />
 
-        {/* 7. Featured Equipment */}
+        {/* 06. Why Chitrani */}
+        <WhyChooseUs />
+
+        {/* 07. Equipment / Boom Placer */}
         <FeaturedEquipmentSection />
 
-        {/* 8. Industries We Serve Preview */}
-        <IndustriesPreviewSection />
+        {/* 08. How We Execute Projects */}
+        <ExecutionProcessSection />
 
-        {/* 9. Safety and Quality Preview */}
+        {/* 09. Safety & Quality */}
         <SafetyQualitySection />
 
-        {/* 10. Final Enquiry CTA */}
+        {/* 10. Project Enquiry CTA */}
         <FinalCTA />
 
       </div>
