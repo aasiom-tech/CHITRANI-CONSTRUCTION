@@ -7,7 +7,8 @@ import { ProjectOverview } from '../components/projects/ProjectOverview';
 import { ProjectFacts } from '../components/projects/ProjectFacts';
 import { ProjectEngagement } from '../components/projects/ProjectEngagement';
 import { ProjectCTA } from '../components/projects/ProjectCTA';
-import { ExternalLink, Building2, Truck, ArrowRight } from 'lucide-react';
+import { Reveal, SectionEyebrow } from '../components/common/Motion';
+import { Building2, Truck, ArrowRight } from 'lucide-react';
 
 export const ProjectDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -33,46 +34,45 @@ export const ProjectDetailPage: React.FC = () => {
         title={project.title}
         badge={project.statusBadge || 'VERIFIED VENDOR ENGAGEMENT'}
         intro={`Chitrani Construction is documented as a construction vendor for the ${project.title} development in Mumbai.`}
+        image={project.image}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12 sm:space-y-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 space-y-12 sm:space-y-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Main Content Column */}
           <div className="lg:col-span-8 space-y-10">
             {/* Overview & Representative Image */}
-            <section>
+            <Reveal>
               <ProjectOverview image={project.image} />
-            </section>
+            </Reveal>
 
             {/* Verified Contract Metadata Facts */}
-            <section>
+            <Reveal delay={0.1}>
               <ProjectFacts />
-            </section>
+            </Reveal>
 
             {/* Vendor Engagement & Responsible Information Note */}
-            <section>
+            <Reveal delay={0.15}>
               <ProjectEngagement />
-            </section>
+            </Reveal>
 
             {/* Related Services Links */}
-            <section className="bg-white rounded-[18px] border border-[#E8DDD0] p-6 sm:p-8 space-y-6 shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
-              <div className="border-b border-[#E8DDD0] pb-4 space-y-1">
-                <span className="font-display text-xs text-[#C96F1B] font-semibold tracking-wider uppercase block">
-                  SERVICE INTEGRATION
-                </span>
+            <Reveal delay={0.2} className="bg-white rounded-2xl border border-[#E8DDD0] p-6 sm:p-10 space-y-6 shadow-sm">
+              <div className="border-b border-[#E8DDD0] pb-4">
+                <SectionEyebrow badge="SERVICE INTEGRATION" className="mb-1" />
                 <h3 className="font-heading font-semibold text-2xl text-[#3D352D]">
                   Related Construction Services
                 </h3>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <Link
                   to="/services/construction-contracting"
                   className="p-5 bg-[#F5EEE5] hover:bg-[#EADBC8]/60 rounded-xl border border-[#E8DDD0] space-y-2 group transition-all"
                 >
                   <div className="flex items-center justify-between">
-                    <div className="w-8 h-8 rounded-full bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center">
-                      <Building2 className="w-4 h-4" />
+                    <div className="w-10 h-10 rounded-xl bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center">
+                      <Building2 className="w-5 h-5" />
                     </div>
                     <ArrowRight className="w-4 h-4 text-[#C96F1B] group-hover:translate-x-1 transition-transform" />
                   </div>
@@ -89,8 +89,8 @@ export const ProjectDetailPage: React.FC = () => {
                   className="p-5 bg-[#F5EEE5] hover:bg-[#EADBC8]/60 rounded-xl border border-[#E8DDD0] space-y-2 group transition-all"
                 >
                   <div className="flex items-center justify-between">
-                    <div className="w-8 h-8 rounded-full bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center">
-                      <Truck className="w-4 h-4" />
+                    <div className="w-10 h-10 rounded-xl bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center">
+                      <Truck className="w-5 h-5" />
                     </div>
                     <ArrowRight className="w-4 h-4 text-[#C96F1B] group-hover:translate-x-1 transition-transform" />
                   </div>
@@ -102,16 +102,18 @@ export const ProjectDetailPage: React.FC = () => {
                   </p>
                 </Link>
               </div>
-            </section>
+            </Reveal>
           </div>
 
           {/* Sidebar Column */}
           <div className="lg:col-span-4 space-y-6">
-            <ProjectCTA
-              title="Inquire About Vendor Capabilities"
-              description="Discuss contracting support, site coordination, and machinery rental for your project."
-              quoteLink="/request-quote?service=construction-contracting"
-            />
+            <Reveal delay={0.15}>
+              <ProjectCTA
+                title="Inquire About Vendor Capabilities"
+                description="Discuss contracting support, site coordination, and machinery rental for your project."
+                quoteLink="/request-quote?service=construction-contracting"
+              />
+            </Reveal>
           </div>
         </div>
       </div>

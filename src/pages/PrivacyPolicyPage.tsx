@@ -19,6 +19,7 @@ export const PrivacyPolicyPage: React.FC = () => {
           badge="LEGAL INFORMATION"
           title="Privacy Policy"
           subtitle="This Privacy Policy explains how information provided through the Chitrani Construction website may be used when responding to enquiries and quotation requests."
+          accentType="legal"
           breadcrumb={[{ label: 'Home', href: '/' }]}
         />
 
