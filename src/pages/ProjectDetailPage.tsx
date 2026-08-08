@@ -1,54 +1,58 @@
 import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { SEO } from '../components/common/SEO';
-import { getProjectBySlug } from '../data/projects';
+import { projectsData } from '../data/projects';
 import { ProjectHero } from '../components/projects/ProjectHero';
 import { ProjectOverview } from '../components/projects/ProjectOverview';
 import { ProjectFacts } from '../components/projects/ProjectFacts';
 import { ProjectEngagement } from '../components/projects/ProjectEngagement';
 import { ProjectCTA } from '../components/projects/ProjectCTA';
+import { ChevronRight, Building2, Truck, ArrowRight } from 'lucide-react';
 import { Reveal, SectionEyebrow } from '../components/common/Motion';
-import { Building2, Truck, ArrowRight } from 'lucide-react';
 
 export const ProjectDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
 
-  // Retrieve project dynamically from data layer
-  const project = getProjectBySlug(slug || '');
+  // Validate allowed slug strictly (only Ocean Star is public)
+  if (!slug || slug !== 'ocean-star') {
+    return <Navigate to="/404" replace />;
+  }
 
-  // Defensive validation: unknown project slug redirects to 404
+  const project = projectsData.find((p) => p.slug === slug);
   if (!project) {
     return <Navigate to="/404" replace />;
   }
 
+  // SEO title for Ocean Star page
+  const seoTitle = 'Ocean Star Concrete Pump Engagement | Chitrani Construction';
+
   return (
-    <div className="bg-[#FFFFFF] text-[#3D352D] min-h-screen">
+    <div className="bg-[#F5EEE5] text-[#3D352D] min-h-screen">
       <SEO
-        title={project.seoTitle || `${project.title} Project | Chitrani Construction`}
-        description={project.seoDescription || project.scope}
-        canonical={`https://chitraniconstruction.com/projects/${project.slug}`}
+        title={seoTitle}
+        description={project.description}
+        canonicalPath={`/projects/${project.slug}`}
       />
 
-      {/* Hero / Intro Header */}
       <ProjectHero
         title={project.title}
-        badge={project.statusBadge || 'VERIFIED VENDOR ENGAGEMENT'}
-        intro={`Chitrani Construction is documented as a construction vendor for the ${project.title} development in Mumbai.`}
-        image={project.image}
+        badge={project.statusLabel?.toUpperCase() || 'VERIFIED VENDOR ENGAGEMENT'}
+        intro={project.shortDescription}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 space-y-12 sm:space-y-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          
           {/* Main Content Column */}
           <div className="lg:col-span-8 space-y-10">
-            {/* Overview & Representative Image */}
+            {/* Overview & Image */}
             <Reveal>
-              <ProjectOverview image={project.image} />
+              <ProjectOverview project={project} />
             </Reveal>
 
-            {/* Verified Contract Metadata Facts */}
+            {/* Verified Project Facts */}
             <Reveal delay={0.1}>
-              <ProjectFacts />
+              <ProjectFacts project={project} />
             </Reveal>
 
             {/* Vendor Engagement & Responsible Information Note */}
@@ -105,16 +109,29 @@ export const ProjectDetailPage: React.FC = () => {
             </Reveal>
           </div>
 
-          {/* Sidebar Column */}
+          {/* Sidebar CTA */}
           <div className="lg:col-span-4 space-y-6">
-            <Reveal delay={0.15}>
-              <ProjectCTA
-                title="Inquire About Vendor Capabilities"
-                description="Discuss contracting support, site coordination, and machinery rental for your project."
-                quoteLink="/request-quote?service=construction-contracting"
-              />
-            </Reveal>
+            <ProjectCTA
+              title="Have a Similar Project Requirement?"
+              description="Discuss concrete pumping parameters, equipment configuration, or civil execution support with our site engineering team."
+              quoteLink="/request-quote?requirement=equipment-rental"
+            />
+
+            {/* Navigation back to all projects */}
+            <div className="p-6 bg-white rounded-[20px] border border-[#E8DDD0] space-y-3 text-xs font-body">
+              <span className="font-heading font-bold text-[#3D352D] uppercase tracking-wider block">
+                Portfolio Navigation
+              </span>
+              <Link
+                to="/projects"
+                className="inline-flex items-center gap-1.5 font-heading font-bold text-[#C96F1B] hover:text-[#B35E17] uppercase tracking-wider"
+              >
+                <span>Back to Projects &amp; Client Engagements</span>
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
+
         </div>
       </div>
     </div>

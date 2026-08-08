@@ -15,13 +15,13 @@ import {
 } from 'lucide-react';
 
 export const ProjectsPage: React.FC = () => {
-  const featuredProject = projectsData[0]; // Ocean Star
+  const oceanStar = projectsData.find((p) => p.slug === 'ocean-star') || projectsData[0];
 
   const projectsHeroVisual = (
     <div className="relative rounded-2xl overflow-hidden border border-[#E8DDD0] bg-[#F5EEE5] shadow-md group aspect-[16/10] max-h-[300px] sm:max-h-[340px]">
       <img
-        src={featuredProject.image}
-        alt="Representative visual of Ocean Star documented high-rise project engagement"
+        src={oceanStar.image}
+        alt={oceanStar.imageAlt || 'Representative visual of Ocean Star documented high-rise project engagement'}
         loading="eager"
         decoding="async"
         className="w-full h-full object-cover filter brightness-95 group-hover:scale-[1.025] transition-transform duration-500 ease-out"
@@ -43,15 +43,15 @@ export const ProjectsPage: React.FC = () => {
     <div className="bg-[#FFFFFF] text-[#3D352D] min-h-screen">
       <SEO
         title="Documented Construction Projects & Vendor Engagements | Chitrani"
-        description="View documented construction vendor engagements by Chitrani Construction, including the Ocean Star development in Mumbai for Suraj Estate Developers Ltd."
-        canonical="https://chitraniconstruction.com/projects"
+        description="Explore verified and approved project information published by Chitrani Construction, including the Ocean Star development engagement in Mumbai."
+        canonicalPath="/projects"
       />
 
       {/* 1. Page Header */}
       <PageHeader
-        badge="PROJECT PORTFOLIO"
-        title="Documented Project Engagements"
-        subtitle="Chitrani Construction maintains transparent documentation of verified client engagements and construction vendor roles."
+        badge="PROJECTS"
+        title="Documented Project Engagement"
+        subtitle="Explore verified and approved project information published by Chitrani Construction."
         accentType="projects"
         customRightVisual={projectsHeroVisual}
       />
@@ -60,12 +60,12 @@ export const ProjectsPage: React.FC = () => {
       <section className="py-16 sm:py-20 bg-[#FFFFFF]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Reveal>
-            <SectionEyebrow badge="VERIFIED ENGAGEMENTS" className="justify-center mb-3" />
+            <SectionEyebrow badge="VERIFIED ENGAGEMENT" className="justify-center mb-3" />
             <h2 className="font-heading font-semibold text-2xl sm:text-4xl text-[#3D352D] tracking-tight mb-4">
               Documented Project Participation
             </h2>
             <p className="text-base sm:text-lg text-[#6B5E4E] font-body leading-relaxed max-w-3xl mx-auto">
-              Chitrani Construction presents project engagements supported by verified documentation and work orders. Project records reflect documented vendor roles, contract dates, and site locations.
+              Chitrani Construction presents project engagements supported by verified documentation. Project records reflect documented vendor roles, client details, and site locations.
             </p>
           </Reveal>
         </div>
@@ -84,7 +84,7 @@ export const ProjectsPage: React.FC = () => {
           </div>
 
           <Reveal delay={0.1} className="max-w-4xl mx-auto">
-            <ProjectCard project={featuredProject} />
+            <ProjectCard project={oceanStar} featured={true} />
           </Reveal>
         </div>
       </section>
@@ -96,9 +96,9 @@ export const ProjectsPage: React.FC = () => {
             <div className="flex items-center gap-3 border-b border-[#E8DDD0] pb-4">
               <FileCheck className="w-6 h-6 text-[#C96F1B] shrink-0" />
               <div>
-                <SectionEyebrow badge="CONTRACT DOCUMENTATION" className="mb-0.5" />
+                <SectionEyebrow badge="ENGAGEMENT RECORD" className="mb-0.5" />
                 <h3 className="font-heading font-semibold text-2xl sm:text-3xl text-[#3D352D]">
-                  Ocean Star Engagement Record
+                  Ocean Star Information Summary
                 </h3>
               </div>
             </div>
@@ -107,28 +107,28 @@ export const ProjectsPage: React.FC = () => {
               <StaggerItem>
                 <div className="p-5 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-1.5 hover:border-[#C96F1B]/40 transition-colors">
                   <span className="text-[#6B5E4E] block text-[11px] font-heading font-semibold uppercase tracking-wider">Client</span>
-                  <span className="font-semibold text-[#3D352D] text-base">Suraj Estate Developers Ltd</span>
+                  <span className="font-semibold text-[#3D352D] text-base">{oceanStar.client}</span>
                 </div>
               </StaggerItem>
 
               <StaggerItem>
                 <div className="p-5 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-1.5 hover:border-[#C96F1B]/40 transition-colors">
                   <span className="text-[#6B5E4E] block text-[11px] font-heading font-semibold uppercase tracking-wider">Location</span>
-                  <span className="font-semibold text-[#3D352D] text-base">Kashinath Dhuru Marg, Mumbai</span>
+                  <span className="font-semibold text-[#3D352D] text-base">{oceanStar.location}</span>
                 </div>
               </StaggerItem>
 
               <StaggerItem>
                 <div className="p-5 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-1.5 hover:border-[#C96F1B]/40 transition-colors">
-                  <span className="text-[#6B5E4E] block text-[11px] font-heading font-semibold uppercase tracking-wider">Work Order</span>
-                  <span className="font-semibold text-[#3D352D] text-base">OSWOJ0002126-27</span>
+                  <span className="text-[#6B5E4E] block text-[11px] font-heading font-semibold uppercase tracking-wider">Vendor Role</span>
+                  <span className="font-semibold text-[#3D352D] text-base">{oceanStar.category}</span>
                 </div>
               </StaggerItem>
 
               <StaggerItem>
                 <div className="p-5 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-1.5 hover:border-[#C96F1B]/40 transition-colors">
-                  <span className="text-[#6B5E4E] block text-[11px] font-heading font-semibold uppercase tracking-wider">Scheduled Period</span>
-                  <span className="font-semibold text-[#3D352D] text-base">31 Jul 2026 – 31 Dec 2026</span>
+                  <span className="text-[#6B5E4E] block text-[11px] font-heading font-semibold uppercase tracking-wider">Engagement Status</span>
+                  <span className="font-semibold text-[#3D352D] text-base">{oceanStar.statusLabel || 'Ongoing Engagement'}</span>
                 </div>
               </StaggerItem>
             </StaggerGroup>
@@ -145,7 +145,7 @@ export const ProjectsPage: React.FC = () => {
               How Project Records Are Presented
             </h2>
             <p className="text-sm sm:text-base text-[#6B5E4E] font-body leading-relaxed max-w-3xl mx-auto">
-              Chitrani Construction publishes only verified project engagements supported by contract records. Unconfirmed projects, unverified scope metrics, or speculative completion claims are deliberately excluded from this portfolio.
+              Chitrani Construction publishes verified project engagements supported by documentation. Unconfirmed projects, unverified scope metrics, or speculative completion claims are excluded from this presentation.
             </p>
           </Reveal>
         </div>
@@ -177,7 +177,7 @@ export const ProjectsPage: React.FC = () => {
                   Construction Contracting
                 </h4>
                 <p className="text-xs sm:text-sm text-[#6B5E4E] font-body leading-relaxed">
-                  Project-based construction support for building and civil requirements in Maharashtra.
+                  Structural civil contracting, RCC frame execution, masonry, and manpower support.
                 </p>
               </Link>
             </Reveal>
