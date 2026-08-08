@@ -77,24 +77,24 @@ export const FeaturedProjectSection: React.FC = () => {
 
                   <div className="space-y-1.5 pt-3 sm:pt-4 sm:border-t sm:border-[#E8DDD0] sm:pr-4">
                     <span className="text-[#6B5E4E] font-semibold uppercase tracking-wider font-heading text-[11px] block">
-                      WORK ORDER
+                      ENGAGEMENT TYPE
                     </span>
                     <div className="flex items-center gap-1.5 text-[#3D352D]">
                       <FileText className="w-4 h-4 text-[#C96F1B] shrink-0" />
                       <span className="font-heading font-semibold text-xs sm:text-sm tracking-wide">
-                        OSWOJ0002126-27
+                        Confirmed Project Engagement
                       </span>
                     </div>
                   </div>
 
                   <div className="space-y-1.5 pt-3 sm:pt-4 sm:border-t sm:border-[#E8DDD0] sm:pl-4">
                     <span className="text-[#6B5E4E] font-semibold uppercase tracking-wider font-heading text-[11px] block">
-                      SCHEDULE
+                      EQUIPMENT
                     </span>
                     <div className="flex items-center gap-1.5 text-[#3D352D]">
                       <Calendar className="w-4 h-4 text-[#C96F1B] shrink-0" />
                       <span className="font-body text-xs sm:text-sm font-semibold">
-                        31 July 2026 – Scheduled completion: 31 Dec 2026
+                        SP 1087 Concrete Pump
                       </span>
                     </div>
                   </div>
@@ -115,7 +115,7 @@ export const FeaturedProjectSection: React.FC = () => {
                   to="/projects"
                   className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-white border-2 border-[#C96F1B] text-[#C96F1B] hover:bg-[#C96F1B] hover:text-white font-heading text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all focus:outline-hidden focus:ring-2 focus:ring-[#C96F1B] min-h-[44px]"
                 >
-                  <span>Explore Projects</span>
+                  <span>Explore Projects &amp; Client Engagements</span>
                 </Link>
               </div>
             </div>

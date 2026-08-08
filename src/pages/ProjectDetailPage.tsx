@@ -10,11 +10,13 @@ import { ProjectCTA } from '../components/projects/ProjectCTA';
 import { ChevronRight, Building2, Truck, ArrowRight } from 'lucide-react';
 import { Reveal, SectionEyebrow } from '../components/common/Motion';
 
+const VALID_SLUGS = ['ocean-star', 'godrej-nurture', 'capacite-infra'];
+
 export const ProjectDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
 
-  // Validate allowed slug strictly (only Ocean Star is public)
-  if (!slug || slug !== 'ocean-star') {
+  // Validate allowed slug strictly
+  if (!slug || !VALID_SLUGS.includes(slug)) {
     return <Navigate to="/404" replace />;
   }
 
@@ -23,8 +25,15 @@ export const ProjectDetailPage: React.FC = () => {
     return <Navigate to="/404" replace />;
   }
 
-  // SEO title for Ocean Star page
-  const seoTitle = 'Ocean Star Concrete Pump Engagement | Chitrani Construction';
+  // SEO title per project
+  let seoTitle = 'Documented Project Engagement | Chitrani Construction';
+  if (project.slug === 'ocean-star') {
+    seoTitle = 'Ocean Star Concrete Pump Engagement | Chitrani Construction';
+  } else if (project.slug === 'godrej-nurture') {
+    seoTitle = 'Godrej Nurture Concrete Pump Requirement | Chitrani Construction';
+  } else if (project.slug === 'capacite-infra') {
+    seoTitle = 'Capacite Infra High-Rise Pump Requirement | Chitrani Construction';
+  }
 
   return (
     <div className="bg-[#F5EEE5] text-[#3D352D] min-h-screen">
@@ -99,10 +108,10 @@ export const ProjectDetailPage: React.FC = () => {
                     <ArrowRight className="w-4 h-4 text-[#C96F1B] group-hover:translate-x-1 transition-transform" />
                   </div>
                   <h4 className="font-heading font-semibold text-base text-[#3D352D] group-hover:text-[#C96F1B] transition-colors">
-                    Concrete Boom Placer Rental
+                    Concrete Equipment Support
                   </h4>
                   <p className="text-xs text-[#6B5E4E] font-body">
-                    Putzmeister M42-5 monthly rental with operator and helper for high-volume pours.
+                    Explore Chitrani Construction’s concrete-placement equipment services.
                   </p>
                 </Link>
               </div>
