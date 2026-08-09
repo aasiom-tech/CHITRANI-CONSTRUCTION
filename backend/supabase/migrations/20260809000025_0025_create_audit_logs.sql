@@ -27,7 +27,7 @@ ALTER TABLE public.audit_logs
 ADD CONSTRAINT chk_audit_logs_before_summary_object
 CHECK (
     before_summary IS NULL OR
-    jsonb_typeof(before_summary) = ''object''
+    jsonb_typeof(before_summary) = 'object'
 );
 
 -- Add constraint: if after_summary is not NULL, it must be a JSON object
@@ -35,7 +35,7 @@ ALTER TABLE public.audit_logs
 ADD CONSTRAINT chk_audit_logs_after_summary_object
 CHECK (
     after_summary IS NULL OR
-    jsonb_typeof(after_summary) = ''object''
+    jsonb_typeof(after_summary) = 'object'
 );
 
 -- Foreign key reference
