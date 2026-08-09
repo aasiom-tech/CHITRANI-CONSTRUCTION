@@ -509,47 +509,28 @@ Reference numbers are generated server-side using a collision-safe, formatted se
 
 ## Migration Implementation Status
 
-All migrations created so far are defined in SQL files under `backend/supabase/migrations/` but have NOT been executed against Supabase.
+All 29 migrations are defined in SQL files under `backend/supabase/migrations/`.
 
 Status:
 
-- 0001 — CREATED, NOT EXECUTED
-- 0002 — CREATED, NOT EXECUTED
-- 0003 — CREATED, NOT EXECUTED
-- 0004 — CREATED, NOT EXECUTED
-- 0005 — CREATED, NOT EXECUTED
-- 0006 — CREATED, NOT EXECUTED
-- 0007 — CREATED, NOT EXECUTED
-- 0008 — CREATED, NOT EXECUTED
-- 0009 — CREATED, NOT EXECUTED
-- 0010 — CREATED, NOT EXECUTED
-- 0011 — CREATED, NOT EXECUTED
-- 0012 — CREATED, NOT EXECUTED
-- 0013 — CREATED, NOT EXECUTED
-- 0014 — CREATED, NOT EXECUTED
-- 0015 — CREATED, NOT EXECUTED
-- 0016 — CREATED, NOT EXECUTED
-- 0017 — CREATED, NOT EXECUTED
-- 0018 — CREATED, NOT EXECUTED
-- 0019 — CREATED, NOT EXECUTED
-- 0020 — CREATED, NOT EXECUTED
-- 0021 — CREATED, NOT EXECUTED
+- 0001–0028 — CREATED, LOCALLY EXECUTED, REMOTELY EXECUTED (DEV)
+- 0029 — CREATED, LOCALLY EXECUTED, REMOTELY PENDING
 
-0022-0027: CREATED, NOT EXECUTED
-
-Seed data: CREATED, NOT EXECUTED
+Seed data: CREATED, NOT EXECUTED (remote or local)
 
 Verified initial seed records: 8
 
 Industries: DEFERRED PENDING EXPLICIT BUSINESS APPROVAL
 
-Supabase execution: NONE
+Remote DEV execution: 0001–0028 applied, 0029 pending
 
 All 28 planned application table definitions are represented in migrations.
 
 0027 adds sequences/functions/defaults but does not add an application table.
 
-## 7. Recommended Migration Dependency Order (27 Steps)
+0029 fixes PL/pgSQL ambiguity in validate_quote_request_configuration and hardens future postgres-created object default privileges.
+
+## 7. Recommended Migration Dependency Order (29 Steps)
 
 ```
  1. 20260809000001_0001_initial_extensions_and_helpers.sql   (uuid-ossp / pgcrypto, timestamp triggers)
@@ -580,13 +561,14 @@ All 28 planned application table definitions are represented in migrations.
 26. 20260809000026_0026_create_notification_logs.sql
 27. 20260809000027_0027_create_reference_sequences.sql
 28. 20260809000028_0028_security_baseline_rls.sql
+29. 20260809000029_0029_hardening_remediation.sql            (fix ambiguity, harden default privileges)
 ```
 
 ## 8. Local Validation Status
 
 - Migration files are Supabase CLI timestamp-compatible (`YYYYMMDDHHmmss_*.sql`)
-- 28/28 migrations successfully executed against local Supabase (Step 4H, 4H.6)
-- 28/28 successfully replayed via `supabase db reset --local --no-seed` (Step 4H, 4H.6)
+- 29/29 migrations successfully executed against local Supabase (Step 4H, 4H.6, 4K)
+- 29/29 successfully replayed via `supabase db reset --local --no-seed` (Step 4H, 4H.6, 4K)
 - 28/28 planned application tables verified locally
 - Seed was disabled during schema execution testing
 - SQL syntax defects in 0025 and 0026 corrected and verified locally
@@ -596,6 +578,9 @@ All 28 planned application table definitions are represented in migrations.
 - service_role access explicitly controlled
 - Application helper functions not exposed to anon/authenticated
 - Publishable access deferred to explicit GRANT + RLS policy migrations
-- Remote development migrations remain NOT EXECUTED
+- Migration 0029 fixes PL/pgSQL ambiguity in validate_quote_request_configuration
+- Migration 0029 hardens future postgres-created object default privileges
+- Local lint passes with 0 warnings after 0029
+- Remote DEV has 0001–0028 applied, 0029 pending
 - Remote seed remains NOT EXECUTED
-- Remote schema remains UNCHANGED
+- Remote 0029 remains NOT EXECUTED
