@@ -513,16 +513,15 @@ All 29 migrations are defined in SQL files under `backend/supabase/migrations/`.
 
 Status:
 
-- 0001–0028 — CREATED, LOCALLY EXECUTED, REMOTELY EXECUTED (DEV)
-- 0029 — CREATED, LOCALLY EXECUTED, REMOTELY PENDING
+- 0001–0029 — CREATED, LOCALLY EXECUTED, REMOTELY EXECUTED (DEV)
 
-Seed data: CREATED, NOT EXECUTED (remote or local)
+Seed data: CREATED, EXECUTED (DEV)
 
 Verified initial seed records: 8
 
 Industries: DEFERRED PENDING EXPLICIT BUSINESS APPROVAL
 
-Remote DEV execution: 0001–0028 applied, 0029 pending
+Remote DEV deployment: COMPLETE — 29/29 migrations applied, seed executed
 
 All 28 planned application table definitions are represented in migrations.
 
@@ -581,6 +580,24 @@ All 28 planned application table definitions are represented in migrations.
 - Migration 0029 fixes PL/pgSQL ambiguity in validate_quote_request_configuration
 - Migration 0029 hardens future postgres-created object default privileges
 - Local lint passes with 0 warnings after 0029
-- Remote DEV has 0001–0028 applied, 0029 pending
-- Remote seed remains NOT EXECUTED
-- Remote 0029 remains NOT EXECUTED
+
+## 9. Remote Deployment Status (DEV)
+
+- Remote project: `nubzccrvqhnaghadyrxu` (name: chitrani-construction-dev, region: ap-northeast-2)
+- 29/29 migrations applied remotely (last: `20260809000029_0029_hardening_remediation.sql`)
+- Remote lint passes with 0 warnings
+- Remote seed executed: 8 records (2 divisions, 2 services, 1 category, 1 equipment, 2 specifications)
+- Seed idempotent: re-run inserts 0 new records
+- Post-seed security verified: publishable key blocked (401), admin key returns 2 divisions
+- Remote deployment date: 2026-08-09
+
+## 10. Security Baseline
+
+- RLS enabled on all 28 application tables
+- Zero public RLS policies — all API access mediated by Express backend
+- anon/authenticated roles: revoked from all application tables and helper functions
+- service_role: granted explicit access to application tables and helper functions
+- Migration 0028: secured 15 helper functions (REVOKE EXECUTE FROM anon, authenticated; GRANT EXECUTE TO service_role)
+- Migration 0029: hardened future postgres-created objects (TABLE/SEQUENCE/FUNCTION defaults to service_role only; EXECUTE revoked from PUBLIC)
+- Supabase-managed defaults (`supabase_admin` → anon/authenticated on public schema) are infrastructure defaults — not removable; mitigated by zero public RLS policies
+- Postgres role defaults: fully hardened via migration 0029

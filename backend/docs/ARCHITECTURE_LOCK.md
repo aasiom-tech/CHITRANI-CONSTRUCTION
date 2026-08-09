@@ -109,3 +109,23 @@ Two explicit Supabase client roles are maintained in `backend/src/lib/`:
 3. Possession of the secret key is **not** itself Admin user authorization.
 4. Future Admin authentication will verify identity server-side and check `admin_users` role before privileged operations.
 5. Future public endpoints must still use Zod validation, business validation, rate limiting, and safe repository methods before persistence.
+
+---
+
+## 7. Database Security Baseline (Remote DEV)
+
+**Deployment status:** 29/29 migrations applied, seed executed, lint clean.
+
+### RLS Policy
+- RLS enabled on all 28 application tables
+- Zero public RLS policies — all API access mediated by Express backend
+- anon/authenticated roles: revoked from all application tables and helper functions
+- service_role: granted explicit access to application tables and helper functions
+
+### Function Security
+- Migration 0028: secured 15 helper functions (REVOKE EXECUTE FROM anon, authenticated; GRANT EXECUTE TO service_role)
+- Migration 0029: hardened future postgres-created objects (TABLE/SEQUENCE/FUNCTION defaults to service_role only; EXECUTE revoked from PUBLIC)
+
+### Supabase-Managed Defaults
+- `supabase_admin` → anon/authenticated on public schema are infrastructure defaults — not removable
+- Mitigated by zero public RLS policies (publishable key returns 401 on all application tables)
