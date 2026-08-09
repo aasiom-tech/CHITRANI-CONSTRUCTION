@@ -4,8 +4,8 @@
 
 `backend/supabase/seed.sql` contains safe, verified initial configuration data for development.
 
-**Status:** CREATED, NOT EXECUTED
-**No production database has been modified.**
+**Status:** CREATED, EXECUTED (DEV)
+**Remote DEV deployment:** COMPLETE — 8 records seeded, idempotent re-run verified.
 
 ---
 
