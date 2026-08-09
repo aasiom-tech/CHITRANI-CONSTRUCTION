@@ -579,16 +579,23 @@ All 28 planned application table definitions are represented in migrations.
 25. 20260809000025_0025_create_audit_logs.sql
 26. 20260809000026_0026_create_notification_logs.sql
 27. 20260809000027_0027_create_reference_sequences.sql
+28. 20260809000028_0028_security_baseline_rls.sql
 ```
 
 ## 8. Local Validation Status
 
 - Migration files are Supabase CLI timestamp-compatible (`YYYYMMDDHHmmss_*.sql`)
-- 27/27 migrations successfully executed against local Supabase (Step 4H)
-- 27/27 successfully replayed via `supabase db reset --local --no-seed` (Step 4H)
+- 28/28 migrations successfully executed against local Supabase (Step 4H, 4H.6)
+- 28/28 successfully replayed via `supabase db reset --local --no-seed` (Step 4H, 4H.6)
 - 28/28 planned application tables verified locally
 - Seed was disabled during schema execution testing
 - SQL syntax defects in 0025 and 0026 corrected and verified locally
+- RLS enabled on all 28 application tables (migration 0028)
+- No public RLS policies — Express backend mediates all operations
+- anon/authenticated direct application-table access denied
+- service_role access explicitly controlled
+- Application helper functions not exposed to anon/authenticated
+- Publishable access deferred to explicit GRANT + RLS policy migrations
 - Remote development migrations remain NOT EXECUTED
 - Remote seed remains NOT EXECUTED
 - Remote schema remains UNCHANGED
