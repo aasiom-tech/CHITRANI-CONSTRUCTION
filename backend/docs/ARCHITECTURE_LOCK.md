@@ -91,3 +91,21 @@ Service (e.g. Concrete Boom Placer Rental)
    - `public_status`: Available, On Rent, Reserved (visible on frontend).
    - `internal_status`: In Service, Inspection Pending, Maintenance Required, Decommissioned (strictly server-internal).
 3. **Key Isolation**: Supabase Service-Role keys must **NEVER** be exposed to browser runtimes. They remain strictly encapsulated inside Node.js environment secrets.
+
+---
+
+## 6. Supabase Client Architecture
+
+Two explicit Supabase client roles are maintained in `backend/src/lib/`:
+
+| Client | File | Key Used | RLS | Use Case |
+| :--- | :--- | :--- | :--- | :--- |
+| **Public** | `supabase-public.ts` | `SUPABASE_PUBLISHABLE_KEY` | Respected | Public API operations subject to normal RLS authorization |
+| **Admin** | `supabase-admin.ts` | `SUPABASE_SECRET_KEY` | Bypassed | Server-only privileged operations after authorization/business validation |
+
+### Rules:
+1. Both clients are lazy-initialized on first use — the server starts without Supabase credentials.
+2. The admin client bypasses RLS and therefore must **not** substitute for authorization or business validation.
+3. Possession of the secret key is **not** itself Admin user authorization.
+4. Future Admin authentication will verify identity server-side and check `admin_users` role before privileged operations.
+5. Future public endpoints must still use Zod validation, business validation, rate limiting, and safe repository methods before persistence.

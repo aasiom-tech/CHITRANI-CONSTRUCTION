@@ -8,7 +8,7 @@ CREATE TABLE public.notification_logs (
     recipient text NOT NULL,
     provider text NOT NULL,
     provider_message_id text NULL,
-    delivery_status text NOT NULL DEFAULT ''pending'',
+    delivery_status text NOT NULL DEFAULT 'pending',
     error_summary text NULL,
     created_at timestamptz NOT NULL DEFAULT now(),
     updated_at timestamptz NOT NULL DEFAULT now()
@@ -32,7 +32,7 @@ CHECK (length(btrim(provider)) > 0);
 -- Add constraint: delivery_status must be one of allowed values
 ALTER TABLE public.notification_logs
 ADD CONSTRAINT chk_notification_logs_delivery_status_valid
-CHECK (delivery_status IN (''pending'', ''sent'', ''delivered'', ''failed''));
+CHECK (delivery_status IN ('pending', 'sent', 'delivered', 'failed'));
 
 -- Add constraint: allow zero OR one related submission (enquiry_id XOR quote_request_id)
 ALTER TABLE public.notification_logs
