@@ -110,12 +110,18 @@ ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
 -- D. HARDEN FUTURE FUNCTION DEFAULT PRIVILEGES
 -- =============================================================================
 
--- Remove all existing future-function defaults
+-- Remove built-in global PUBLIC EXECUTE default for future functions created by postgres
+-- This is NOT schema-specific; PostgreSQL's built-in default is global
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres
+    REVOKE EXECUTE ON FUNCTIONS
+    FROM PUBLIC;
+
+-- Remove all existing future-function defaults in public schema
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
     REVOKE ALL PRIVILEGES ON FUNCTIONS
-    FROM PUBLIC, anon, authenticated, service_role;
+    FROM anon, authenticated, service_role;
 
--- Restore only intended service_role defaults
+-- Restore only intended service_role defaults in public schema
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
     GRANT EXECUTE ON FUNCTIONS
     TO service_role;
