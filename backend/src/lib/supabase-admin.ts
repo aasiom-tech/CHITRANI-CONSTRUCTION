@@ -1,7 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
 import { getSupabaseConfig } from "../config/supabase-env.js";
+import type { Database } from "./database.types.js";
 
-let client: ReturnType<typeof createClient> | null = null;
+let client: ReturnType<typeof createClient<Database>> | null = null;
 
 /**
  * Privileged Supabase client that bypasses RLS.
@@ -13,7 +14,7 @@ export function getSupabaseAdminClient() {
 
   const config = getSupabaseConfig();
 
-  client = createClient(config.SUPABASE_URL, config.SUPABASE_SECRET_KEY, {
+  client = createClient<Database>(config.SUPABASE_URL, config.SUPABASE_SECRET_KEY, {
     auth: {
       persistSession: false,
       autoRefreshToken: false,
