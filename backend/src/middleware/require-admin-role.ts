@@ -2,19 +2,13 @@ import type { Request, Response, NextFunction } from "express";
 import { AppError } from "../errors/app-error.js";
 import type { AdminRole } from "../types/admin-auth.js";
 
-const ROLE_HIERARCHY: Record<AdminRole, number> = {
-  viewer: 1,
-  admin: 2,
-  super_admin: 3,
-};
-
-function roleMeetsRequirement(userRole: AdminRole, requiredRoles: AdminRole[]): boolean {
-  const userLevel = ROLE_HIERARCHY[userRole];
-  return requiredRoles.some((r) => ROLE_HIERARCHY[r] <= userLevel);
+function isAllowedRole(userRole: AdminRole, allowedRoles: readonly AdminRole[]): boolean {
+  if (userRole === "super_admin") return true;
+  return allowedRoles.includes(userRole);
 }
 
-export function requireAdminRole(...requiredRoles: AdminRole[]) {
-  if (requiredRoles.length === 0) {
+export function requireAdminRole(...allowedRoles: AdminRole[]) {
+  if (allowedRoles.length === 0) {
     throw new Error("requireAdminRole requires at least one role");
   }
 
@@ -26,12 +20,12 @@ export function requireAdminRole(...requiredRoles: AdminRole[]) {
       return;
     }
 
-    if (!roleMeetsRequirement(admin.role, requiredRoles)) {
+    if (!isAllowedRole(admin.role, allowedRoles)) {
       next(
         new AppError(
           403,
           "FORBIDDEN",
-          `Insufficient permissions. Required: ${requiredRoles.join(" or ")}.`,
+          `Insufficient permissions. Required: ${allowedRoles.join(" or ")}.`,
         ),
       );
       return;
@@ -46,5 +40,6 @@ export function isSuperAdmin(req: Request): boolean {
 }
 
 export function isAdminOrAbove(req: Request): boolean {
-  return req.admin !== undefined && ROLE_HIERARCHY[req.admin.role] >= ROLE_HIERARCHY.admin;
+  const role = req.admin?.role;
+  return role === "admin" || role === "super_admin";
 }

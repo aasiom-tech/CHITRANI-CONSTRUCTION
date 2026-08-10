@@ -83,10 +83,18 @@ This invariant is documented for future admin-management service implementation.
   - Looks up `admin_users` record using `auth_user_id` FK via service-role client (`getSupabaseAdminClient()`)
   - Verifies `is_active = true`
   - Attaches typed `AdminIdentity { authUserId, adminUserId, role }` to `req.admin`
-- **Authorization Middleware**: `requireAdminRole(...roles)` (in `src/middleware/require-admin-role.ts`)
-  - Accepts one or more required roles
-  - Uses role hierarchy: `viewer` < `admin` < `super_admin`
+- **Authorization Middleware**: `requireAdminRole(...allowedRoles)` (in `src/middleware/require-admin-role.ts`)
+  - Accepts one or more explicitly allowed roles as variadic arguments
+  - **`super_admin` is always allowed** for any non-empty allowedRoles list (global override)
+  - For `admin` and `viewer`: role must be **explicitly present** in allowedRoles
+  - Examples:
+    - `requireAdminRole('super_admin')` → super_admin only
+    - `requireAdminRole('admin')` → admin + super_admin
+    - `requireAdminRole('viewer')` → viewer + super_admin
+    - `requireAdminRole('admin', 'viewer')` → admin + viewer + super_admin
+    - `requireAdminRole('super_admin', 'viewer')` → super_admin + viewer (NOT admin)
   - Returns HTTP 403 if authenticated user's role doesn't meet requirement
+  - Empty allowedRoles list throws development error (programmer error)
   - Provides helper predicates `isSuperAdmin(req)`, `isAdminOrAbove(req)`
 
 ---
