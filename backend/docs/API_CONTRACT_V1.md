@@ -117,12 +117,12 @@ MUST **NOT** return:
 If the service slug is unknown or the service/template is not published-eligible, the endpoint returns HTTP 404 (not a malformed partial payload).
 
 ### Public Intake Endpoints
-- `POST /api/v1/contact` — Submit general contact form enquiry (see Public Submission Boundary below). **Not implemented yet**; delivered with the intake feature.
+- `POST /api/v1/contact` — Submit general contact form enquiry (see Public Submission Boundary below). **✅ IMPLEMENTED**
 - `POST /api/v1/quotes` — Submit dynamic quote request (see Public Submission Boundary below). **Not implemented yet**; delivered with the intake feature.
 
 ### Public Submission Boundary (`POST /api/v1/contact`, `POST /api/v1/quotes`)
 
-> **Status**: DOCUMENTED ONLY — endpoints are NOT implemented in Step 3D1. This section locks the required behavior for the future implementation.
+> **Status**: POST /api/v1/contact is **IMPLEMENTED**. POST /api/v1/quotes is DOCUMENTED ONLY.
 
 Both submission endpoints MUST:
 
