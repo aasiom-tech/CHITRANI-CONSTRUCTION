@@ -149,6 +149,9 @@ A successful submission returns the reference number, a confirmation message, an
 
 All `/api/v1/admin/*` endpoints require a valid Supabase Auth Bearer token in the `Authorization` header.
 
+### Implemented Admin Resource Endpoints:
+- `GET /api/v1/admin/me` — Returns the authenticated admin's identity and role. **✅ IMPLEMENTED (route logic; NOT YET ROOT-MOUNTED)**
+
 ### Planned Admin Resource Endpoints:
 - `/api/v1/admin/dashboard` — Operational metrics & recent activity feeds
 - `/api/v1/admin/enquiries` — Enquiry list (server pagination/filters) & detail
