@@ -77,14 +77,14 @@ The backend MUST NEVER return raw database entity rows directly to public caller
 ## 4. Public API Endpoints (`/api/v1`)
 
 ### Catalog & Content Endpoints
-- `GET /api/v1/business-divisions` — Active business divisions listing.
-- `GET /api/v1/services` — Published services listing.
-- `GET /api/v1/services/:slug` — Service detail by unique slug.
-- `GET /api/v1/equipment` — Equipment listing (filtered by `public_status`).
-- `GET /api/v1/equipment/:slug` — Equipment detail and public specs by slug.
-- `GET /api/v1/projects` — Verified projects and client requirement summaries.
-- `GET /api/v1/projects/:slug` — Project engagement detail by slug.
-- `GET /api/v1/industries` — Target industry sectors listing.
+- `GET /api/v1/business-divisions` — Active business divisions listing. **✅ IMPLEMENTED**
+- `GET /api/v1/services` — Published services listing. **✅ IMPLEMENTED** (supports `?divisionSlug=` filter)
+- `GET /api/v1/services/:slug` — Service detail by unique slug. **✅ IMPLEMENTED**
+- `GET /api/v1/equipment` — Equipment listing (filtered by `public_status`). **✅ IMPLEMENTED** (supports `?category=` filter)
+- `GET /api/v1/equipment/:slug` — Equipment detail and public specs by slug. **✅ IMPLEMENTED**
+- `GET /api/v1/projects` — Verified projects and client requirement summaries. **Not implemented yet.**
+- `GET /api/v1/projects/:slug` — Project engagement detail by slug. **Not implemented yet.**
+- `GET /api/v1/industries` — Target industry sectors listing. **Not implemented yet.**
 - `GET /api/v1/quote-templates/:serviceSlug` — Active quote form configuration for a specific service (see Public Quote Template Boundary below). **Not implemented yet**; will be delivered with the quote submission feature.
 
 ### Public Quote Template Boundary (`GET /api/v1/quote-templates/:serviceSlug`)
