@@ -4,10 +4,11 @@ import { successResponse } from "../utils/api-response.js";
 import { AppError } from "../errors/app-error.js";
 import { insertContactEnquiry } from "../repositories/contact.repository.js";
 import { submitContactEnquirySchema } from "../validation/contact.schema.js";
+import { contactRateLimiter } from "../middleware/contact-rate-limit.js";
 
 const router = Router();
 
-router.post("/", async (req, res, next) => {
+router.post("/", contactRateLimiter, async (req, res, next) => {
   try {
     const requestId = res.locals.requestId as string | undefined;
 

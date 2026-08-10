@@ -122,7 +122,7 @@ If the service slug is unknown or the service/template is not published-eligible
 
 ### Public Submission Boundary (`POST /api/v1/contact`, `POST /api/v1/quotes`)
 
-> **Status**: POST /api/v1/contact is **IMPLEMENTED**. POST /api/v1/quotes is DOCUMENTED ONLY.
+> **Status**: POST /api/v1/contact is **IMPLEMENTED** with rate limiting. POST /api/v1/quotes is DOCUMENTED ONLY.
 
 Both submission endpoints MUST:
 
@@ -131,6 +131,56 @@ Both submission endpoints MUST:
 3. **Store the database record FIRST** — the enquiry or quote request must persist successfully before any email delivery is attempted. An email provider failure MUST NOT cause the saved record to disappear.
 4. **Return the generated reference number** — `CHI-ENQ-YYYY-XXXXXX` for contact, `CHI-Q-YYYY-XXXXXX` for quotes.
 5. **Use the standard API envelope** — standard success/error envelope per Section 1.
+
+#### POST /api/v1/contact — Implemented Behaviour
+
+**Accepted fields:**
+- `name` (required, string, max 200)
+- `company` (optional, string, max 200)
+- `email` (required, valid email, max 254)
+- `phone` (required, string, max 30)
+- `divisionId` (optional, valid UUID — must reference an existing business_division)
+- `serviceId` (optional, valid UUID — must reference an existing service belonging to the provided divisionId)
+- `projectLocation` (optional, string, max 300)
+- `message` (required, string, max 5000)
+- `consent` (required, boolean `true`)
+
+**Response codes:**
+- `201` — Enquiry accepted, reference number generated
+- `400` — Validation failure (missing/invalid fields, unknown fields, invalid relationship)
+- `429` — Rate limited (5 attempts per 15 minutes per client IP)
+
+**Rate limiting baseline:**
+- Limit: 5 submissions per 15-minute window per client IP
+- Scope: POST /api/v1/contact only (catalog GET endpoints are not limited)
+- Client identity: X-Real-IP header (validated via `net.isIP()`), fallback to Express req.ip
+- Memory store: counters reset on process restart; not shared across replicas
+- Both valid and invalid attempts consume quota
+- CAPTCHA/Turnstile: not yet implemented
+
+**Success response (201):**
+```json
+{
+  "success": true,
+  "data": {
+    "referenceNumber": "CHI-ENQ-2026-000001",
+    "message": "Your enquiry has been received. Our team will contact you shortly."
+  },
+  "meta": { "requestId": "..." }
+}
+```
+
+**Rate-limited response (429):**
+```json
+{
+  "success": false,
+  "error": {
+    "code": "RATE_LIMITED",
+    "message": "Too many contact requests. Please try again later."
+  },
+  "meta": { "requestId": "..." }
+}
+```
 
 `POST /api/v1/contact` creates a row in `contact_enquiries`. `POST /api/v1/quotes` creates a row in `quote_requests` plus immutable answer snapshots in `quote_answers`, and requires the selected form version to be published at submission time.
 
@@ -142,6 +192,10 @@ Public creation responses MUST **NOT** return:
 - admin information
 
 A successful submission returns the reference number, a confirmation message, and safe metadata only.
+
+**Email notification:** Not yet implemented. Will be added in a future step.
+
+**Idempotency:** None. Duplicate submissions create separate enquiries with separate reference numbers.
 
 ---
 
