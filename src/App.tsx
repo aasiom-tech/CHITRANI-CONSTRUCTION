@@ -46,30 +46,30 @@ const AdminFallback: React.FC = () => (
 export function App() {
   return (
     <BrowserRouter>
-      <AdminAuthProvider>
-        <Routes>
-          {/* Public website */}
-          <Route element={<RootLayout />}>
-            <Route element={<Suspense fallback={<PageFallback />}><Outlet /></Suspense>}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/services/:slug" element={<ServiceDetailPage />} />
-              <Route path="/projects" element={<ProjectsPage />} />
-              <Route path="/projects/:slug" element={<ProjectDetailPage />} />
-              <Route path="/equipment" element={<EquipmentPage />} />
-              <Route path="/equipment/:slug" element={<EquipmentDetailPage />} />
-              <Route path="/industries" element={<IndustriesPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/request-quote" element={<RequestQuotePage />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-              <Route path="/terms-and-conditions" element={<TermsConditionsPage />} />
-            </Route>
-            <Route path="/404" element={<NotFoundPage />} />
-            <Route path="*" element={<Navigate to="/404" replace />} />
+      <Routes>
+        {/* Public website */}
+        <Route element={<RootLayout />}>
+          <Route element={<Suspense fallback={<PageFallback />}><Outlet /></Suspense>}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/services/:slug" element={<ServiceDetailPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/projects/:slug" element={<ProjectDetailPage />} />
+            <Route path="/equipment" element={<EquipmentPage />} />
+            <Route path="/equipment/:slug" element={<EquipmentDetailPage />} />
+            <Route path="/industries" element={<IndustriesPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/request-quote" element={<RequestQuotePage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/terms-and-conditions" element={<TermsConditionsPage />} />
           </Route>
+          <Route path="/404" element={<NotFoundPage />} />
+          <Route path="*" element={<Navigate to="/404" replace />} />
+        </Route>
 
-          {/* Admin portal */}
+        {/* Admin portal */}
+        <Route element={<AdminAuthProvider><Outlet /></AdminAuthProvider>}>
           <Route path="/admin/login" element={<Suspense fallback={<AdminFallback />}><AdminLoginPage /></Suspense>} />
           <Route
             path="/admin"
@@ -81,8 +81,8 @@ export function App() {
           >
             <Route index element={<Suspense fallback={<AdminFallback />}><AdminDashboardPage /></Suspense>} />
           </Route>
-        </Routes>
-      </AdminAuthProvider>
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }

@@ -25,14 +25,13 @@ export const AdminLoginPage: React.FC = () => {
     setLoading(true);
 
     try {
-      await signIn(email, password);
-      // signIn succeeded; onAuthStateChange in context will pick up the session
-      // and fetch /admin/me. Wait briefly for that to resolve, then navigate.
-      // The context's onAuthStateChange will set session + admin.
-      // We redirect after a short delay to allow the context to update.
-      setTimeout(() => {
+      const identity = await signIn(email, password);
+      if (identity) {
         navigate("/admin", { replace: true });
-      }, 500);
+      } else {
+        setError("This account is not authorized for the Chitrani Admin Portal.");
+        setLoading(false);
+      }
     } catch {
       setError("Invalid email or password. Please try again.");
       setLoading(false);
@@ -76,7 +75,7 @@ export const AdminLoginPage: React.FC = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="input-ds w-full"
-                placeholder="admin@chitrani.com"
+                placeholder="you@example.com"
                 disabled={loading}
               />
             </div>
