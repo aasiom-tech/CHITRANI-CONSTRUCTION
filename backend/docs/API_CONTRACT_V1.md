@@ -293,11 +293,34 @@ All `/api/v1/admin/*` endpoints require a valid Supabase Auth Bearer token in th
   - Quote counts by status: `total`, `new`, `under_review`, `clarification_required`, `quoted`, `won`, `lost`, `closed`
   - Catalog counts: `businessDivisions`, `services`, `equipment`, `projects`, `industries`
   - Zero counts are valid data
+- `GET /api/v1/admin/enquiries` — Paginated list of contact enquiries. **✅ IMPLEMENTED**
+  - Authentication required (Bearer Supabase access token)
+  - Allowed active roles: `super_admin`, `admin`, `viewer` (read-only endpoint)
+  - Query parameters: `page` (default 1), `limit` (default 20, max 100), `status` (optional: `new` | `contacted` | `qualified` | `closed`)
+  - Response: paginated list with `items[]` (id, referenceNumber, name, company, email, phone, status, createdAt), `total`, `page`, `limit`
+  - Ordered by createdAt descending (newest first)
+- `GET /api/v1/admin/enquiries/:id` — Returns full admin-safe detail for a single enquiry. **✅ IMPLEMENTED**
+  - Authentication required (Bearer Supabase access token)
+  - Allowed active roles: `super_admin`, `admin`, `viewer` (read-only endpoint)
+  - Response includes: enquiry detail (referenceNumber, name, company, email, phone, projectLocation, message, status, division, service, createdAt, updatedAt), notes[], statusHistory[]
+  - Notes include author name/role, ordered oldest→newest
+  - Status history includes oldStatus, newStatus, changedAt, actor name/role (if available)
+  - No PII beyond what admin staff need for operational handling
+- `PATCH /api/v1/admin/enquiries/:id/status` — Updates enquiry status atomically. **✅ IMPLEMENTED**
+  - Authentication required (Bearer Supabase access token)
+  - Allowed active roles: `super_admin`, `admin` (`viewer` → 403)
+  - Body: `{ "status": "contacted" }` (strict: `new` | `contacted` | `qualified` | `closed`)
+  - Uses atomic PostgreSQL function `transition_enquiry_status` — single transaction for status update + history insert
+  - Same-status request is a clean no-op (returns `changed: false`, no history row created)
+  - Returns transition result with oldStatus, newStatus, changed, historyId
+- `POST /api/v1/admin/enquiries/:id/notes` — Adds internal note to enquiry. **✅ IMPLEMENTED**
+  - Authentication required (Bearer Supabase access token)
+  - Allowed active roles: `super_admin`, `admin` (`viewer` → 403)
+  - Body: `{ "note": "Internal note text..." }` (trimmed, min 1, max 5000 chars)
+  - Author is always the authenticated admin (from token), never from request body
+  - Returns created note with author name/role, createdAt
 
 ### Planned Admin Resource Endpoints:
-- `/api/v1/admin/enquiries` — Enquiry list (server pagination/filters) & detail
-- `/api/v1/admin/enquiries/:id/status` — Enquiry status transition & history logging
-- `/api/v1/admin/enquiries/:id/notes` — Attach internal operational notes
 - `/api/v1/admin/quotes` — Quote request list (server pagination/filters) & detail
 - `/api/v1/admin/quotes/:id/status` — Quote status transition & history logging
 - `/api/v1/admin/quotes/:id/notes` — Attach internal quote notes
