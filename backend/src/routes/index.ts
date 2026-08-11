@@ -4,6 +4,7 @@ import { businessDivisionRoutes } from "./business-divisions.routes.js";
 import { serviceRoutes } from "./services.routes.js";
 import { equipmentRoutes } from "./equipment.routes.js";
 import { contactRoutes } from "./contact.routes.js";
+import { projectsIndustriesRoutes } from "./projects.routes.js";
 import { adminRoutes } from "./admin/index.js";
 
 const router = Router();
@@ -13,6 +14,7 @@ router.use("/business-divisions", businessDivisionRoutes);
 router.use("/services", serviceRoutes);
 router.use("/equipment", equipmentRoutes);
 router.use("/contact", contactRoutes);
+router.use(projectsIndustriesRoutes);
 router.use("/admin", adminRoutes);
 
 export { router };
