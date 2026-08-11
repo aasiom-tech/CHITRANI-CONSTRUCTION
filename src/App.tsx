@@ -24,6 +24,8 @@ const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(m => ({ defa
 // Admin route-level code splitting
 const AdminLoginPage = lazy(() => import('./pages/admin/AdminLoginPage').then(m => ({ default: m.AdminLoginPage })));
 const AdminDashboardPage = lazy(() => import('./pages/admin/AdminDashboardPage').then(m => ({ default: m.AdminDashboardPage })));
+const AdminEnquiriesPage = lazy(() => import('./pages/admin/AdminEnquiriesPage').then(m => ({ default: m.AdminEnquiriesPage })));
+const AdminEnquiryDetailPage = lazy(() => import('./pages/admin/AdminEnquiryDetailPage').then(m => ({ default: m.AdminEnquiryDetailPage })));
 
 const PageFallback: React.FC = () => (
   <div className="min-h-[60vh] bg-[#EADBC8] flex items-center justify-center p-4">
@@ -80,6 +82,8 @@ export function App() {
             }
           >
             <Route index element={<Suspense fallback={<AdminFallback />}><AdminDashboardPage /></Suspense>} />
+            <Route path="enquiries" element={<Suspense fallback={<AdminFallback />}><AdminEnquiriesPage /></Suspense>} />
+            <Route path="enquiries/:id" element={<Suspense fallback={<AdminFallback />}><AdminEnquiryDetailPage /></Suspense>} />
           </Route>
         </Route>
       </Routes>

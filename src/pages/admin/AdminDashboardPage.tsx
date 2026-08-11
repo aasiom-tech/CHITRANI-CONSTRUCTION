@@ -94,12 +94,14 @@ export const AdminDashboardPage: React.FC = () => {
               label="New Enquiries"
               value={enquiries?.new ?? 0}
               emptyText="No new enquiries"
+              to="/admin/enquiries?status=new"
             />
             <MetricCard
               icon={<Mail size={18} />}
               label="Total Enquiries"
               value={enquiries?.total ?? 0}
               emptyText="No enquiries received yet"
+              to="/admin/enquiries"
             />
             <MetricCard
               icon={<FileText size={18} />}
@@ -183,13 +185,15 @@ function MetricCard({
   label,
   value,
   emptyText,
+  to,
 }: {
   icon: React.ReactNode;
   label: string;
   value: number;
   emptyText?: string;
+  to?: string;
 }) {
-  return (
+  const content = (
     <div className="bg-white rounded-2xl border border-[#E8DDD0] p-5">
       <div className="flex items-center gap-2 mb-3">
         <span className="text-[#C96F1B]">{icon}</span>
@@ -208,6 +212,16 @@ function MetricCard({
       )}
     </div>
   );
+
+  if (to) {
+    return (
+      <a href={to} className="block hover:shadow-md transition-shadow">
+        {content}
+      </a>
+    );
+  }
+
+  return content;
 }
 
 function StatusPill({

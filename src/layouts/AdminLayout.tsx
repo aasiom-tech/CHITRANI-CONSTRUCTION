@@ -17,7 +17,7 @@ import {
 
 const NAV_ITEMS = [
   { to: "/admin", icon: LayoutDashboard, label: "Dashboard", end: true },
-  { to: "/admin/enquiries", icon: Mail, label: "Enquiries", disabled: true },
+  { to: "/admin/enquiries", icon: Mail, label: "Enquiries", disabled: false },
   { to: "/admin/quotes", icon: FileText, label: "Quotes", disabled: true },
   { to: "/admin/services", icon: Wrench, label: "Services", disabled: true },
   { to: "/admin/equipment", icon: Cog, label: "Equipment", disabled: true },

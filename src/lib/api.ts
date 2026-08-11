@@ -7,14 +7,36 @@ export interface ApiResponse<T> {
   meta: { requestId: string };
 }
 
+export interface ApiErrorBody {
+  success: false;
+  error: {
+    code: string;
+    message: string;
+    fields?: Record<string, string>;
+  };
+  meta?: { requestId?: string };
+}
+
+export type ApiErrorKind = "unauthorized" | "forbidden" | "validation" | "server" | "other";
+
 export class ApiError extends Error {
   constructor(
     public readonly status: number,
+    public readonly body: ApiErrorBody | null,
+    public readonly kind: ApiErrorKind,
     message: string,
   ) {
     super(message);
     this.name = "ApiError";
   }
+}
+
+function classifyStatus(status: number): ApiErrorKind {
+  if (status === 401) return "unauthorized";
+  if (status === 403) return "forbidden";
+  if (status === 400 || status === 422) return "validation";
+  if (status >= 500) return "server";
+  return "other";
 }
 
 export async function apiFetch<T>(
@@ -37,8 +59,21 @@ export async function apiFetch<T>(
     body: options.body ? JSON.stringify(options.body) : undefined,
   });
 
+  const kind = classifyStatus(res.status);
+
   if (!res.ok) {
-    throw new ApiError(res.status, `API request failed: ${res.status}`);
+    let body: ApiErrorBody | null = null;
+    try {
+      body = (await res.json()) as ApiErrorBody;
+    } catch {
+      body = null;
+    }
+    throw new ApiError(
+      res.status,
+      body,
+      kind,
+      body?.error?.message ?? `API request failed: ${res.status}`,
+    );
   }
 
   const json: ApiResponse<T> = await res.json();
