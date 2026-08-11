@@ -82,10 +82,90 @@ The backend MUST NEVER return raw database entity rows directly to public caller
 - `GET /api/v1/services/:slug` — Service detail by unique slug. **✅ IMPLEMENTED**
 - `GET /api/v1/equipment` — Equipment listing (filtered by `public_status`). **✅ IMPLEMENTED** (supports `?category=` filter)
 - `GET /api/v1/equipment/:slug` — Equipment detail and public specs by slug. **✅ IMPLEMENTED**
-- `GET /api/v1/projects` — Verified projects and client requirement summaries. **Not implemented yet.**
-- `GET /api/v1/projects/:slug` — Project engagement detail by slug. **Not implemented yet.**
-- `GET /api/v1/industries` — Target industry sectors listing. **Not implemented yet.**
+- `GET /api/v1/projects` — Verified projects and client requirement summaries (paginated). **✅ IMPLEMENTED**
+- `GET /api/v1/projects/:slug` — Project engagement detail by slug. **✅ IMPLEMENTED**
+- `GET /api/v1/industries` — Target industry sectors listing. **✅ IMPLEMENTED**
 - `GET /api/v1/quote-templates/:serviceSlug` — Active quote form configuration for a specific service (see Public Quote Template Boundary below). **Not implemented yet**; will be delivered with the quote submission feature.
+
+#### GET /api/v1/industries — Implemented Behaviour
+
+Returns all active, non-archived industry sectors ordered by `display_order`.
+
+**Query parameters:** None.
+
+**Response (200):**
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "uuid",
+      "name": "Residential Construction",
+      "slug": "residential-construction",
+      "shortDescription": "...",
+      "fullDescription": "...",
+      "displayOrder": 1
+    }
+  ]
+}
+```
+
+Empty collections return HTTP 200 with `data: []`.
+
+#### GET /api/v1/projects — Implemented Behaviour
+
+Returns active, non-archived projects with pagination. Projects are ordered by `featured` (desc), then `display_order` (asc), then `created_at` (desc).
+
+**Query parameters:**
+| Parameter | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `page` | integer | 1 | Page number (min 1) |
+| `limit` | integer | 12 | Items per page (min 1, max 50) |
+
+**Response (200):**
+```json
+{
+  "success": true,
+  "data": {
+    "items": [
+      {
+        "id": "uuid",
+        "name": "Project Name",
+        "slug": "project-name",
+        "clientName": "Client Ltd",
+        "location": "Mumbai",
+        "role": "Contractor",
+        "shortDescription": "...",
+        "projectStatus": "completed",
+        "featured": false,
+        "displayOrder": 0,
+        "services": [{ "id": "uuid", "name": "Service", "slug": "service" }],
+        "industries": [{ "id": "uuid", "name": "Industry", "slug": "industry" }]
+      }
+    ],
+    "pagination": {
+      "page": 1,
+      "limit": 12,
+      "total": 0,
+      "totalPages": 0
+    }
+  }
+}
+```
+
+Empty collections return HTTP 200 with `items: []` and valid pagination metadata.
+
+#### GET /api/v1/projects/:slug — Implemented Behaviour
+
+Returns a single active project by its URL-friendly slug, including `fullDescription`, SEO fields, and related services/industries.
+
+**Path parameters:** `slug` — URL-friendly slug (lowercase alphanumeric with hyphens).
+
+**Response (200):** Single project object with all public fields plus `fullDescription`, `seoTitle`, `seoDescription`, `services[]`, `industries[]`.
+
+**Error responses:**
+- 400 — Invalid slug format
+- 404 — Project not found (or inactive/archived)
 
 ### Public Quote Template Boundary (`GET /api/v1/quote-templates/:serviceSlug`)
 
