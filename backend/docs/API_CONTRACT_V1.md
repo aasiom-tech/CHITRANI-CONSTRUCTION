@@ -205,9 +205,16 @@ All `/api/v1/admin/*` endpoints require a valid Supabase Auth Bearer token in th
 
 ### Implemented Admin Resource Endpoints:
 - `GET /api/v1/admin/me` — Returns the authenticated admin's identity and role. **✅ IMPLEMENTED (route mounted, auth enforced)**
+- `GET /api/v1/admin/dashboard` — Returns aggregated dashboard summary counts for enquiries, quotes, and catalog. **✅ IMPLEMENTED**
+  - Authentication required (Bearer Supabase access token)
+  - Allowed active roles: `super_admin`, `admin`, `viewer` (read-only endpoint)
+  - Response contains aggregated counts only — no PII, no enquiry/quote bodies, no admin emails, no auth_user_id
+  - Enquiry counts by status: `total`, `new`, `contacted`, `qualified`, `closed`
+  - Quote counts by status: `total`, `new`, `under_review`, `clarification_required`, `quoted`, `won`, `lost`, `closed`
+  - Catalog counts: `businessDivisions`, `services`, `equipment`, `projects`, `industries`
+  - Zero counts are valid data
 
 ### Planned Admin Resource Endpoints:
-- `/api/v1/admin/dashboard` — Operational metrics & recent activity feeds
 - `/api/v1/admin/enquiries` — Enquiry list (server pagination/filters) & detail
 - `/api/v1/admin/enquiries/:id/status` — Enquiry status transition & history logging
 - `/api/v1/admin/enquiries/:id/notes` — Attach internal operational notes
