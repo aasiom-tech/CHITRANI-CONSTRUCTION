@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { PageHeader } from '../components/common/PageHeader';
 import { SEO } from '../components/common/SEO';
-import { getPublishedServices } from '../data/services';
-import { ServiceCard } from '../components/services/ServiceCard';
-import { Reveal, SectionEyebrow, StaggerGroup, StaggerItem, ArchitecturalDivider } from '../components/common/Motion';
+import { useServices } from '../hooks/useServices';
+import { CardSkeleton, ApiError, EmptyState } from '../components/common/ApiStates';
+import { Reveal, SectionEyebrow, StaggerGroup, StaggerItem } from '../components/common/Motion';
 import {
   Building2,
   Truck,
@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 
 export const ServicesPage: React.FC = () => {
-  const publishedServices = getPublishedServices();
+  const { data: services, loading, error, retry } = useServices();
 
   return (
     <div className="bg-[#FFFFFF] text-[#3D352D] min-h-screen">
@@ -33,8 +33,6 @@ export const ServicesPage: React.FC = () => {
         title="Construction Services and Project Support"
         subtitle="Chitrani Construction provides construction, structural, civil, masonry, labour and concrete-placement support for project requirements across the construction sector."
         accentType="services"
-        heroImage={publishedServices[0]?.image}
-        heroImageAlt="Construction contracting site execution support visual"
       />
 
       {/* 2. Introduction Section (White Background, Architectural Spacing) */}
@@ -67,14 +65,45 @@ export const ServicesPage: React.FC = () => {
             </Reveal>
           </div>
 
-          {/* 3 Columns x 2 Rows Desktop Grid for 6 Services */}
-          <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
-            {publishedServices.map((service) => (
-              <StaggerItem key={service.id} className="h-full">
-                <ServiceCard service={service} />
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
+          {/* 3 Columns x 2 Rows Desktop Grid for Services */}
+          {loading && <CardSkeleton count={6} />}
+          {error && <ApiError message={error} onRetry={retry} />}
+          {!loading && !error && services && services.length === 0 && (
+            <EmptyState message="Service information is being updated." />
+          )}
+          {!loading && !error && services && services.length > 0 && (
+            <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+              {services.map((service) => (
+                <StaggerItem key={service.id} className="h-full">
+                  <Link
+                    to={`/services/${service.slug}`}
+                    className="block bg-white rounded-2xl border border-[#E8DDD0] p-6 sm:p-8 space-y-4 hover:border-[#C96F1B]/40 hover:shadow-md transition-all h-full"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-11 h-11 rounded-xl bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center shrink-0">
+                        {service.division?.slug === 'equipment-rental' ? <Truck className="w-5 h-5" /> : <Building2 className="w-5 h-5" />}
+                      </div>
+                      <div>
+                        <span className="text-[10px] font-heading font-semibold text-[#9D9287] uppercase tracking-wider block">
+                          {service.division?.name}
+                        </span>
+                        <h3 className="font-heading font-semibold text-base sm:text-lg text-[#3D352D]">
+                          {service.name}
+                        </h3>
+                      </div>
+                    </div>
+                    <p className="text-xs sm:text-sm text-[#6B5E4E] font-body leading-relaxed line-clamp-3">
+                      {service.shortDescription || service.fullDescription || "Service details coming soon."}
+                    </p>
+                    <div className="pt-2 flex items-center gap-1 text-xs font-heading font-semibold text-[#C96F1B] uppercase tracking-wider">
+                      <span>View Details</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </div>
+                  </Link>
+                </StaggerItem>
+              ))}
+            </StaggerGroup>
+          )}
         </div>
       </section>
 
@@ -130,12 +159,12 @@ export const ServicesPage: React.FC = () => {
                   </h3>
                 </div>
                 <p className="text-xs sm:text-sm text-[#6B5E4E] font-body leading-relaxed">
-                  Putzmeister M42-5 boom placer rental with operator and helper for high-volume or elevated concrete pours.
+                  Concrete boom placer rental with operator and helper for high-volume or elevated concrete pours.
                 </p>
                 <ul className="space-y-2 text-xs sm:text-sm text-[#3D352D] font-body pt-2 border-t border-[#E8DDD0]/60">
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#C96F1B] shrink-0" />
-                    <span>42m reach & 90 m³ capacity</span>
+                    <span>High-capacity placement equipment</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#C96F1B] shrink-0" />
@@ -155,15 +184,15 @@ export const ServicesPage: React.FC = () => {
             <div className="space-y-2 max-w-3xl">
               <SectionEyebrow badge="FEATURED MACHINERY SUPPORT" className="mb-1" />
               <h3 className="font-heading font-semibold text-xl sm:text-2xl lg:text-3xl text-[#3D352D]">
-                Putzmeister M42-5 Concrete Boom Placer Rental
+                Concrete Boom Placer Rental
               </h3>
               <p className="text-sm sm:text-base text-[#6B5E4E] font-body leading-relaxed">
-                Need high-capacity concrete pumping for slab casting or elevated pours? Explore specs and monthly rental terms for our 42-metre boom placer.
+                Need high-capacity concrete pumping for slab casting or elevated pours? Explore specs and monthly rental terms for our boom placer equipment.
               </p>
             </div>
 
             <Link
-              to="/equipment/putzmeister-m42-5"
+              to="/equipment"
               className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-[#3D352D] hover:bg-[#2D2620] text-white font-heading text-xs font-semibold uppercase tracking-wider transition-all shrink-0 min-h-[44px] shadow-sm hover:shadow-md"
             >
               <span>View Machinery Details</span>
