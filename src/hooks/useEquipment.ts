@@ -31,29 +31,25 @@ export function useEquipmentBySlug(slug: string | undefined) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
+  const fetchData = async () => {
     if (!slug) { setLoading(false); return; }
-    let active = true;
-    (async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const result = await publicFetch<EquipmentDetail>(`/api/v1/equipment/${encodeURIComponent(slug)}`);
-        if (active) setData(result);
-      } catch (err) {
-        if (active) {
-          if (err instanceof PublicApiError && err.status === 404) {
-            setData(null);
-          } else {
-            setError("Equipment information is temporarily unavailable. Please try again.");
-          }
-        }
-      } finally {
-        if (active) setLoading(false);
+    setLoading(true);
+    setError(null);
+    try {
+      const result = await publicFetch<EquipmentDetail>(`/api/v1/equipment/${encodeURIComponent(slug)}`);
+      setData(result);
+    } catch (err) {
+      if (err instanceof PublicApiError && err.status === 404) {
+        setData(null);
+      } else {
+        setError("Equipment information is temporarily unavailable. Please try again.");
       }
-    })();
-    return () => { active = false; };
-  }, [slug]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  return { data, loading, error };
+  useEffect(() => { fetchData(); }, [slug]);
+
+  return { data, loading, error, retry: fetchData };
 }
