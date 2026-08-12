@@ -1,80 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageHeader } from '../components/common/PageHeader';
 import { SEO } from '../components/common/SEO';
-import { getEvidencedIndustries, getApplicabilityIndustries } from '../data/industries';
-import { IndustryCard } from '../components/industries/IndustryCard';
-import { Reveal, SectionEyebrow, StaggerGroup, StaggerItem } from '../components/common/Motion';
+import { industriesData, PriyaIndustryItem } from '../data/industries';
+import { Reveal, SectionEyebrow } from '../components/common/Motion';
 import {
+  ArrowRight,
   FileText,
-  PhoneCall
+  PhoneCall,
+  CheckCircle2,
+  Building2,
+  Landmark,
+  Truck,
+  Building,
+  Factory,
+  Warehouse,
+  GraduationCap,
+  ChevronRight
 } from 'lucide-react';
 
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Building2,
+  Landmark,
+  Truck,
+  Building,
+  Factory,
+  Warehouse,
+  GraduationCap
+};
+
 export const IndustriesPage: React.FC = () => {
-  const evidencedSectors = getEvidencedIndustries();
-  const applicabilitySectors = getApplicabilityIndustries();
-
-  const img1 = evidencedSectors[0]?.image;
-  const img2 = evidencedSectors[1]?.image;
-  const img3 = evidencedSectors[2]?.image;
-
-  const industriesHeroVisual = (
-    <div className="grid grid-cols-12 gap-2.5 max-w-md ml-auto">
-      <div className="col-span-7 relative rounded-2xl overflow-hidden border border-[#E8DDD0] shadow-sm aspect-[4/5] bg-[#F5EEE5] group">
-        {img1 && (
-          <img
-            src={img1}
-            alt="Residential construction sector visual"
-            loading="eager"
-            decoding="async"
-            className="w-full h-full object-cover filter brightness-95 group-hover:scale-[1.03] transition-transform duration-500 ease-out"
-          />
-        )}
-        <div className="absolute bottom-2 left-2 bg-black/60 backdrop-blur-xs text-white text-[10px] font-heading font-semibold uppercase px-2 py-0.5 rounded-md">
-          RESIDENTIAL
-        </div>
-      </div>
-
-      <div className="col-span-5 flex flex-col gap-2.5">
-        <div className="relative rounded-2xl overflow-hidden border border-[#E8DDD0] shadow-sm aspect-[4/3] bg-[#F5EEE5] group h-1/2">
-          {img2 && (
-            <img
-              src={img2}
-              alt="Infrastructure civil works sector visual"
-              loading="eager"
-              decoding="async"
-              className="w-full h-full object-cover filter brightness-95 group-hover:scale-[1.03] transition-transform duration-500 ease-out"
-            />
-          )}
-          <div className="absolute bottom-2 left-2 bg-black/60 backdrop-blur-xs text-white text-[9px] font-heading font-semibold uppercase px-2 py-0.5 rounded-md">
-            CIVIL
-          </div>
-        </div>
-
-        <div className="relative rounded-2xl overflow-hidden border border-[#E8DDD0] shadow-sm aspect-[4/3] bg-[#F5EEE5] group h-1/2">
-          {img3 && (
-            <img
-              src={img3}
-              alt="Industrial manufacturing sector visual"
-              loading="eager"
-              decoding="async"
-              className="w-full h-full object-cover filter brightness-95 group-hover:scale-[1.03] transition-transform duration-500 ease-out"
-            />
-          )}
-          <div className="absolute bottom-2 left-2 bg-black/60 backdrop-blur-xs text-white text-[9px] font-heading font-semibold uppercase px-2 py-0.5 rounded-md">
-            COMMERCIAL
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const activeIndustry: PriyaIndustryItem = industriesData[selectedIndex];
+  const IconComponent = iconMap[activeIndustry.iconName] || Building2;
+  const isEvidenced = activeIndustry.evidenceLevel === 'evidenced';
 
   return (
     <div className="bg-[#FFFFFF] text-[#3D352D] min-h-screen">
       <SEO
         title="Sectors & Project Applications | Chitrani Construction"
         description="Explore construction and concrete boom placer rental capabilities across residential, civil infrastructure, commercial, and contractor support sectors."
-        canonical="https://chitraniconstruction.com/industries"
+        canonicalPath="/industries"
       />
 
       {/* 1. Page Header */}
@@ -83,10 +49,11 @@ export const IndustriesPage: React.FC = () => {
         title="Construction Capabilities Across Project Types"
         subtitle="Chitrani Construction’s contracting, civil, structural, masonry, workforce and concrete-placement capabilities can support different construction requirements depending on project scope, site conditions and commercial agreement."
         accentType="industries"
-        customRightVisual={industriesHeroVisual}
+        heroImage={industriesData[0].image}
+        heroImageAlt="Residential construction sector visual"
       />
 
-      {/* 2. Intro / Sector Positioning (White Viewport Background) */}
+      {/* 2. Intro Section */}
       <section className="py-16 sm:py-20 bg-[#FFFFFF]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Reveal>
@@ -101,122 +68,144 @@ export const IndustriesPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. Verified Sector Context (Soft Cream Viewport Background) */}
-      <section className="py-16 sm:py-24 bg-[#F5EEE5] border-y border-[#E8DDD0]/70" aria-label="Evidenced Project Sectors">
+      {/* 3. TERMINAL/CUBERTO INTERACTIVE IMAGE SWITCHER (Original Content Intact) */}
+      <section className="py-20 sm:py-28 bg-[#F5EEE5] border-y border-[#E8DDD0]" aria-label="Sector Interactive Gallery">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+
           <div className="text-center max-w-2xl mx-auto">
             <Reveal>
-              <SectionEyebrow badge="EVIDENCED SECTORS" className="justify-center mb-3" />
+              <SectionEyebrow badge="INTERACTIVE SECTOR SWITCHER" className="justify-center mb-3" />
               <h2 className="font-heading font-semibold text-2xl sm:text-3xl lg:text-4xl text-[#3D352D]">
-                Primary Evidenced Sectors
+                Explore Sector Capabilities & Documented Scope
               </h2>
               <p className="text-sm sm:text-base text-[#6B5E4E] font-body mt-2">
-                Sectors supported by verified contract documentation and machinery deployment capabilities.
+                Hover or click any sector below to inspect specific capabilities, descriptions, and verified project notices.
               </p>
             </Reveal>
           </div>
 
-          <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch">
-            {evidencedSectors.map((sector, idx) => (
-              <StaggerItem key={sector.id} className="h-full">
-                <IndustryCard industry={sector} index={idx} />
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
-        </div>
-      </section>
+          {/* SPLIT INTERACTIVE SWITCHER CONTAINER */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-start">
 
-      {/* 4. Broader Service Applications (White Viewport Background) */}
-      <section className="py-16 sm:py-24 bg-[#FFFFFF]" aria-label="Applicable Construction Scope">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="text-center max-w-2xl mx-auto">
-            <Reveal>
-              <SectionEyebrow badge="APPLICABLE PROJECT TYPES" className="justify-center mb-3" />
-              <h2 className="font-heading font-semibold text-2xl sm:text-3xl lg:text-4xl text-[#3D352D]">
-                Applicable Construction Scope
-              </h2>
-              <p className="text-sm sm:text-base text-[#6B5E4E] font-body mt-2">
-                Sectors where Chitrani Construction’s civil, structural, and equipment capabilities may apply based on project scope.
-              </p>
-            </Reveal>
+            {/* LEFT: VERTICAL STACK OF LARGE SECTOR NAMES */}
+            <div className="lg:col-span-5 space-y-3">
+              {industriesData.map((item: PriyaIndustryItem, idx: number) => {
+                const isSelected = selectedIndex === idx;
+                return (
+                  <div
+                    key={item.id}
+                    onClick={() => setSelectedIndex(idx)}
+                    onMouseEnter={() => setSelectedIndex(idx)}
+                    className={`p-5 rounded-2xl border transition-all duration-300 cursor-pointer flex items-center justify-between group ${
+                      isSelected
+                        ? 'bg-[#3D352D] text-white border-[#3D352D] shadow-xl translate-x-2'
+                        : 'bg-white text-[#3D352D] border-[#E8DDD0] hover:border-[#C96F1B]'
+                    }`}
+                  >
+                    <div className="flex items-center gap-4">
+                      <span className={`font-specs font-bold text-xs ${isSelected ? 'text-[#C96F1B]' : 'text-[#7E7267]'}`}>
+                        0{idx + 1}
+                      </span>
+                      <h3 className={`font-heading font-bold text-base sm:text-xl uppercase tracking-tight transition-colors ${
+                        isSelected ? 'text-[#C96F1B]' : 'text-[#3D352D] group-hover:text-[#C96F1B]'
+                      }`}>
+                        {item.name}
+                      </h3>
+                    </div>
+
+                    <ChevronRight className={`w-5 h-5 transition-transform ${
+                      isSelected ? 'text-[#C96F1B] translate-x-1' : 'text-[#7E7267] group-hover:translate-x-1'
+                    }`} />
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* RIGHT: ONE LARGE VISUAL STAGE WITH DYNAMIC CONTENT & CUBERTO HOVER CURSOR */}
+            <div className="lg:col-span-7 bg-white p-6 sm:p-10 rounded-3xl border border-[#E8DDD0] shadow-xl space-y-6">
+
+              {/* Unique Image Stage */}
+              <div
+                className="relative rounded-2xl overflow-hidden aspect-[16/10] bg-[#3D352D] group"
+              >
+                <img
+                  key={activeIndustry.id}
+                  src={activeIndustry.image}
+                  alt={activeIndustry.imageAlt || activeIndustry.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-95 animate-in fade-in duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white text-xs font-heading">
+                  <span className={`px-3.5 py-1.5 rounded-full font-specs font-bold uppercase tracking-wider ${
+                    isEvidenced ? 'bg-[#C96F1B] text-white' : 'bg-white/20 backdrop-blur-xs text-white border border-white/30'
+                  }`}>
+                    {isEvidenced ? 'EVIDENCED SECTOR' : 'APPLICABILITY SCOPE'}
+                  </span>
+                  <div className="w-9 h-9 rounded-full bg-black/60 backdrop-blur-xs text-[#F5A54A] flex items-center justify-center border border-white/20">
+                    <IconComponent className="w-4 h-4" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Verified Title & Description */}
+              <div className="space-y-3">
+                <h3 className="font-heading font-bold text-2xl sm:text-3xl text-[#3D352D]">
+                  {activeIndustry.name}
+                </h3>
+                <p className="text-sm sm:text-base text-[#6B5E4E] font-body leading-relaxed">
+                  {activeIndustry.description}
+                </p>
+              </div>
+
+              {/* Evidence Notice */}
+              {activeIndustry.evidenceNotice && (
+                <div className="p-4 bg-[#F5EEE5] rounded-xl border border-[#E8DDD0] text-xs font-specs text-[#C96F1B] leading-relaxed">
+                  <strong>Notice:</strong> {activeIndustry.evidenceNotice}
+                </div>
+              )}
+
+              {/* Verified Capabilities */}
+              {activeIndustry.capabilities && activeIndustry.capabilities.length > 0 && (
+                <div className="space-y-2 pt-2 border-t border-[#E8DDD0]">
+                  <span className="font-heading font-bold text-xs text-[#3D352D] uppercase tracking-wider block">
+                    Core Sector Work Capabilities:
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {activeIndustry.capabilities.map((cap, cIdx) => (
+                      <div key={cIdx} className="flex items-center gap-2 text-xs font-body text-[#6B5E4E]">
+                        <CheckCircle2 className="w-4 h-4 text-[#C96F1B] shrink-0" />
+                        <span>{cap}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Related Service Links */}
+              {activeIndustry.relatedServiceLinks && activeIndustry.relatedServiceLinks.length > 0 && (
+                <div className="pt-4 border-t border-[#E8DDD0] flex flex-wrap items-center gap-4">
+                  {activeIndustry.relatedServiceLinks.map((lnk, lIdx) => (
+                    <Link
+                      key={lIdx}
+                      to={lnk.href}
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#3D352D] hover:bg-[#2D2620] text-white font-specs font-bold text-xs uppercase tracking-wider transition-colors"
+                    >
+                      <span>{lnk.name}</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-[#C96F1B]" />
+                    </Link>
+                  ))}
+                </div>
+              )}
+
+            </div>
+
           </div>
 
-          <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 items-stretch">
-            {applicabilitySectors.map((sector, idx) => (
-              <StaggerItem key={sector.id} className="h-full">
-                <IndustryCard industry={sector} index={idx + 3} />
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
         </div>
       </section>
 
-      {/* 5. Service-to-Sector Relationship (Warm Cream Viewport Background) */}
-      <section className="py-16 sm:py-24 bg-[#EADBC8]/40 border-y border-[#E8DDD0]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="text-center max-w-2xl mx-auto">
-            <Reveal>
-              <SectionEyebrow badge="CAPABILITY MATRIX" className="justify-center mb-3" />
-              <h2 className="font-heading font-semibold text-2xl sm:text-3xl lg:text-4xl text-[#3D352D]">
-                Service to Sector Alignment
-              </h2>
-              <p className="text-sm sm:text-base text-[#6B5E4E] font-body mt-2">
-                How core capabilities align to different project environments.
-              </p>
-            </Reveal>
-          </div>
-
-          <Reveal delay={0.1} className="bg-white p-8 sm:p-12 rounded-3xl border border-[#E8DDD0] shadow-sm space-y-6 max-w-4xl mx-auto">
-            <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 text-xs sm:text-sm font-body">
-              <StaggerItem>
-                <div className="p-5 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-2 hover:border-[#C96F1B]/40 transition-colors">
-                  <h4 className="font-heading font-semibold text-[#3D352D] text-base">
-                    Building & Real Estate
-                  </h4>
-                  <p className="text-xs text-[#6B5E4E] leading-relaxed">
-                    Supported by Construction Contracting, RCC Structural Work, Brickwork & Blockwork, and Labour Contracting.
-                  </p>
-                </div>
-              </StaggerItem>
-
-              <StaggerItem>
-                <div className="p-5 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-2 hover:border-[#C96F1B]/40 transition-colors">
-                  <h4 className="font-heading font-semibold text-[#3D352D] text-base">
-                    Civil & Infrastructure
-                  </h4>
-                  <p className="text-xs text-[#6B5E4E] leading-relaxed">
-                    Supported by Civil Construction, RCC Structural Work, and Putzmeister M42-5 Boom Placer deployment.
-                  </p>
-                </div>
-              </StaggerItem>
-
-              <StaggerItem>
-                <div className="p-5 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-2 hover:border-[#C96F1B]/40 transition-colors">
-                  <h4 className="font-heading font-semibold text-[#3D352D] text-base">
-                    Contractor Machinery Support
-                  </h4>
-                  <p className="text-xs text-[#6B5E4E] leading-relaxed">
-                    Supported by Putzmeister M42-5 concrete boom placer rental with operator and helper.
-                  </p>
-                </div>
-              </StaggerItem>
-
-              <StaggerItem>
-                <div className="p-5 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-2 hover:border-[#C96F1B]/40 transition-colors">
-                  <h4 className="font-heading font-semibold text-[#3D352D] text-base">
-                    Commercial & Industrial Facilities
-                  </h4>
-                  <p className="text-xs text-[#6B5E4E] leading-relaxed">
-                    Supported by Civil Execution, Foundation Pours, and High-Volume Concrete Placement.
-                  </p>
-                </div>
-              </StaggerItem>
-            </StaggerGroup>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* 6. Project Discussion CTA Section (Dark Charcoal Background) */}
+      {/* 4. Project Discussion CTA Section */}
       <section className="py-16 sm:py-24 bg-[#FFFFFF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal className="bg-[#3D352D] rounded-3xl p-8 sm:p-16 text-white text-center space-y-8 shadow-xl max-w-5xl mx-auto relative overflow-hidden">

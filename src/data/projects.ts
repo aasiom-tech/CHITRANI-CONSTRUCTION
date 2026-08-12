@@ -1,41 +1,84 @@
+// Projects data file - verified Ocean Star project and documented client requirements
 import { ProjectItem } from '../types';
 import oceanStarImg from '../assets/images/projects/ocean-star-project.webp';
+import godrejNurtureImg from '../assets/images/projects/godrej-nurture-project.webp';
+import capaciteInfraImg from '../assets/images/projects/capacite-infra-project.webp';
 
-export interface PriyaProjectItem extends ProjectItem {
-  imageAlt?: string;
-  isRepresentativeVisual?: boolean;
-  statusBadge?: string;
-  scheduledTimeline?: string;
-  scopeNotice?: string;
-  seoTitle?: string;
-  seoDescription?: string;
-}
-
-export const projectsData: PriyaProjectItem[] = [
+export const projectsData: ProjectItem[] = [
   {
     id: 'ocean-star',
     slug: 'ocean-star',
     title: 'Ocean Star',
-    category: 'Building Construction / Construction Vendor Engagement',
-    client: 'Suraj Estate Developers Ltd',
-    location: 'Kashinath Dhuru Marg, Mumbai – 400028',
-    vendorRole: 'Construction Vendor',
-    workOrderNumber: 'OSWOJ0002126-27',
-    orderDate: '31 July 2026',
-    scheduledCompletion: '31 December 2026',
-    scheduledTimeline: 'Work order issued 31 July 2026 with scheduled completion 31 December 2026.',
-    scope: 'Chitrani Construction is documented as a construction vendor for the Ocean Star development in Mumbai.',
-    scopeNotice: 'Construction vendor engagement — detailed itemised scope not available in the current public project record.',
-    engineeringHighlight: 'Verified engagement as a construction vendor for a major Mumbai building development.',
+    client: 'Suraj Estate Developers Ltd.',
+    location: 'Kashinath Dhuru Marg, Next to Rameshwaram Building, Mumbai – 400028',
+    category: 'Concrete Pump Deployment',
+    status: 'confirmed',
+    statusLabel: 'Confirmed Project Engagement',
+    shortDescription: 'Chitrani Construction was engaged by Suraj Estate Developers Ltd. to provide concrete-pumping support for the Ocean Star development in Mumbai.',
+    description: 'Chitrani Construction was engaged by Suraj Estate Developers Ltd. to provide concrete-pumping support for the Ocean Star development in Mumbai. The documented scope includes concrete pump deployment with pipeline and operating manpower for project concrete-placement requirements.',
+    scope: [
+      'Concrete pump deployment',
+      '100-metre pipeline configuration',
+      'Operating manpower support',
+      'Concrete-placement support',
+      'Site transportation / equipment support'
+    ],
+    equipment: 'SP 1087 Concrete Pump',
+    equipmentLabel: 'Equipment Deployment',
     image: oceanStarImg,
-    imageAlt: 'Representative high-rise construction project visual for the Ocean Star engagement',
-    isRepresentativeVisual: true,
-    statusBadge: 'VERIFIED VENDOR ENGAGEMENT',
-    seoTitle: 'Ocean Star Project | Chitrani Construction',
-    seoDescription: 'Documented construction vendor engagement for the Ocean Star development by Suraj Estate Developers Ltd in Mumbai.'
+    imageAlt: 'High-rise urban concrete construction activity for Ocean Star project in Mumbai',
+    transparencyNote: 'Representative project image. Documented project engagement backed by client work order.'
+  },
+  {
+    id: 'godrej-nurture',
+    slug: 'godrej-nurture',
+    title: 'Godrej Nurture',
+    client: 'Godrej Nurture',
+    location: 'LBS Road, Bhandup, Mumbai',
+    category: 'Concrete Pump Requirement',
+    status: 'quotation',
+    statusLabel: 'Client Requirement',
+    shortDescription: 'Chitrani Construction prepared a concrete-pump support proposal for the Godrej Nurture site at LBS Road, Bhandup.',
+    description: 'Chitrani Construction prepared a concrete-pump support proposal for the Godrej Nurture site at LBS Road, Bhandup. The proposed scope covered concrete pump deployment with a 100-metre pipeline, operating manpower, diesel support and transportation to site.',
+    scope: [
+      'Concrete pump support',
+      '100-metre pipeline configuration',
+      'Operating manpower support',
+      'Diesel-supported operation',
+      'Site transportation'
+    ],
+    equipment: 'SP 1087 or equivalent',
+    equipmentLabel: 'Proposed Equipment Configuration',
+    image: godrejNurtureImg,
+    imageAlt: 'Modern residential high-rise construction site with concrete pumping context for Godrej Nurture',
+    transparencyNote: 'This page represents a documented client requirement/proposal and does not state project completion.'
+  },
+  {
+    id: 'capacite-infra',
+    slug: 'capacite-infra',
+    title: 'Capacite Infra Projects Ltd.',
+    client: 'Capacite Infra Projects Ltd.',
+    location: 'Mumbai',
+    category: 'High-Rise Concrete Pump Requirement',
+    status: 'quotation',
+    statusLabel: 'Client Requirement',
+    shortDescription: 'Chitrani Construction prepared a high-rise concrete pumping proposal for Capacite Infra Projects Ltd. using a Putzmeister BSA 1408 / BAS1408HD-class pumping configuration.',
+    description: 'Chitrani Construction prepared a high-rise concrete pumping proposal for Capacite Infra Projects Ltd. using a Putzmeister BSA 1408 / BAS1408HD-class pumping configuration with operator support and transportation to site.',
+    scope: [
+      'High-rise concrete pump requirement',
+      'High-rise concrete-placement support',
+      'Operator support',
+      'Equipment transportation',
+      'Proposed Putzmeister BSA 1408 / BAS1408HD-class configuration'
+    ],
+    equipment: 'Putzmeister BSA 1408 / BAS1408HD or equivalent',
+    equipmentLabel: 'Proposed Equipment',
+    image: capaciteInfraImg,
+    imageAlt: 'High-rise construction with stationary concrete pumping equipment context for Capacite Infra Projects Ltd.',
+    transparencyNote: 'This page represents a documented client requirement/proposal and does not state project completion.'
   }
 ];
 
-export const getProjectBySlug = (slug: string): PriyaProjectItem | undefined => {
+export const getProjectBySlug = (slug: string): ProjectItem | undefined => {
   return projectsData.find((p) => p.slug === slug);
 };

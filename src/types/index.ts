@@ -29,6 +29,8 @@ export interface EquipmentItem {
   keySpecs: { label: string; value: string }[];
 }
 
+export type ProjectEngagementStatus = 'confirmed' | 'quotation';
+
 export interface ProjectItem {
   id: string;
   slug: string;
@@ -36,14 +38,19 @@ export interface ProjectItem {
   category: string;
   client: string;
   location: string;
-  vendorRole: string;
-  workOrderNumber: string;
-  orderDate: string;
-  scheduledCompletion: string;
-  scope: string;
-  engineeringHighlight: string;
+  vendorRole?: string;
+  orderDate?: string;
+  scheduledCompletion?: string;
+  status: ProjectEngagementStatus;
+  statusLabel: string;
+  shortDescription: string;
+  description: string;
+  scope?: string[];
+  equipment?: string;
+  equipmentLabel?: string;
   image: string;
-  additionalImages?: string[];
+  imageAlt: string;
+  transparencyNote?: string;
 }
 
 export interface IndustryItem {

@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Building2, ShieldCheck, MapPin, Truck } from 'lucide-react';
+import { ArrowRight, Building2 } from 'lucide-react';
 import { motion } from 'motion/react';
 import heroBgImage from '../assets/images/chitrani-construction-hero.png';
 
 export const Hero: React.FC = () => {
   return (
-    <section id="home" className="relative w-full min-h-[580px] lg:h-[calc(100vh-18px)] lg:max-h-[820px] lg:min-h-[640px] overflow-hidden flex flex-col justify-center">
+    <section id="home" className="relative w-full min-h-[580px] sm:min-h-[640px] lg:h-[calc(100vh-18px)] lg:max-h-[860px] lg:min-h-[680px] overflow-hidden flex flex-col justify-center">
 
-      {/* 1. Full-Width Construction Hero Background Image */}
+      {/* 1. Full-Width Construction Hero Background Image (Preserving Full Lower Ground & Workers Composition) */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-[#1a2535]">
         <img
           src={heroBgImage}
@@ -16,7 +16,7 @@ export const Hero: React.FC = () => {
           referrerPolicy="no-referrer"
           loading="eager"
           fetchPriority="high"
-          className="hero-img absolute inset-0 h-full w-full object-cover"
+          className="hero-img absolute inset-0 h-full w-full object-cover object-[center_55%] sm:object-[center_65%]"
         />
 
         {/* Sky blue — color blend so it works regardless of underlying warm tones */}
@@ -36,7 +36,7 @@ export const Hero: React.FC = () => {
           }}
         />
 
-        {/* Desktop: neutral dark readability scrim on text side only — NOT warm cream */}
+        {/* Desktop: neutral dark readability scrim on text side only */}
         <div
           aria-hidden="true"
           className="absolute inset-0 hidden sm:block pointer-events-none z-10"
@@ -66,20 +66,20 @@ export const Hero: React.FC = () => {
         />
       </div>
 
-      {/* 2. Left-Aligned Content Overlay */}
+      {/* 2. Clean Left-Aligned Content Overlay */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 pt-[116px] sm:pt-[124px] lg:pt-[128px] pb-8 sm:pb-10 w-full my-auto">
-        <div className="max-w-[720px] text-left space-y-3.5 sm:space-y-4 lg:space-y-5">
+        <div className="max-w-[720px] text-left space-y-4 sm:space-y-5 lg:space-y-6">
 
           {/* Category Badge / Eyebrow */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-3 py-1 bg-white/12 backdrop-blur-md border border-white/30 rounded-[10px] w-fit shadow-xs"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/12 backdrop-blur-md border border-white/30 rounded-[10px] w-fit shadow-xs"
           >
             <span className="w-2 h-2 rounded-full bg-[#C96F1B]" />
             <span className="text-[11px] sm:text-xs font-heading text-white uppercase tracking-wider font-semibold">
-              RCC • CIVIL CONSTRUCTION • LABOUR CONTRACTS • BRICKWORK • BOOM PLACER RENTAL
+              RCC • CIVIL CONSTRUCTION • LABOUR CONTRACTS • BOOM PLACER RENTAL
             </span>
           </motion.div>
 
@@ -88,7 +88,7 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-[30px] sm:text-[42px] lg:text-[48px] xl:text-[52px] font-semibold text-white font-heading leading-[1.12] tracking-tight max-w-[700px]"
+            className="text-[32px] sm:text-[44px] lg:text-[50px] xl:text-[54px] font-semibold text-white font-heading leading-[1.12] tracking-tight max-w-[700px]"
             style={{ textShadow: '0 2px 14px rgba(0,0,0,0.28)' }}
           >
             Building With Strength. <br className="hidden sm:inline" />
@@ -100,7 +100,7 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-sm sm:text-base lg:text-[17px] text-white/88 font-body leading-relaxed max-w-[560px]"
+            className="text-sm sm:text-base lg:text-[17px] text-white/90 font-body leading-relaxed max-w-[560px]"
             style={{ textShadow: '0 1px 8px rgba(0,0,0,0.22)' }}
           >
             End-to-end construction execution for developers, contractors and institutional projects, backed by skilled manpower, disciplined site management and reliable execution.
@@ -111,7 +111,7 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="pt-1 sm:pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4"
+            className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4"
           >
             {/* Primary Button */}
             <Link
@@ -130,35 +130,6 @@ export const Hero: React.FC = () => {
               <Building2 className="w-4 h-4" />
               <span>View Our Projects</span>
             </Link>
-          </motion.div>
-
-          {/* Factual Capability Strip */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="pt-3 border-t border-white/20 grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3 text-xs text-white/90 font-body"
-          >
-            <div className="flex items-center gap-1.5">
-              <Building2 className="w-3.5 h-3.5 text-[#F5A54A] shrink-0" />
-              <span className="font-semibold text-[11px] sm:text-xs">RCC Execution</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <Truck className="w-3.5 h-3.5 text-[#F5A54A] shrink-0" />
-              <span className="font-semibold text-[11px] sm:text-xs">Skilled Workforce</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <Truck className="w-3.5 h-3.5 text-[#F5A54A] shrink-0" />
-              <span className="font-semibold text-[11px] sm:text-xs">Machinery Support</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#F5A54A] shrink-0" />
-              <span className="font-semibold text-[11px] sm:text-xs">Safety-Focused Execution</span>
-            </div>
-            <div className="flex items-center gap-1.5 col-span-2 sm:col-span-1">
-              <MapPin className="w-3.5 h-3.5 text-[#F5A54A] shrink-0" />
-              <span className="font-semibold text-[11px] sm:text-xs">Maharashtra</span>
-            </div>
           </motion.div>
 
         </div>

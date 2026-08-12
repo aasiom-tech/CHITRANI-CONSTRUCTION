@@ -23,14 +23,17 @@
     --header-top-offset: 18px;
     --header-expanded-height-desktop: 88px;
     --header-expanded-height-mobile: 84px;
-    --header-clearance-desktop: 128px; /* 18px top + 88px header + 22px gap */
-    --header-clearance-mobile: 118px; /* 18px top + 84px header + 16px gap */
+    --header-clearance-desktop: 128px;
+    --header-clearance-mobile: 118px;
 
     /* Approved Typography System */
     --font-heading: "Space Grotesk", sans-serif;
     --font-body: "Inter", sans-serif;
     --font-specs: "Manrope", sans-serif;
     --font-display: "Bebas Neue", sans-serif;
+
+    /* Custom Motion Easing Token */
+    --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   html {
@@ -71,9 +74,29 @@
   }
 }
 
-/* Design System Component Utilities */
+/* Marquee 100% Seamless Infinite Keyframes */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
 
-/* Primary Button: #FFFFFF text over #C96F1B Terracotta */
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+/* Vertical Writing Mode Helper for Story Panels */
+.writing-vertical {
+  writing-mode: vertical-rl;
+}
+
+/* Primary Button */
 .btn-primary {
   background-color: var(--color-primary);
   color: #FFFFFF;
@@ -85,7 +108,7 @@
   font-size: 0.875rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -96,162 +119,4 @@
 .btn-primary:hover {
   background-color: var(--color-primary-hover);
   box-shadow: 0 12px 32px rgba(179, 94, 23, 0.35);
-}
-
-/* Secondary Button: White or transparent surface with #C96F1B border and text */
-.btn-secondary {
-  background-color: #FFFFFF;
-  border: 2px solid var(--color-primary);
-  color: var(--color-primary);
-  border-radius: 12px;
-  min-height: 44px;
-  padding: 10px 24px;
-  font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 0.875rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  transition: all 0.2s ease-in-out;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.btn-secondary:hover {
-  background-color: var(--color-primary);
-  color: #FFFFFF;
-}
-
-/* Text Button */
-.btn-text {
-  background-color: transparent;
-  color: var(--color-primary);
-  font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 0.875rem;
-  transition: color 0.2s ease-in-out;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.btn-text:hover {
-  color: var(--color-primary-hover);
-}
-
-/* Card Base Styling */
-.card-ds {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(61, 53, 45, 0.05);
-  padding: 32px;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .card-ds:hover {
-    transform: translateY(-4px);
-    border-color: rgba(201, 111, 27, 0.55);
-    box-shadow: 0 16px 38px rgba(61, 53, 45, 0.10);
-  }
-}
-
-/* Input / Form Styling */
-.input-ds {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-input-border);
-  color: var(--color-heading);
-  border-radius: 10px;
-  padding: 12px 16px;
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.input-ds::placeholder {
-  color: var(--color-placeholder);
-}
-
-.input-ds:focus {
-  border-color: var(--color-primary);
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(201, 111, 27, 0.18);
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--color-background);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-secondary);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary);
-}
-
-/* Safe area padding for mobile notch and bottom bar */
-.pb-safe-action {
-  padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
-}
-
-.pt-safe-top {
-  padding-top: env(safe-area-inset-top, 0px);
-}
-
-/* Focus styles for keyboard accessibility */
-a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 3px;
-}
-
-/* Disable scrollbar on category filters */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Reduced Motion Override */
-@media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-/* ─── Hero image responsive focal point ─────────────────────────────────────
-   Shifts the crop downward on larger viewports so both construction workers,
-   the excavator, and the lower site are fully visible.
-   Mobile default (< 640px): balanced sky + ground at 62% 68%
-   Tablet (≥ 640px):         55% 74%
-   Desktop (≥ 1024px):       55% 78%
-   Wide (≥ 1280px):          55% 80%
-──────────────────────────────────────────────────────────────────────────── */
-.hero-img {
-  object-position: 62% 68%;
-}
-@media (min-width: 640px) {
-  .hero-img {
-    object-position: 55% 74%;
-  }
-}
-@media (min-width: 1024px) {
-  .hero-img {
-    object-position: 55% 78%;
-  }
-}
-@media (min-width: 1280px) {
-  .hero-img {
-    object-position: 55% 80%;
-  }
 }

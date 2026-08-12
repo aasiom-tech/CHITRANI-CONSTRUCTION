@@ -15,13 +15,14 @@ import {
 } from 'lucide-react';
 
 export const ProjectsPage: React.FC = () => {
-  const featuredProject = projectsData[0]; // Ocean Star
+  const oceanStar = projectsData.find((p) => p.slug === 'ocean-star') || projectsData[0];
+  const supportingProjects = projectsData.filter((p) => p.slug !== 'ocean-star');
 
   const projectsHeroVisual = (
     <div className="relative rounded-2xl overflow-hidden border border-[#E8DDD0] bg-[#F5EEE5] shadow-md group aspect-[16/10] max-h-[300px] sm:max-h-[340px]">
       <img
-        src={featuredProject.image}
-        alt="Representative visual of Ocean Star documented high-rise project engagement"
+        src={oceanStar.image}
+        alt={oceanStar.imageAlt}
         loading="eager"
         decoding="async"
         className="w-full h-full object-cover filter brightness-95 group-hover:scale-[1.025] transition-transform duration-500 ease-out"
@@ -33,7 +34,7 @@ export const ProjectsPage: React.FC = () => {
           OCEAN STAR · MUMBAI
         </span>
         <span className="bg-[#C96F1B]/90 backdrop-blur-xs px-2.5 py-1 rounded-md text-white font-semibold">
-          VENDOR ENGAGEMENT
+          CONFIRMED ENGAGEMENT
         </span>
       </div>
     </div>
@@ -42,93 +43,109 @@ export const ProjectsPage: React.FC = () => {
   return (
     <div className="bg-[#FFFFFF] text-[#3D352D] min-h-screen">
       <SEO
-        title="Documented Construction Projects & Vendor Engagements | Chitrani"
-        description="View documented construction vendor engagements by Chitrani Construction, including the Ocean Star development in Mumbai for Suraj Estate Developers Ltd."
-        canonical="https://chitraniconstruction.com/projects"
+        title="Projects & Client Engagements | Chitrani Construction"
+        description="Explore selected construction and concrete-pumping engagements and client requirements involving Ocean Star, Godrej Nurture and Capacite Infra Projects Ltd."
+        canonicalPath="/projects"
       />
 
       {/* 1. Page Header */}
       <PageHeader
-        badge="PROJECT PORTFOLIO"
-        title="Documented Project Engagements"
-        subtitle="Chitrani Construction maintains transparent documentation of verified client engagements and construction vendor roles."
+        badge="PROJECTS & CLIENT ENGAGEMENTS"
+        title="Construction and Concrete Pumping Engagements"
+        subtitle="Explore selected construction and concrete-pumping requirements supported or proposed by Chitrani Construction across Mumbai projects and client engagements."
         accentType="projects"
         customRightVisual={projectsHeroVisual}
       />
 
-      {/* 2. Introduction Section (White Viewport Background) */}
+      {/* 2. Introduction Section */}
       <section className="py-16 sm:py-20 bg-[#FFFFFF]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Reveal>
-            <SectionEyebrow badge="VERIFIED ENGAGEMENTS" className="justify-center mb-3" />
+            <SectionEyebrow badge="DOCUMENTED ENGAGEMENTS" className="justify-center mb-3" />
             <h2 className="font-heading font-semibold text-2xl sm:text-4xl text-[#3D352D] tracking-tight mb-4">
-              Documented Project Participation
+              Project Portfolio & Client Requirements
             </h2>
             <p className="text-base sm:text-lg text-[#6B5E4E] font-body leading-relaxed max-w-3xl mx-auto">
-              Chitrani Construction presents project engagements supported by verified documentation and work orders. Project records reflect documented vendor roles, contract dates, and site locations.
+              Chitrani Construction presents project engagements and client requirements supported by transparent documentation. Records reflect confirmed vendor roles alongside formal proposal specifications.
             </p>
           </Reveal>
         </div>
       </section>
 
-      {/* 3. Featured Project — Ocean Star (Soft Cream Viewport Background) */}
-      <section className="py-16 sm:py-24 bg-[#F5EEE5] border-y border-[#E8DDD0]/70" aria-label="Verified Project Portfolio">
+      {/* 3. Featured & Supporting Project Cards */}
+      <section className="py-16 sm:py-24 bg-[#F5EEE5] border-y border-[#E8DDD0]/70" aria-label="Project Portfolio Directory">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          {/* Section Sub-heading */}
           <div className="text-center max-w-2xl mx-auto">
             <Reveal>
-              <SectionEyebrow badge="FEATURED ENGAGEMENT" className="justify-center mb-3" />
+              <SectionEyebrow badge="ENGAGEMENT DIRECTORY" className="justify-center mb-3" />
               <h2 className="font-heading font-semibold text-2xl sm:text-3xl lg:text-4xl text-[#3D352D]">
-                Verified Construction Vendor Record
+                Documented Site Engagements & Proposals
               </h2>
             </Reveal>
           </div>
 
-          <Reveal delay={0.1} className="max-w-4xl mx-auto">
-            <ProjectCard project={featuredProject} />
+          {/* Featured Large Card: Ocean Star */}
+          <Reveal delay={0.1}>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              <ProjectCard project={oceanStar} featured={true} />
+            </div>
           </Reveal>
+
+          {/* Supporting Cards Grid: Godrej Nurture & Capacite Infra */}
+          <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+            {supportingProjects.map((project) => (
+              <StaggerItem key={project.id}>
+                <ProjectCard project={project} featured={false} />
+              </StaggerItem>
+            ))}
+          </StaggerGroup>
+
         </div>
       </section>
 
-      {/* 4. Project Information / Verified Facts Band (White Viewport Background) */}
+      {/* 4. Verified Facts & Scope Summary */}
       <section className="py-16 sm:py-24 bg-[#FFFFFF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal className="space-y-8">
             <div className="flex items-center gap-3 border-b border-[#E8DDD0] pb-4">
               <FileCheck className="w-6 h-6 text-[#C96F1B] shrink-0" />
               <div>
-                <SectionEyebrow badge="CONTRACT DOCUMENTATION" className="mb-0.5" />
+                <SectionEyebrow badge="TRANSPARENT RECORDS" className="mb-0.5" />
                 <h3 className="font-heading font-semibold text-2xl sm:text-3xl text-[#3D352D]">
-                  Ocean Star Engagement Record
+                  Portfolio Engagement Summary
                 </h3>
               </div>
             </div>
 
-            <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs sm:text-sm font-body">
+            <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs sm:text-sm font-body">
               <StaggerItem>
-                <div className="p-5 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-1.5 hover:border-[#C96F1B]/40 transition-colors">
-                  <span className="text-[#6B5E4E] block text-[11px] font-heading font-semibold uppercase tracking-wider">Client</span>
-                  <span className="font-semibold text-[#3D352D] text-base">Suraj Estate Developers Ltd</span>
+                <div className="p-6 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-2 hover:border-[#C96F1B]/40 transition-colors h-full">
+                  <span className="text-[#C96F1B] block text-[11px] font-heading font-bold uppercase tracking-wider">Confirmed Engagement</span>
+                  <h4 className="font-heading font-bold text-lg text-[#3D352D]">Ocean Star</h4>
+                  <p className="text-xs text-[#6B5E4E] font-body leading-relaxed">
+                    Suraj Estate Developers Ltd. — Kashinath Dhuru Marg, Mumbai. SP 1087 Concrete Pump deployment with 100m pipeline.
+                  </p>
                 </div>
               </StaggerItem>
 
               <StaggerItem>
-                <div className="p-5 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-1.5 hover:border-[#C96F1B]/40 transition-colors">
-                  <span className="text-[#6B5E4E] block text-[11px] font-heading font-semibold uppercase tracking-wider">Location</span>
-                  <span className="font-semibold text-[#3D352D] text-base">Kashinath Dhuru Marg, Mumbai</span>
+                <div className="p-6 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-2 hover:border-[#C96F1B]/40 transition-colors h-full">
+                  <span className="text-[#6B5E4E] block text-[11px] font-heading font-bold uppercase tracking-wider">Client Requirement</span>
+                  <h4 className="font-heading font-bold text-lg text-[#3D352D]">Godrej Nurture</h4>
+                  <p className="text-xs text-[#6B5E4E] font-body leading-relaxed">
+                    LBS Road, Bhandup, Mumbai. Concrete pump support proposal with 100m pipeline and operating manpower.
+                  </p>
                 </div>
               </StaggerItem>
 
               <StaggerItem>
-                <div className="p-5 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-1.5 hover:border-[#C96F1B]/40 transition-colors">
-                  <span className="text-[#6B5E4E] block text-[11px] font-heading font-semibold uppercase tracking-wider">Work Order</span>
-                  <span className="font-semibold text-[#3D352D] text-base">OSWOJ0002126-27</span>
-                </div>
-              </StaggerItem>
-
-              <StaggerItem>
-                <div className="p-5 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-1.5 hover:border-[#C96F1B]/40 transition-colors">
-                  <span className="text-[#6B5E4E] block text-[11px] font-heading font-semibold uppercase tracking-wider">Scheduled Period</span>
-                  <span className="font-semibold text-[#3D352D] text-base">31 Jul 2026 – 31 Dec 2026</span>
+                <div className="p-6 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-2 hover:border-[#C96F1B]/40 transition-colors h-full">
+                  <span className="text-[#6B5E4E] block text-[11px] font-heading font-bold uppercase tracking-wider">Client Requirement</span>
+                  <h4 className="font-heading font-bold text-lg text-[#3D352D]">Capacite Infra Projects Ltd.</h4>
+                  <p className="text-xs text-[#6B5E4E] font-body leading-relaxed">
+                    Mumbai. High-rise concrete pumping proposal utilizing Putzmeister BSA 1408 / BAS1408HD-class equipment configuration.
+                  </p>
                 </div>
               </StaggerItem>
             </StaggerGroup>
@@ -136,7 +153,7 @@ export const ProjectsPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. How Project Records Are Presented (Warm Cream Viewport Background) */}
+      {/* 5. How Project Records Are Presented */}
       <section className="py-16 sm:py-24 bg-[#EADBC8]/40 border-y border-[#E8DDD0]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Reveal>
@@ -145,13 +162,13 @@ export const ProjectsPage: React.FC = () => {
               How Project Records Are Presented
             </h2>
             <p className="text-sm sm:text-base text-[#6B5E4E] font-body leading-relaxed max-w-3xl mx-auto">
-              Chitrani Construction publishes only verified project engagements supported by contract records. Unconfirmed projects, unverified scope metrics, or speculative completion claims are deliberately excluded from this portfolio.
+              Chitrani Construction publishes documented project engagements and formal client requirements. Confirmed engagements reflect awarded work orders, while client requirements reflect documented commercial proposals.
             </p>
           </Reveal>
         </div>
       </section>
 
-      {/* 6. Related Capabilities Section (White Background) */}
+      {/* 6. Related Capabilities Section */}
       <section className="py-16 sm:py-24 bg-[#FFFFFF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <Reveal className="space-y-2">
@@ -177,7 +194,7 @@ export const ProjectsPage: React.FC = () => {
                   Construction Contracting
                 </h4>
                 <p className="text-xs sm:text-sm text-[#6B5E4E] font-body leading-relaxed">
-                  Project-based construction support for building and civil requirements in Maharashtra.
+                  Structural civil contracting, RCC frame execution, masonry, and manpower support.
                 </p>
               </Link>
             </Reveal>
@@ -205,7 +222,7 @@ export const ProjectsPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 7. Project Discussion CTA Section (Dark Charcoal Background) */}
+      {/* 7. Project Discussion CTA Section */}
       <section className="py-16 sm:py-24 bg-[#FFFFFF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal className="bg-[#3D352D] rounded-3xl p-8 sm:p-16 text-white text-center space-y-8 shadow-xl max-w-5xl mx-auto relative overflow-hidden">

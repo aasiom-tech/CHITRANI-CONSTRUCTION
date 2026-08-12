@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Building2, MapPin, Calendar, ArrowRight, FileText, HardHat } from 'lucide-react';
+import { Building2, MapPin, ArrowRight, FileText, HardHat } from 'lucide-react';
 import { projectsData } from '../data/projects';
 
 export const Projects: React.FC = () => {
@@ -13,14 +13,14 @@ export const Projects: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="font-display text-xs text-[#C96F1B] font-bold tracking-wider uppercase block">
+          <span className="font-heading text-xs text-[#C96F1B] font-bold tracking-wider uppercase block">
             PROJECT EXPERIENCE
           </span>
           <h2 className="font-heading font-bold text-3xl sm:text-4xl text-[#3D352D] tracking-tight">
             Verified Project Engagement
           </h2>
           <p className="text-sm sm:text-base text-[#6B5E4E] font-body leading-relaxed">
-            Chitrani Construction’s project portfolio is presented using verified client and work-order information.
+            Chitrani Construction’s project portfolio is presented using transparent engagement documentation.
           </p>
         </div>
 
@@ -38,14 +38,14 @@ export const Projects: React.FC = () => {
                 />
                 <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-xs px-3 py-1 rounded-full border border-[#E8DDD0] text-[11px] font-heading font-bold text-[#3D352D] flex items-center gap-1.5 uppercase tracking-wider">
                   <HardHat className="w-3.5 h-3.5 text-[#C96F1B]" />
-                  <span>{project.vendorRole}</span>
+                  <span>{project.statusLabel}</span>
                 </div>
               </div>
 
               <div className="p-6 sm:p-8 space-y-5">
                 <div className="space-y-1">
                   <span className="font-heading text-xs text-[#C96F1B] font-bold uppercase tracking-wider block">
-                    WORK ORDER: {project.workOrderNumber}
+                    CATEGORY: {project.category}
                   </span>
                   <h3 className="font-heading font-bold text-2xl sm:text-3xl text-[#3D352D] tracking-tight group-hover:text-[#C96F1B] transition-colors">
                     {project.title}
@@ -53,7 +53,7 @@ export const Projects: React.FC = () => {
                 </div>
 
                 <p className="text-sm text-[#6B5E4E] font-body leading-relaxed">
-                  {project.scope}
+                  {project.shortDescription}
                 </p>
 
                 <div className="pt-3 border-t border-[#E8DDD0] grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-body text-[#3D352D]">
@@ -70,22 +70,6 @@ export const Projects: React.FC = () => {
                     <div>
                       <span className="text-[10px] font-heading font-semibold text-[#6B5E4E] uppercase block">Location</span>
                       <span className="font-semibold">{project.location}</span>
-                    </div>
-                  </div>
-
-                  <div className="p-3 bg-[#F5EEE5] rounded-xl border border-[#E8DDD0] flex items-start gap-2">
-                    <Calendar className="w-4 h-4 text-[#C96F1B] shrink-0 mt-0.5" />
-                    <div>
-                      <span className="text-[10px] font-heading font-semibold text-[#6B5E4E] uppercase block">Order Date</span>
-                      <span className="font-body font-bold">{project.orderDate}</span>
-                    </div>
-                  </div>
-
-                  <div className="p-3 bg-[#F5EEE5] rounded-xl border border-[#E8DDD0] flex items-start gap-2">
-                    <Calendar className="w-4 h-4 text-[#C96F1B] shrink-0 mt-0.5" />
-                    <div>
-                      <span className="text-[10px] font-heading font-semibold text-[#6B5E4E] uppercase block">Scheduled Completion</span>
-                      <span className="font-body font-bold">{project.scheduledCompletion}</span>
                     </div>
                   </div>
                 </div>
