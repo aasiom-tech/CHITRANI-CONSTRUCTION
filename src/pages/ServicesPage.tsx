@@ -9,12 +9,20 @@ import {
   Building2,
   Truck,
   ArrowRight,
-  FileText,
-  PhoneCall,
   CheckCircle2,
-  Landmark,
-  HardHat
+  Ruler,
+  Gauge,
+  Layers,
+  ShieldCheck,
+  ChevronRight,
+  FileText
 } from 'lucide-react';
+import contractingImg from '../assets/images/services/construction-contracting-service.webp';
+import boomPlacerImg from '../assets/images/services/boom-placer-rental-service.webp';
+import rccImg from '../assets/images/services/rcc-structural-work.webp';
+import civilImg from '../assets/images/services/civil-construction.webp';
+import brickworkImg from '../assets/images/services/brickwork-blockwork.webp';
+import labourImg from '../assets/images/services/labour-contracting.webp';
 
 export const ServicesPage: React.FC = () => {
   const { data: services, loading, error, retry } = useServices();
@@ -22,291 +30,260 @@ export const ServicesPage: React.FC = () => {
   return (
     <div className="bg-[#FFFFFF] text-[#3D352D] min-h-screen">
       <SEO
-        title="Construction Services & Project Support | Chitrani Construction"
-        description="Chitrani Construction provides construction, structural, civil, masonry, labour and concrete-placement support for project requirements in Maharashtra."
-        canonical="https://chitraniconstruction.com/services"
+        title="Construction Contracting & Equipment Rental | Chitrani"
+        description="Chitrani Construction offers structural civil contracting, RCC framing, civil works, blockwork masonry, labour contracting, and Putzmeister M42-5 boom placer rental."
+        canonicalPath="/services"
       />
 
       {/* 1. Page Header */}
       <PageHeader
-        badge="OUR SERVICES"
-        title="Construction Services and Project Support"
-        subtitle="Chitrani Construction provides construction, structural, civil, masonry, labour and concrete-placement support for project requirements across the construction sector."
+        badge="SERVICES & CAPABILITIES"
+        title="Construction Contracting & Boom Placer Rental"
+        subtitle="Organised structural execution, civil project support, masonry works, labour team deployment, and high-capacity Putzmeister M42-5 concrete boom placer monthly rentals across Maharashtra."
         accentType="services"
+        heroImage={contractingImg}
+        heroImageAlt="Active construction site representing civil contracting and boom placer services"
       />
 
-      {/* 2. Introduction Section (White Background, Architectural Spacing) */}
+      {/* 2. Intro Statement Section */}
       <section className="py-16 sm:py-20 bg-[#FFFFFF]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Reveal>
-            <SectionEyebrow badge="WHAT WE DO" className="justify-center mb-3" />
+            <SectionEyebrow badge="TWO CORE SERVICE PILLARS" className="justify-center mb-3" />
             <h2 className="font-heading font-semibold text-2xl sm:text-4xl text-[#3D352D] tracking-tight mb-4">
-              Practical Capabilities Across Construction Execution
+              Project Execution & Equipment Support
             </h2>
             <p className="text-base sm:text-lg text-[#6B5E4E] font-body leading-relaxed max-w-3xl mx-auto">
-              Chitrani Construction supports construction requirements through a mix of site execution services, structural and civil work, masonry support, construction labour and concrete-placement equipment. Project scope, deployment requirements and commercial terms are discussed according to the needs of each enquiry.
+              Chitrani Construction delivers project-based contracting support for developers and contractors alongside high-capacity Putzmeister M42-5 concrete boom placer monthly rentals.
             </p>
           </Reveal>
         </div>
       </section>
 
-      {/* 3. Main Services Grid (Soft Cream Viewport Background) */}
-      <section className="py-16 sm:py-24 bg-[#F5EEE5] border-y border-[#E8DDD0]/70" aria-label="Construction Services Directory">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="text-center max-w-2xl mx-auto">
-            <Reveal>
-              <SectionEyebrow badge="SERVICE DIRECTORY" className="justify-center mb-3" />
-              <h2 className="font-heading font-semibold text-2xl sm:text-3xl lg:text-4xl text-[#3D352D]">
-                Core Construction Services
+      {/* 3. CHAPTER 01: CONSTRUCTION CONTRACTING (Vertical Editorial Layout) */}
+      <section className="py-20 sm:py-28 bg-[#F5EEE5] border-y border-[#E8DDD0]" id="contracting" aria-label="Construction Contracting Chapter">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+
+          <div className="border-b-2 border-[#3D352D] pb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <span className="font-specs text-xs text-[#C96F1B] font-extrabold uppercase tracking-widest block">
+                CHAPTER 01 · STRUCTURAL CONTRACTING
+              </span>
+              <h2 className="font-display text-4xl sm:text-7xl text-[#3D352D] uppercase tracking-wide leading-none mt-2">
+                CONSTRUCTION CONTRACTING
               </h2>
-              <p className="text-sm sm:text-base text-[#6B5E4E] font-body mt-2">
-                Explore the six core service areas supported by Chitrani Construction.
+            </div>
+            <span className="font-specs text-xs font-bold text-[#7E7267] uppercase tracking-widest border border-[#E8DDD0] px-4 py-2 rounded-full w-fit">
+              RCC · CIVIL · MASONRY · WORKFORCE
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+
+            {/* Left: Large Visual Frame with Cuberto Hover Cursor */}
+            <div
+              className="lg:col-span-7 relative rounded-3xl overflow-hidden aspect-[4/3] bg-[#3D352D] border border-[#E8DDD0] shadow-2xl group"
+            >
+              <img
+                src={contractingImg}
+                alt="Construction Contracting active site"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-95"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+
+              <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between text-white text-xs font-heading">
+                <span className="bg-[#C96F1B] px-3.5 py-1.5 rounded-full font-specs font-bold uppercase">
+                  CONTRACTING SCOPE
+                </span>
+                <span className="bg-black/60 backdrop-blur-xs px-3.5 py-1.5 rounded-full font-specs font-bold border border-white/20">
+                  MUMBAI &amp; MAHARASHTRA
+                </span>
+              </div>
+            </div>
+
+            {/* Right: Narrow Editorial Text Column */}
+            <div className="lg:col-span-5 space-y-6">
+              <p className="text-base sm:text-lg text-[#3D352D] font-body leading-relaxed font-semibold">
+                Project-based construction support for building and civil requirements, with scope defined according to project documentation, site conditions and commercial agreement.
               </p>
-            </Reveal>
+
+              <div className="space-y-3 pt-2">
+                <span className="font-heading font-bold text-xs text-[#3D352D] uppercase tracking-wider block">
+                  Documented Scope Boundaries:
+                </span>
+                {[
+                  'RCC structural framing and formwork',
+                  'Civil foundation and site coordination',
+                  'AAC blockwork and masonry walls',
+                  'Organised site workforce deployment'
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-2 text-xs sm:text-sm font-body text-[#6B5E4E]">
+                    <CheckCircle2 className="w-4 h-4 text-[#C96F1B] shrink-0 mt-0.5" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="pt-4 border-t border-[#E8DDD0] flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                <Link
+                  to="/services/construction-contracting"
+                  className="px-7 py-4 rounded-xl bg-[#3D352D] hover:bg-[#2D2620] text-white font-heading text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md"
+                >
+                  <span>View Detailed Scope</span>
+                  <ArrowRight className="w-4 h-4 text-[#C96F1B]" />
+                </Link>
+
+                <Link
+                  to="/request-quote"
+                  className="px-7 py-4 rounded-xl bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md"
+                >
+                  <span>Request Contracting Quote</span>
+                </Link>
+              </div>
+            </div>
+
           </div>
 
-          {/* 3 Columns x 2 Rows Desktop Grid for Services */}
-          {loading && <CardSkeleton count={6} />}
-          {error && <ApiError message={error} onRetry={retry} />}
-          {!loading && !error && services && services.length === 0 && (
-            <EmptyState message="Service information is being updated." />
-          )}
-          {!loading && !error && services && services.length > 0 && (
-            <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
-              {services.map((service) => (
-                <StaggerItem key={service.id} className="h-full">
-                  <Link
-                    to={`/services/${service.slug}`}
-                    className="block bg-white rounded-2xl border border-[#E8DDD0] p-6 sm:p-8 space-y-4 hover:border-[#C96F1B]/40 hover:shadow-md transition-all h-full"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-11 h-11 rounded-xl bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center shrink-0">
-                        {service.division?.slug === 'equipment-rental' ? <Truck className="w-5 h-5" /> : <Building2 className="w-5 h-5" />}
-                      </div>
-                      <div>
-                        <span className="text-[10px] font-heading font-semibold text-[#9D9287] uppercase tracking-wider block">
-                          {service.division?.name}
-                        </span>
-                        <h3 className="font-heading font-semibold text-base sm:text-lg text-[#3D352D]">
-                          {service.name}
-                        </h3>
-                      </div>
-                    </div>
-                    <p className="text-xs sm:text-sm text-[#6B5E4E] font-body leading-relaxed line-clamp-3">
-                      {service.shortDescription || service.fullDescription || "Service details coming soon."}
-                    </p>
-                    <div className="pt-2 flex items-center gap-1 text-xs font-heading font-semibold text-[#C96F1B] uppercase tracking-wider">
-                      <span>View Details</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </div>
-                  </Link>
-                </StaggerItem>
+          {/* Sub-Services Grid */}
+          <div className="pt-8 border-t border-[#E8DDD0]">
+            <span className="font-specs text-xs text-[#C96F1B] font-extrabold uppercase tracking-widest block mb-6">
+              SPECIALISED CONTRACTING SUB-PACKAGES
+            </span>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                { name: 'RCC Structural Work', img: rccImg, desc: 'Formwork, shuttering & steel binding' },
+                { name: 'Civil Construction', img: civilImg, desc: 'Foundations & site civil coordination' },
+                { name: 'Brickwork & Blockwork', img: brickworkImg, desc: 'AAC blockwork & masonry walls' },
+                { name: 'Labour Contracting', img: labourImg, desc: 'Organised site workforce deployment' }
+              ].map((sub, idx) => (
+                <div
+                  key={sub.name}
+                  className="bg-white rounded-2xl p-5 border border-[#E8DDD0] shadow-sm hover:shadow-xl transition-all duration-300 space-y-3 group"
+                >
+                  <div className="relative aspect-[16/10] rounded-xl overflow-hidden bg-[#3D352D]">
+                    <img src={sub.img} alt={sub.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  </div>
+                  <h4 className="font-heading font-bold text-lg text-[#3D352D] group-hover:text-[#C96F1B] transition-colors">
+                    {sub.name}
+                  </h4>
+                  <p className="text-xs text-[#6B5E4E] font-body">{sub.desc}</p>
+                </div>
               ))}
-            </StaggerGroup>
-          )}
-        </div>
-      </section>
-
-      {/* 4. Connected Capabilities Section (White Background, Open Composition) */}
-      <section className="py-16 sm:py-24 bg-[#FFFFFF]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <Reveal className="max-w-3xl space-y-3">
-            <SectionEyebrow badge="INTEGRATED CAPABILITIES" className="mb-1" />
-            <h2 className="font-heading font-semibold text-2xl sm:text-4xl text-[#3D352D] tracking-tight">
-              Execution Support & Equipment Deployment
-            </h2>
-            <p className="text-sm sm:text-base text-[#6B5E4E] font-body leading-relaxed">
-              Some projects require site execution services such as structural RCC framing, civil works, or blockwork masonry, while others require specialized concrete-placement equipment and crew deployment. Chitrani Construction can discuss these requirements independently or as part of the same project conversation depending on confirmed project needs.
-            </p>
-          </Reveal>
-
-          {/* Open Architecture Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            <Reveal delay={0.1}>
-              <div className="p-8 bg-[#F5EEE5]/80 hover:bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-4 transition-colors h-full">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center shrink-0">
-                    <Building2 className="w-6 h-6" />
-                  </div>
-                  <h3 className="font-heading font-semibold text-xl text-[#3D352D]">
-                    Site Execution Services
-                  </h3>
-                </div>
-                <p className="text-xs sm:text-sm text-[#6B5E4E] font-body leading-relaxed">
-                  Building construction contracting, RCC structural framing, civil foundations, blockwork masonry, and site workforce coordination.
-                </p>
-                <ul className="space-y-2 text-xs sm:text-sm text-[#3D352D] font-body pt-2 border-t border-[#E8DDD0]/60">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#C96F1B] shrink-0" />
-                    <span>Vendor participation & site coordination</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#C96F1B] shrink-0" />
-                    <span>Verified Mumbai project engagement</span>
-                  </li>
-                </ul>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.2}>
-              <div className="p-8 bg-[#F5EEE5]/80 hover:bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] space-y-4 transition-colors h-full">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center shrink-0">
-                    <Truck className="w-6 h-6" />
-                  </div>
-                  <h3 className="font-heading font-semibold text-xl text-[#3D352D]">
-                    Equipment Deployment Support
-                  </h3>
-                </div>
-                <p className="text-xs sm:text-sm text-[#6B5E4E] font-body leading-relaxed">
-                  Concrete boom placer rental with operator and helper for high-volume or elevated concrete pours.
-                </p>
-                <ul className="space-y-2 text-xs sm:text-sm text-[#3D352D] font-body pt-2 border-t border-[#E8DDD0]/60">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#C96F1B] shrink-0" />
-                    <span>High-capacity placement equipment</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#C96F1B] shrink-0" />
-                    <span>Dedicated operator & helper included</span>
-                  </li>
-                </ul>
-              </div>
-            </Reveal>
+            </div>
           </div>
+
         </div>
       </section>
 
-      {/* 5. Machinery Support Highlight (Soft Cream Viewport Background) */}
-      <section className="py-14 sm:py-20 bg-[#F5EEE5] border-t border-[#E8DDD0]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Reveal className="bg-white rounded-2xl border border-[#E8DDD0] p-8 sm:p-12 shadow-[0_10px_30px_rgba(61,53,45,0.05)] flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div className="space-y-2 max-w-3xl">
-              <SectionEyebrow badge="FEATURED MACHINERY SUPPORT" className="mb-1" />
-              <h3 className="font-heading font-semibold text-xl sm:text-2xl lg:text-3xl text-[#3D352D]">
-                Concrete Boom Placer Rental
+      {/* 4. CHAPTER 02: CONCRETE BOOM PLACER RENTAL (Horizontal Progression Layout) */}
+      <section className="py-20 sm:py-28 bg-[#FFFFFF]" id="equipment-rental" aria-label="Boom Placer Rental Chapter">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+
+          <div className="border-b-2 border-[#3D352D] pb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <span className="font-specs text-xs text-[#C96F1B] font-extrabold uppercase tracking-widest block">
+                CHAPTER 02 · MACHINERY DEPLOYMENT
+              </span>
+              <h2 className="font-display text-4xl sm:text-7xl text-[#3D352D] uppercase tracking-wide leading-none mt-2">
+                BOOM PLACER RENTAL
+              </h2>
+            </div>
+            <span className="font-specs text-xs font-bold text-[#7E7267] uppercase tracking-widest border border-[#E8DDD0] px-4 py-2 rounded-full w-fit">
+              PUTZMEISTER M42-5 · 42M REACH
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#F5EEE5] p-8 sm:p-14 rounded-3xl border border-[#E8DDD0] shadow-xl">
+
+            <div className="lg:col-span-6 space-y-6">
+              <span className="font-specs text-xs text-[#C96F1B] font-extrabold uppercase tracking-widest block">
+                Putzmeister M42-5 Concrete Boom Placer
+              </span>
+              <h3 className="font-heading font-bold text-3xl sm:text-4xl text-[#3D352D]">
+                High-Capacity Concrete Placement Support
               </h3>
               <p className="text-sm sm:text-base text-[#6B5E4E] font-body leading-relaxed">
-                Need high-capacity concrete pumping for slab casting or elevated pours? Explore specs and monthly rental terms for our boom placer equipment.
+                Putzmeister M42-5 concrete boom placer rental with an operator and helper for sites requiring dependable, high-capacity concrete-placement support.
               </p>
+
+              {/* Technical Spec Chips */}
+              <div className="grid grid-cols-3 gap-3 pt-2">
+                <div className="p-3 bg-white rounded-xl border border-[#E8DDD0] text-center">
+                  <span className="font-specs text-[10px] text-[#7E7267] font-bold block">BOOM REACH</span>
+                  <span className="font-display text-2xl text-[#C96F1B]">42M</span>
+                </div>
+                <div className="p-3 bg-white rounded-xl border border-[#E8DDD0] text-center">
+                  <span className="font-specs text-[10px] text-[#7E7267] font-bold block">PUMP OUTPUT</span>
+                  <span className="font-display text-2xl text-[#C96F1B]">90 m³</span>
+                </div>
+                <div className="p-3 bg-white rounded-xl border border-[#E8DDD0] text-center">
+                  <span className="font-specs text-[10px] text-[#7E7267] font-bold block">PIPELINE</span>
+                  <span className="font-display text-2xl text-[#C96F1B]">100M</span>
+                </div>
+              </div>
+
+              <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                <Link
+                  to="/services/concrete-boom-placer-rental"
+                  className="px-7 py-4 rounded-xl bg-[#3D352D] hover:bg-[#2D2620] text-white font-heading text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md"
+                >
+                  <span>View Equipment Terms</span>
+                  <ArrowRight className="w-4 h-4 text-[#C96F1B]" />
+                </Link>
+
+                <Link
+                  to="/request-quote?requirement=equipment-rental"
+                  className="px-7 py-4 rounded-xl bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md"
+                >
+                  <span>Request Rental Quote</span>
+                </Link>
+              </div>
             </div>
 
-            <Link
-              to="/equipment"
-              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-[#3D352D] hover:bg-[#2D2620] text-white font-heading text-xs font-semibold uppercase tracking-wider transition-all shrink-0 min-h-[44px] shadow-sm hover:shadow-md"
+            <div
+              className="lg:col-span-6 relative rounded-2xl overflow-hidden aspect-[4/3] bg-[#3D352D] border border-[#E8DDD0] shadow-xl group"
             >
-              <span>View Machinery Details</span>
-              <ArrowRight className="w-4 h-4 text-[#C96F1B]" />
-            </Link>
-          </Reveal>
+              <img
+                src={boomPlacerImg}
+                alt="Putzmeister M42-5 Concrete Boom Placer visual"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-95"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none" />
+
+              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white text-xs font-heading">
+                <span className="bg-[#C96F1B] px-3 py-1 rounded-md font-specs font-bold uppercase">
+                  OPERATOR &amp; HELPER INCLUDED
+                </span>
+                <span className="bg-black/70 backdrop-blur-xs px-3 py-1 rounded-md border border-white/20 font-specs font-bold">
+                  MONTHLY RENTAL
+                </span>
+              </div>
+            </div>
+
+          </div>
+
         </div>
       </section>
 
-      {/* 6. Sector Applicability Section (Warm Cream Viewport Background) */}
-      <section className="py-16 sm:py-24 bg-[#EADBC8]/40 border-y border-[#E8DDD0]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="text-center max-w-2xl mx-auto">
-            <Reveal>
-              <SectionEyebrow badge="SECTOR APPLICABILITY" className="justify-center mb-3" />
-              <h2 className="font-heading font-semibold text-2xl sm:text-3xl lg:text-4xl text-[#3D352D]">
-                Target Project Sectors
-              </h2>
-              <p className="text-sm sm:text-base text-[#6B5E4E] font-body mt-2">
-                Services may support requirements across the following verified project environments.
-              </p>
-            </Reveal>
-          </div>
-
-          <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            <StaggerItem>
-              <div className="bg-white p-8 rounded-2xl border border-[#E8DDD0] space-y-4 shadow-2xs hover:shadow-md hover:border-[#C96F1B]/40 transition-all h-full">
-                <div className="w-12 h-12 rounded-xl bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center">
-                  <Building2 className="w-6 h-6" />
-                </div>
-                <h3 className="font-heading font-semibold text-base sm:text-lg text-[#3D352D]">
-                  REAL ESTATE & BUILDING CONSTRUCTION
-                </h3>
-                <p className="text-xs sm:text-sm text-[#6B5E4E] font-body leading-relaxed">
-                  Construction contracting and concrete-placement support for building requirements.
-                </p>
-              </div>
-            </StaggerItem>
-
-            <StaggerItem>
-              <div className="bg-white p-8 rounded-2xl border border-[#E8DDD0] space-y-4 shadow-2xs hover:shadow-md hover:border-[#C96F1B]/40 transition-all h-full">
-                <div className="w-12 h-12 rounded-xl bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center">
-                  <Landmark className="w-6 h-6" />
-                </div>
-                <h3 className="font-heading font-semibold text-base sm:text-lg text-[#3D352D]">
-                  INFRASTRUCTURE & CIVIL WORKS
-                </h3>
-                <p className="text-xs sm:text-sm text-[#6B5E4E] font-body leading-relaxed">
-                  Project and equipment support for infrastructure and civil construction requirements.
-                </p>
-              </div>
-            </StaggerItem>
-
-            <StaggerItem>
-              <div className="bg-white p-8 rounded-2xl border border-[#E8DDD0] space-y-4 shadow-2xs hover:shadow-md hover:border-[#C96F1B]/40 transition-all h-full">
-                <div className="w-12 h-12 rounded-xl bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center">
-                  <HardHat className="w-6 h-6" />
-                </div>
-                <h3 className="font-heading font-semibold text-base sm:text-lg text-[#3D352D]">
-                  CONTRACTOR EQUIPMENT SUPPORT
-                </h3>
-                <p className="text-xs sm:text-sm text-[#6B5E4E] font-body leading-relaxed">
-                  Concrete boom placer deployment for contractors requiring high-capacity placement capability.
-                </p>
-              </div>
-            </StaggerItem>
-          </StaggerGroup>
-
-          <div className="text-center pt-2">
+      {/* 5. CTA Section */}
+      <section className="py-16 sm:py-24 bg-[#F5EEE5]">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+          <SectionEyebrow badge="SERVICE ENQUIRY" className="justify-center mb-1 text-[#C96F1B]" />
+          <h2 className="font-heading font-semibold text-3xl sm:text-4xl text-[#3D352D]">
+            Discuss Your Specific Service Requirements
+          </h2>
+          <p className="text-sm sm:text-base text-[#6B5E4E] font-body max-w-2xl mx-auto">
+            Contact Chitrani Construction to review project BOQs, drawings, or boom placer deployment dates.
+          </p>
+          <div className="pt-2 flex justify-center">
             <Link
-              to="/industries"
-              className="inline-flex items-center gap-2 text-xs sm:text-sm font-heading font-semibold uppercase tracking-wider text-[#C96F1B] hover:text-[#B35E17] transition-colors"
+              to="/request-quote"
+              className="px-8 py-4 rounded-xl bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs font-bold uppercase tracking-wider transition-all shadow-md"
             >
-              <span>Explore All Supported Industries</span>
-              <ArrowRight className="w-4 h-4" />
+              REQUEST A QUOTE
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* 7. Final Services CTA Section (Dark Charcoal Viewport Background) */}
-      <section className="py-16 sm:py-24 bg-[#FFFFFF]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Reveal className="bg-[#3D352D] rounded-3xl p-8 sm:p-16 text-white text-center space-y-8 shadow-xl max-w-5xl mx-auto relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-80 h-80 bg-[#C96F1B]/15 rounded-full blur-3xl pointer-events-none" />
-
-            <div className="space-y-4 relative z-10">
-              <SectionEyebrow badge="PROJECT REQUIREMENT" className="justify-center mb-1 text-[#C96F1B]" />
-              <h2 className="font-heading font-semibold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight">
-                Need Construction Support or Boom Placer Rental?
-              </h2>
-              <p className="text-sm sm:text-base lg:text-lg text-[#D1C5B0] font-body leading-relaxed max-w-2xl mx-auto">
-                Share your site location, project requirement and expected timeline with Chitrani Construction so the relevant service scope can be discussed.
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2 relative z-10">
-              <Link
-                to="/request-quote"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all shadow-md min-h-[44px] focus:outline-hidden focus:ring-2 focus:ring-white"
-              >
-                <FileText className="w-4 h-4" />
-                <span>REQUEST A QUOTE</span>
-              </Link>
-
-              <Link
-                to="/contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#F5EEE5] hover:bg-[#EADBC8] text-[#3D352D] font-heading text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all border border-[#E8DDD0] min-h-[44px] focus:outline-hidden focus:ring-2 focus:ring-white"
-              >
-                <PhoneCall className="w-4 h-4 text-[#C96F1B]" />
-                <span>CONTACT US</span>
-              </Link>
-            </div>
-          </Reveal>
         </div>
       </section>
     </div>

@@ -78,3 +78,7 @@ export const projectsData: ProjectItem[] = [
     transparencyNote: 'This page represents a documented client requirement/proposal and does not state project completion.'
   }
 ];
+
+export const getProjectBySlug = (slug: string): ProjectItem | undefined => {
+  return projectsData.find((p) => p.slug === slug);
+};

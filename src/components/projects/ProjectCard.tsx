@@ -61,7 +61,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, featured = fa
 
         {/* Representative Image Label */}
         <div className="absolute bottom-3 right-3 z-10 px-2.5 py-1 rounded-md bg-black/65 backdrop-blur-xs text-white text-[10px] font-heading font-medium uppercase tracking-wider">
-          Representative project image
+          Representative project visual
         </div>
       </div>
 

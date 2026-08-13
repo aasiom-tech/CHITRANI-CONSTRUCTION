@@ -4,20 +4,22 @@ import { PageHeader } from '../components/common/PageHeader';
 import { SEO } from '../components/common/SEO';
 import { useEquipmentList } from '../hooks/useEquipment';
 import { CardSkeleton, ApiError, EmptyState } from '../components/common/ApiStates';
+import { TechnicalEquipmentShowcase } from '../components/equipment/TechnicalEquipmentShowcase';
 import { Reveal, SectionEyebrow, StaggerGroup, StaggerItem } from '../components/common/Motion';
 import {
   Truck,
-  Building2,
   ArrowRight,
   FileText,
-  PhoneCall,
-  CheckCircle2,
   Calendar,
   Clock,
   UserCheck,
-  AlertCircle,
-  Info
+  CheckCircle2,
+  Ruler,
+  Gauge,
+  Info,
+  Building2
 } from 'lucide-react';
+import m42Img from '../assets/images/equipment/putzmeister-m42-5-equipment.webp';
 
 export const EquipmentPage: React.FC = () => {
   const { data: equipment, loading, error, retry } = useEquipmentList();
@@ -45,7 +47,7 @@ export const EquipmentPage: React.FC = () => {
           <Reveal>
             <SectionEyebrow badge="MACHINERY DEPLOYMENT" className="justify-center mb-3" />
             <h2 className="font-heading font-semibold text-2xl sm:text-4xl text-[#3D352D] tracking-tight mb-4">
-              High-Capacity Concrete Placement
+              High-Capacity Concrete Placement Machinery
             </h2>
             <p className="text-base sm:text-lg text-[#6B5E4E] font-body leading-relaxed max-w-3xl mx-auto">
               Chitrani Construction offers specialized machinery rental for concrete placement. Equipment is deployed on monthly single-shift rental agreements with an operator and helper.
@@ -54,7 +56,10 @@ export const EquipmentPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. Featured Equipment Card (data-driven) */}
+      {/* 3. TECHNICAL MACHINERY CATALOGUE SHOWCASE (New Brochure Presentation) */}
+      <TechnicalEquipmentShowcase />
+
+      {/* 4. Featured Equipment Card (data-driven) */}
       <section className="py-16 sm:py-24 bg-[#F5EEE5] border-y border-[#E8DDD0]/70" aria-label="Concrete Placing Equipment Directory">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="text-center max-w-2xl mx-auto">
@@ -133,7 +138,7 @@ export const EquipmentPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. Rental Terms & Operations Band */}
+      {/* 5. Rental Terms & Operations Band */}
       <section className="py-16 sm:py-24 bg-[#FFFFFF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal className="space-y-8">
@@ -149,7 +154,7 @@ export const EquipmentPage: React.FC = () => {
 
             <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs sm:text-sm font-body">
               <StaggerItem>
-                <div className="p-5 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] flex items-center gap-3 hover:border-[#C96F1B]/40 transition-colors">
+                <div className="p-6 bg-white rounded-2xl border border-[#E8DDD0] flex items-center gap-3 hover:border-[#C96F1B] transition-colors shadow-sm">
                   <div className="w-10 h-10 rounded-xl bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center shrink-0">
                     <Calendar className="w-5 h-5" />
                   </div>
@@ -161,7 +166,7 @@ export const EquipmentPage: React.FC = () => {
               </StaggerItem>
 
               <StaggerItem>
-                <div className="p-5 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] flex items-center gap-3 hover:border-[#C96F1B]/40 transition-colors">
+                <div className="p-6 bg-white rounded-2xl border border-[#E8DDD0] flex items-center gap-3 hover:border-[#C96F1B] transition-colors shadow-sm">
                   <div className="w-10 h-10 rounded-xl bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center shrink-0">
                     <Clock className="w-5 h-5" />
                   </div>
@@ -173,7 +178,7 @@ export const EquipmentPage: React.FC = () => {
               </StaggerItem>
 
               <StaggerItem>
-                <div className="p-5 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] flex items-center gap-3 hover:border-[#C96F1B]/40 transition-colors">
+                <div className="p-6 bg-white rounded-2xl border border-[#E8DDD0] flex items-center gap-3 hover:border-[#C96F1B] transition-colors shadow-sm">
                   <div className="w-10 h-10 rounded-xl bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center shrink-0">
                     <CheckCircle2 className="w-5 h-5" />
                   </div>
@@ -185,7 +190,7 @@ export const EquipmentPage: React.FC = () => {
               </StaggerItem>
 
               <StaggerItem>
-                <div className="p-5 bg-[#F5EEE5] rounded-2xl border border-[#E8DDD0] flex items-center gap-3 hover:border-[#C96F1B]/40 transition-colors">
+                <div className="p-6 bg-white rounded-2xl border border-[#E8DDD0] flex items-center gap-3 hover:border-[#C96F1B] transition-colors shadow-sm">
                   <div className="w-10 h-10 rounded-xl bg-[#C96F1B]/15 text-[#C96F1B] flex items-center justify-center shrink-0">
                     <UserCheck className="w-5 h-5" />
                   </div>
@@ -196,16 +201,11 @@ export const EquipmentPage: React.FC = () => {
                 </div>
               </StaggerItem>
             </StaggerGroup>
-
-            <div className="p-4 bg-[#F5EEE5] rounded-xl border border-[#E8DDD0] text-xs font-body text-[#6B5E4E] flex items-center gap-2.5">
-              <AlertCircle className="w-4 h-4 text-[#C96F1B] shrink-0" />
-              <span><em>Availability is subject to confirmation for the requested project period.</em></span>
-            </div>
           </Reveal>
         </div>
       </section>
 
-      {/* 5. Commercial Information & Client Scope Panel */}
+      {/* 6. Commercial Information & Client Scope Panel */}
       <section className="py-16 sm:py-24 bg-[#EADBC8]/40 border-y border-[#E8DDD0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="text-center max-w-2xl mx-auto space-y-2">
@@ -251,7 +251,7 @@ export const EquipmentPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 6. Related Construction Services */}
+      {/* 7. Related Construction Services */}
       <section className="py-16 sm:py-24 bg-[#FFFFFF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <Reveal className="space-y-2">
@@ -305,7 +305,7 @@ export const EquipmentPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 7. Equipment Rental Enquiry CTA Section */}
+      {/* 8. Equipment Rental Enquiry CTA Section */}
       <section className="py-16 sm:py-24 bg-[#FFFFFF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal className="bg-[#3D352D] rounded-3xl p-8 sm:p-16 text-white text-center space-y-8 shadow-xl max-w-5xl mx-auto relative overflow-hidden">
@@ -324,18 +324,10 @@ export const EquipmentPage: React.FC = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2 relative z-10">
               <Link
                 to="/request-quote?service=equipment-rental"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all shadow-md min-h-[44px] focus:outline-hidden focus:ring-2 focus:ring-white"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all shadow-md min-h-[44px]"
               >
                 <FileText className="w-4 h-4" />
                 <span>REQUEST A QUOTE</span>
-              </Link>
-
-              <Link
-                to="/contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#F5EEE5] hover:bg-[#EADBC8] text-[#3D352D] font-heading text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all border border-[#E8DDD0] min-h-[44px] focus:outline-hidden focus:ring-2 focus:ring-white"
-              >
-                <PhoneCall className="w-4 h-4 text-[#C96F1B]" />
-                <span>CONTACT US</span>
               </Link>
             </div>
           </Reveal>

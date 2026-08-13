@@ -2,24 +2,16 @@ import React from 'react';
 import { PageHeader } from '../components/common/PageHeader';
 import { SEO } from '../components/common/SEO';
 import { ContactMethods } from '../components/contact/ContactMethods';
+import { SplitScreenContactExperience } from '../components/contact/SplitScreenContactExperience';
 import { ContactOffices } from '../components/contact/ContactOffices';
-import { ContactFormSection } from '../components/contact/ContactFormSection';
 import { ContactGuidance } from '../components/contact/ContactGuidance';
 import { ContactFinalCTA } from '../components/contact/ContactFinalCTA';
-import { motion, useReducedMotion } from 'motion/react';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 export const ContactPage: React.FC = () => {
-  const shouldReduceMotion = useReducedMotion();
-
-  // Custom Site-Plan Linework & Contact Connection Graphic (NO REUSED PHOTO, NO GIANT TEXT)
+  // Custom Site-Plan Linework & Contact Connection Graphic (NO REUSED PHOTO)
   const contactHeroVisual = (
-    <motion.div
-      initial={shouldReduceMotion ? false : { opacity: 0, y: 14 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, delay: 0.2 }}
-      className="relative p-6 sm:p-8 rounded-2xl bg-white/80 backdrop-blur-xs border border-[#E8DDD0] shadow-sm max-w-md ml-auto"
-    >
+    <div className="relative p-6 sm:p-8 rounded-2xl bg-white/80 backdrop-blur-xs border border-[#E8DDD0] shadow-sm max-w-md ml-auto">
       {/* Corner Bracket Accents */}
       <div className="absolute top-3 left-3 text-[#C96F1B]" aria-hidden="true">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 6V2H6" stroke="currentColor" strokeWidth="2"/></svg>
@@ -45,7 +37,7 @@ export const ContactPage: React.FC = () => {
             <MapPin className="w-4 h-4 text-[#C96F1B] shrink-0 mt-0.5" />
             <div>
               <span className="font-heading font-semibold text-[#3D352D] block">Mumbai Office</span>
-              <span className="text-[11px] text-[#6B5E4E]">Kashinath Dhuru Marg, Dadar (W), Mumbai – 400028</span>
+              <span className="text-[11px] text-[#6B5E4E]">Andheri East, Sahar Road, Mumbai – 400069</span>
             </div>
           </div>
 
@@ -53,7 +45,7 @@ export const ContactPage: React.FC = () => {
             <Phone className="w-4 h-4 text-[#C96F1B] shrink-0 mt-0.5" />
             <div className="flex-1 flex items-center justify-between">
               <span className="font-heading font-semibold text-[#3D352D]">Direct Line</span>
-              <span className="font-specs font-bold text-[#3D352D]">+91 93223 93085</span>
+              <span className="font-specs font-bold text-[#3D352D]">+91 98337 06666</span>
             </div>
           </div>
 
@@ -71,7 +63,7 @@ export const ContactPage: React.FC = () => {
           <span>RESPONSIVE DIRECT ENQUIRY SUPPORT</span>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 
   return (
@@ -83,7 +75,7 @@ export const ContactPage: React.FC = () => {
       />
 
       <div className="bg-[#EADBC8] space-y-0 text-[#3D352D]">
-        {/* 01. Shared PageHeader with Custom Contact Graphic (No Reused Photo, No Giant Text) */}
+        {/* 01. Shared PageHeader */}
         <PageHeader
           badge="CONTACT CHITRANI"
           title="Start a Conversation About Your Construction Requirement"
@@ -96,11 +88,11 @@ export const ContactPage: React.FC = () => {
         {/* 02. Direct Contact Methods */}
         <ContactMethods />
 
+        {/* 03. SPLIT-SCREEN CONTACT EXPERIENCE (NEW REDESIGN) */}
+        <SplitScreenContactExperience />
+
         {/* Office Locations */}
         <ContactOffices />
-
-        {/* 03. Structured Project Enquiry Form */}
-        <ContactFormSection />
 
         {/* 04. What Happens Next */}
         <ContactGuidance />
