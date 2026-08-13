@@ -108,7 +108,7 @@ export const Equipment: React.FC = () => {
             <div className="p-6 sm:p-8 pt-0 flex flex-col sm:flex-row items-center gap-3">
               <Link
                 to={`/equipment/${item.slug}`}
-                className="w-full sm:w-1/2 py-3.5 px-5 rounded-lg bg-[#3D352D] hover:bg-[#2D2620] text-white font-heading text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-xs"
+                className="w-full sm:w-1/2 py-3.5 px-5 rounded-lg bg-white hover:bg-[#EADBC8] text-[#3D352D] border border-[#E8DDD0] font-heading text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-xs"
               >
                 <span>View Equipment Details</span>
                 <ArrowRight className="w-4 h-4 text-[#C96F1B]" />

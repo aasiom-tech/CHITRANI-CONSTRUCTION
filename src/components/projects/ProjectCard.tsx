@@ -47,7 +47,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, featured = fa
             className={`px-3 py-1 rounded-full text-[11px] font-heading font-bold uppercase tracking-wider shadow-sm flex items-center gap-1.5 backdrop-blur-md ${
               isConfirmed
                 ? 'bg-[#C96F1B] text-white border border-white/20'
-                : 'bg-[#3D352D]/90 text-[#EADBC8] border border-white/10'
+                : 'bg-[#F5EEE5]/90 text-[#6B5E4E] border border-[#E8DDD0]'
             }`}
           >
             {isConfirmed ? (
@@ -139,7 +139,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, featured = fa
         <div className="pt-4 border-t border-[#E8DDD0] flex flex-col sm:flex-row items-center gap-3">
           <Link
             to={`/projects/${project.slug}`}
-            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#3D352D] hover:bg-[#2D2620] text-white font-heading text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-xs group/btn"
+            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-white hover:bg-[#EADBC8] text-[#3D352D] border border-[#E8DDD0] font-heading text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-xs group/btn"
           >
             <span>View Details</span>
             <ArrowRight className="w-4 h-4 text-[#C96F1B] group-hover/btn:translate-x-1 transition-transform" />

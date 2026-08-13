@@ -16,17 +16,17 @@ export const ServiceCTA: React.FC<ServiceCTAProps> = ({
   buttonText = 'Request Proposal'
 }) => {
   return (
-    <div className="bg-[#3D352D] text-white p-6 sm:p-8 rounded-[18px] border border-[#E8DDD0]/20 space-y-5 shadow-lg">
+    <div className="bg-[#F5EEE5] text-[#3D352D] p-6 sm:p-8 rounded-[18px] border border-[#E8DDD0] space-y-5 shadow-lg">
       <div className="flex items-center gap-2 text-[#C96F1B] font-heading text-xs font-bold uppercase tracking-wider">
         <FileText className="w-4 h-4" />
         <span>DIRECT DISPATCH & QUOTATION</span>
       </div>
 
-      <h3 className="font-heading font-bold text-xl sm:text-2xl text-white tracking-tight">
+      <h3 className="font-heading font-bold text-xl sm:text-2xl text-[#3D352D] tracking-tight">
         {title}
       </h3>
 
-      <p className="text-xs sm:text-sm text-[#D1C5B0] font-body leading-relaxed">
+      <p className="text-xs sm:text-sm text-[#6B5E4E] font-body leading-relaxed">
         {description}
       </p>
 

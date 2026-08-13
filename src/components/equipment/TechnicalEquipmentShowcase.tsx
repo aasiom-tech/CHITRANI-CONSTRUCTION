@@ -25,7 +25,7 @@ export const TechnicalEquipmentShowcase: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
 
         {/* HEADER SECTION */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b-2 border-[#3D352D] pb-8 gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b-2 border-[#C96F1B]/30 pb-8 gap-4">
           <div className="space-y-2">
             <span className="font-specs text-xs text-[#C96F1B] font-extrabold uppercase tracking-widest block">
               SYSTEM ANALYSIS · HEAVY CONCRETE MACHINERY
@@ -35,7 +35,7 @@ export const TechnicalEquipmentShowcase: React.FC = () => {
             </h1>
           </div>
 
-          <span className="font-specs text-xs font-bold text-[#3D352D]/70 uppercase tracking-widest border border-[#3D352D]/20 px-4 py-2 rounded-full w-fit">
+          <span className="font-specs text-xs font-bold text-[#7E7267] uppercase tracking-widest border border-[#E8DDD0] px-4 py-2 rounded-full w-fit">
             2020 MODEL · AdBlue BS6 CERTIFIED
           </span>
         </div>
@@ -51,7 +51,7 @@ export const TechnicalEquipmentShowcase: React.FC = () => {
                 onClick={() => setActiveTab(tab)}
                 className={`px-6 py-3 rounded-full font-heading font-bold text-xs uppercase tracking-wider transition-all duration-300 border cursor-pointer ${
                   isActive
-                    ? 'bg-[#3D352D] text-white border-[#3D352D] shadow-lg'
+                    ? 'bg-[#C96F1B] text-white border-[#C96F1B] shadow-lg'
                     : 'bg-white text-[#3D352D] border-[#E8DDD0] hover:border-[#C96F1B]'
                 }`}
               >
@@ -75,7 +75,7 @@ export const TechnicalEquipmentShowcase: React.FC = () => {
 
             {/* Central Visual Stage */}
             <div
-              className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-[#3D352D] group"
+              className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-[#F5EEE5] group"
             >
               <img
                 src={m42Img}

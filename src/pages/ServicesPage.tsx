@@ -64,7 +64,7 @@ export const ServicesPage: React.FC = () => {
       <section className="py-20 sm:py-28 bg-[#F5EEE5] border-y border-[#E8DDD0]" id="contracting" aria-label="Construction Contracting Chapter">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
 
-          <div className="border-b-2 border-[#3D352D] pb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div className="border-b-2 border-[#C96F1B]/30 pb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
               <span className="font-specs text-xs text-[#C96F1B] font-extrabold uppercase tracking-widest block">
                 CHAPTER 01 · STRUCTURAL CONTRACTING
@@ -82,7 +82,7 @@ export const ServicesPage: React.FC = () => {
 
             {/* Left: Large Visual Frame with Cuberto Hover Cursor */}
             <div
-              className="lg:col-span-7 relative rounded-3xl overflow-hidden aspect-[4/3] bg-[#3D352D] border border-[#E8DDD0] shadow-2xl group"
+              className="lg:col-span-7 relative rounded-3xl overflow-hidden aspect-[4/3] bg-[#F5EEE5] border border-[#E8DDD0] shadow-2xl group"
             >
               <img
                 src={contractingImg}
@@ -127,7 +127,7 @@ export const ServicesPage: React.FC = () => {
               <div className="pt-4 border-t border-[#E8DDD0] flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                 <Link
                   to="/services/construction-contracting"
-                  className="px-7 py-4 rounded-xl bg-[#3D352D] hover:bg-[#2D2620] text-white font-heading text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md"
+                  className="px-7 py-4 rounded-xl bg-white hover:bg-[#EADBC8] text-[#3D352D] border border-[#E8DDD0] font-heading text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-sm"
                 >
                   <span>View Detailed Scope</span>
                   <ArrowRight className="w-4 h-4 text-[#C96F1B]" />
@@ -161,7 +161,7 @@ export const ServicesPage: React.FC = () => {
                   key={sub.name}
                   className="bg-white rounded-2xl p-5 border border-[#E8DDD0] shadow-sm hover:shadow-xl transition-all duration-300 space-y-3 group"
                 >
-                  <div className="relative aspect-[16/10] rounded-xl overflow-hidden bg-[#3D352D]">
+                  <div className="relative aspect-[16/10] rounded-xl overflow-hidden bg-[#F5EEE5]">
                     <img src={sub.img} alt={sub.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
                   <h4 className="font-heading font-bold text-lg text-[#3D352D] group-hover:text-[#C96F1B] transition-colors">
@@ -180,7 +180,7 @@ export const ServicesPage: React.FC = () => {
       <section className="py-20 sm:py-28 bg-[#FFFFFF]" id="equipment-rental" aria-label="Boom Placer Rental Chapter">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
 
-          <div className="border-b-2 border-[#3D352D] pb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div className="border-b-2 border-[#C96F1B]/30 pb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
               <span className="font-specs text-xs text-[#C96F1B] font-extrabold uppercase tracking-widest block">
                 CHAPTER 02 · MACHINERY DEPLOYMENT
@@ -226,7 +226,7 @@ export const ServicesPage: React.FC = () => {
               <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                 <Link
                   to="/services/concrete-boom-placer-rental"
-                  className="px-7 py-4 rounded-xl bg-[#3D352D] hover:bg-[#2D2620] text-white font-heading text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md"
+                  className="px-7 py-4 rounded-xl bg-white hover:bg-[#EADBC8] text-[#3D352D] border border-[#E8DDD0] font-heading text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-sm"
                 >
                   <span>View Equipment Terms</span>
                   <ArrowRight className="w-4 h-4 text-[#C96F1B]" />
@@ -242,7 +242,7 @@ export const ServicesPage: React.FC = () => {
             </div>
 
             <div
-              className="lg:col-span-6 relative rounded-2xl overflow-hidden aspect-[4/3] bg-[#3D352D] border border-[#E8DDD0] shadow-xl group"
+              className="lg:col-span-6 relative rounded-2xl overflow-hidden aspect-[4/3] bg-[#F5EEE5] border border-[#E8DDD0] shadow-xl group"
             >
               <img
                 src={boomPlacerImg}
