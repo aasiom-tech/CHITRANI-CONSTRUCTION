@@ -225,15 +225,15 @@ export const ProjectsPage: React.FC = () => {
       {/* 7. Project Discussion CTA Section */}
       <section className="py-16 sm:py-24 bg-[#FFFFFF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Reveal className="bg-[#3D352D] rounded-3xl p-8 sm:p-16 text-white text-center space-y-8 shadow-xl max-w-5xl mx-auto relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-80 h-80 bg-[#C96F1B]/15 rounded-full blur-3xl pointer-events-none" />
+          <Reveal className="bg-[#F5EEE5] rounded-3xl p-8 sm:p-16 text-[#3D352D] text-center space-y-8 border border-[#E8DDD0] shadow-lg max-w-5xl mx-auto relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-[#C96F1B]/10 rounded-full blur-3xl pointer-events-none" />
 
             <div className="space-y-4 relative z-10">
               <SectionEyebrow badge="PROJECT ENQUIRY" className="justify-center mb-1 text-[#C96F1B]" />
-              <h2 className="font-heading font-semibold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight">
+              <h2 className="font-heading font-semibold text-3xl sm:text-4xl lg:text-5xl text-[#3D352D] tracking-tight">
                 Have a Project Requirement?
               </h2>
-              <p className="text-sm sm:text-base lg:text-lg text-[#D1C5B0] font-body leading-relaxed max-w-2xl mx-auto">
+              <p className="text-sm sm:text-base lg:text-lg text-[#6B5E4E] font-body leading-relaxed max-w-2xl mx-auto">
                 Share your site location, project requirement and expected timeline so the relevant construction contracting or machinery deployment scope can be reviewed.
               </p>
             </div>
@@ -241,7 +241,7 @@ export const ProjectsPage: React.FC = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2 relative z-10">
               <Link
                 to="/request-quote?service=construction-contracting"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all shadow-md min-h-[44px] focus:outline-hidden focus:ring-2 focus:ring-white"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all shadow-md min-h-[44px] focus:outline-hidden focus:ring-2 focus:ring-[#C96F1B]"
               >
                 <FileText className="w-4 h-4" />
                 <span>REQUEST A QUOTE</span>
@@ -249,7 +249,7 @@ export const ProjectsPage: React.FC = () => {
 
               <Link
                 to="/contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#F5EEE5] hover:bg-[#EADBC8] text-[#3D352D] font-heading text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all border border-[#E8DDD0] min-h-[44px] focus:outline-hidden focus:ring-2 focus:ring-white"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white hover:bg-[#EADBC8] text-[#3D352D] font-heading text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all border border-[#E8DDD0] min-h-[44px] focus:outline-hidden focus:ring-2 focus:ring-[#C96F1B]"
               >
                 <PhoneCall className="w-4 h-4 text-[#C96F1B]" />
                 <span>CONTACT US</span>

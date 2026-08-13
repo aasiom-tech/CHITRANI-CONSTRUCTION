@@ -14,15 +14,15 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 
 export const CoreServicesPreview: React.FC = () => {
   return (
-    <section className="py-20 sm:py-28 bg-[#3D352D] text-white border-b border-[#C96F1B]/30 relative overflow-hidden">
+    <section className="py-20 sm:py-28 bg-[#F5EEE5] text-[#3D352D] border-b border-[#E8DDD0] relative overflow-hidden">
       {/* Background Radial Texture Ray */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#C96F1B]/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#C96F1B]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12 sm:space-y-16">
-        <Reveal className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/15 pb-6">
+        <Reveal className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#E8DDD0] pb-6">
           <div>
             <SectionEyebrow badge="CONTRACTING & RENTAL CAPABILITIES" className="mb-2 text-[#C96F1B]" />
-            <h2 className="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight">
+            <h2 className="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-[#3D352D] tracking-tight">
               Our Core Services Directory
             </h2>
           </div>
@@ -42,27 +42,27 @@ export const CoreServicesPreview: React.FC = () => {
 
             return (
               <StaggerItem key={svc.id} className="h-full">
-                <div className="bg-white/5 backdrop-blur-xs p-7 sm:p-8 rounded-3xl border border-white/10 hover:border-[#C96F1B] hover:bg-white/10 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group h-full shadow-lg">
+                <div className="bg-white p-7 sm:p-8 rounded-3xl border border-[#E8DDD0] hover:border-[#C96F1B] hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group h-full shadow-sm">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <div className="w-12 h-12 rounded-2xl bg-[#C96F1B]/20 border border-[#C96F1B]/40 text-[#C96F1B] flex items-center justify-center group-hover:bg-[#C96F1B] group-hover:text-white transition-colors">
                         <Icon className="w-6 h-6 text-[#C96F1B] group-hover:text-white transition-colors" />
                       </div>
-                      <span className="font-specs text-xs bg-white/10 text-[#F5A54A] px-3.5 py-1 rounded-xl border border-white/10 font-bold uppercase">
+                      <span className="font-specs text-xs bg-[#F5EEE5] text-[#C96F1B] px-3.5 py-1 rounded-xl border border-[#E8DDD0] font-bold uppercase">
                         0{svc.number}
                       </span>
                     </div>
 
-                    <h3 className="font-heading font-bold text-xl sm:text-2xl text-white group-hover:text-[#F5A54A] transition-colors leading-snug">
+                    <h3 className="font-heading font-bold text-xl sm:text-2xl text-[#3D352D] group-hover:text-[#C96F1B] transition-colors leading-snug">
                       {svc.title}
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-[#D1C5B0] font-body leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#6B5E4E] font-body leading-relaxed">
                       {svc.description}
                     </p>
                   </div>
 
-                  <div className="pt-6 mt-6 border-t border-white/10">
+                  <div className="pt-6 mt-6 border-t border-[#E8DDD0]">
                     <Link
                       to={svc.link}
                       className="inline-flex items-center justify-between w-full px-5 py-3.5 rounded-xl bg-[#C96F1B] hover:bg-[#B35E17] text-white font-heading text-xs font-semibold uppercase tracking-wider transition-all shadow-sm min-h-[44px]"

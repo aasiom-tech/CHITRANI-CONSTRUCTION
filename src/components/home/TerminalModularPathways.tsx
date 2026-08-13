@@ -92,7 +92,7 @@ export const TerminalModularPathways: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
 
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b-2 border-[#3D352D] pb-8 gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b-2 border-[#C96F1B]/30 pb-8 gap-4">
           <div className="space-y-2">
             <span className="font-specs text-xs text-[#C96F1B] font-extrabold uppercase tracking-widest block">
               MODULAR EXECUTION SYSTEM
@@ -119,7 +119,7 @@ export const TerminalModularPathways: React.FC = () => {
                   onClick={() => setActiveId(pathway.id)}
                   className={`p-6 sm:p-8 rounded-3xl border-2 transition-all duration-500 cursor-pointer ${
                     isActive
-                      ? 'bg-[#3D352D] text-white border-[#C96F1B] shadow-2xl scale-[1.01]'
+                      ? 'bg-white text-[#3D352D] border-[#C96F1B] shadow-2xl scale-[1.01]'
                       : 'bg-[#F5EEE5]/60 text-[#3D352D] border-[#E8DDD0] hover:border-[#C96F1B]/50 hover:bg-[#F5EEE5]'
                   }`}
                 >
@@ -130,11 +130,11 @@ export const TerminalModularPathways: React.FC = () => {
                       </span>
                       <div>
                         <h3 className={`font-heading font-bold text-lg sm:text-2xl uppercase tracking-tight ${
-                          isActive ? 'text-white' : 'text-[#3D352D]'
+                          isActive ? 'text-[#3D352D]' : 'text-[#3D352D]'
                         }`}>
                           {pathway.title}
                         </h3>
-                        <p className={`text-xs font-body ${isActive ? 'text-[#D1C5B0]' : 'text-[#6B5E4E]'}`}>
+                        <p className={`text-xs font-body ${isActive ? 'text-[#6B5E4E]' : 'text-[#6B5E4E]'}`}>
                           {pathway.subtitle}
                         </p>
                       </div>
@@ -149,14 +149,14 @@ export const TerminalModularPathways: React.FC = () => {
 
                   {/* Expanded Content View when active */}
                   {isActive && (
-                    <div className="mt-6 pt-6 border-t border-white/15 space-y-6 animate-in fade-in duration-300">
-                      <p className="text-xs sm:text-sm text-[#D1C5B0] font-body leading-relaxed">
+                    <div className="mt-6 pt-6 border-t border-[#E8DDD0] space-y-6 animate-in fade-in duration-300">
+                      <p className="text-xs sm:text-sm text-[#6B5E4E] font-body leading-relaxed">
                         {pathway.description}
                       </p>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {pathway.highlights.map((item, idx) => (
-                          <div key={idx} className="flex items-center gap-2 text-xs font-body text-white">
+                          <div key={idx} className="flex items-center gap-2 text-xs font-body text-[#3D352D]">
                             <CheckCircle2 className="w-4 h-4 text-[#C96F1B] shrink-0" />
                             <span>{item}</span>
                           </div>
@@ -181,7 +181,7 @@ export const TerminalModularPathways: React.FC = () => {
 
           {/* RIGHT: DYNAMIC VISUAL STAGE WITH CUBERTO-INSPIRED CURSOR INTERACTION */}
           <div
-            className="lg:col-span-6 relative rounded-3xl overflow-hidden aspect-[4/3] bg-[#3D352D] border border-[#E8DDD0] shadow-2xl group"
+            className="lg:col-span-6 relative rounded-3xl overflow-hidden aspect-[4/3] bg-[#F5EEE5] border border-[#E8DDD0] shadow-2xl group"
           >
             <img
               src={activePathway.image}

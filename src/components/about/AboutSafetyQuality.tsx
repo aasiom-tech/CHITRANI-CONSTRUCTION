@@ -26,7 +26,7 @@ export const AboutSafetyQuality: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 sm:py-28 bg-[#3D352D] text-white border-b border-[#C96F1B]/30 relative overflow-hidden">
+    <section className="py-20 sm:py-28 bg-[#F5EEE5] text-[#3D352D] border-b border-[#E8DDD0] relative overflow-hidden">
       {/* Background Architectural Grid Pattern */}
       <div
         aria-hidden="true"
@@ -42,10 +42,10 @@ export const AboutSafetyQuality: React.FC = () => {
             <span>RESPONSIBLE SITE PRACTICES</span>
           </div>
 
-          <h2 className="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight">
+          <h2 className="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-[#3D352D] tracking-tight">
             Safety and Quality Standards
           </h2>
-          <p className="text-sm sm:text-base text-[#D1C5B0] font-body leading-relaxed max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-[#6B5E4E] font-body leading-relaxed max-w-2xl mx-auto">
             Chitrani Construction maintains disciplined site supervision, equipment checks, and workmanship protocols across all project engagements.
           </p>
         </div>
@@ -57,7 +57,7 @@ export const AboutSafetyQuality: React.FC = () => {
             return (
               <div
                 key={mod.title}
-                className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#C96F1B] hover:bg-white/10 transition-all duration-300 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group"
+                className="p-6 rounded-2xl bg-white border border-[#E8DDD0] hover:border-[#C96F1B] hover:shadow-md transition-all duration-300 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group"
               >
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-[#C96F1B]/20 text-[#C96F1B] flex items-center justify-center shrink-0 border border-[#C96F1B]/30 group-hover:bg-[#C96F1B] group-hover:text-white transition-colors">
@@ -66,11 +66,11 @@ export const AboutSafetyQuality: React.FC = () => {
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
                       <span className="font-specs font-bold text-xs text-[#F5A54A]">0{idx + 1}</span>
-                      <h3 className="font-heading font-bold text-base text-white group-hover:text-[#F5A54A] transition-colors">
+                      <h3 className="font-heading font-bold text-base text-[#3D352D] group-hover:text-[#C96F1B] transition-colors">
                         {mod.title}
                       </h3>
                     </div>
-                    <p className="text-xs text-[#D1C5B0] font-body leading-relaxed">
+                    <p className="text-xs text-[#6B5E4E] font-body leading-relaxed">
                       {mod.desc}
                     </p>
                   </div>
@@ -86,7 +86,7 @@ export const AboutSafetyQuality: React.FC = () => {
         </div>
 
         {/* Clarification Box */}
-        <div className="p-4 sm:p-5 bg-white/5 rounded-2xl border border-white/10 max-w-5xl mx-auto flex items-center gap-3 text-xs text-[#D1C5B0] font-body">
+        <div className="p-4 sm:p-5 bg-white rounded-2xl border border-[#E8DDD0] max-w-5xl mx-auto flex items-center gap-3 text-xs text-[#6B5E4E] font-body">
           <Info className="w-4 h-4 text-[#C96F1B] shrink-0" />
           <p>
             Specific site responsibilities, PPE arrangements, safety provisions, and commercial obligations are confirmed in the relevant quotation or project agreement.

@@ -133,7 +133,7 @@ export const SplitScreenContactExperience: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setSubmitted(false)}
-                  className="px-6 py-2.5 rounded-xl bg-[#3D352D] text-white font-heading text-xs font-bold uppercase tracking-wider hover:bg-[#2D2620] transition-colors"
+                  className="px-6 py-2.5 rounded-xl bg-[#F5EEE5] text-[#3D352D] border border-[#E8DDD0] font-heading text-xs font-bold uppercase tracking-wider hover:bg-[#EADBC8] transition-colors"
                 >
                   Send Another Message
                 </button>

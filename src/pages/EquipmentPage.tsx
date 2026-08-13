@@ -308,15 +308,15 @@ export const EquipmentPage: React.FC = () => {
       {/* 8. Equipment Rental Enquiry CTA Section */}
       <section className="py-16 sm:py-24 bg-[#FFFFFF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Reveal className="bg-[#3D352D] rounded-3xl p-8 sm:p-16 text-white text-center space-y-8 shadow-xl max-w-5xl mx-auto relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-80 h-80 bg-[#C96F1B]/15 rounded-full blur-3xl pointer-events-none" />
+          <Reveal className="bg-[#F5EEE5] rounded-3xl p-8 sm:p-16 text-[#3D352D] text-center space-y-8 border border-[#E8DDD0] shadow-lg max-w-5xl mx-auto relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-[#C96F1B]/10 rounded-full blur-3xl pointer-events-none" />
 
             <div className="space-y-4 relative z-10">
               <SectionEyebrow badge="MACHINERY ENQUIRY" className="justify-center mb-1 text-[#C96F1B]" />
-              <h2 className="font-heading font-semibold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight">
+              <h2 className="font-heading font-semibold text-3xl sm:text-4xl lg:text-5xl text-[#3D352D] tracking-tight">
                 Need Concrete Boom Placer Deployment?
               </h2>
-              <p className="text-sm sm:text-base lg:text-lg text-[#D1C5B0] font-body leading-relaxed max-w-2xl mx-auto">
+              <p className="text-sm sm:text-base lg:text-lg text-[#6B5E4E] font-body leading-relaxed max-w-2xl mx-auto">
                 Share your site location, concrete volume requirements and expected deployment timeline with Chitrani Construction so availability and rental rates can be confirmed.
               </p>
             </div>

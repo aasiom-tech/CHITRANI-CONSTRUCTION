@@ -23,7 +23,7 @@ export const ProjectOverview: React.FC<ProjectOverviewProps> = ({ project }) => 
             </span>
             <span
               className={`px-2.5 py-0.5 rounded-full text-[10px] font-heading font-bold uppercase tracking-wider ${
-                isConfirmed ? 'bg-[#C96F1B] text-white' : 'bg-[#3D352D] text-[#EADBC8]'
+                isConfirmed ? 'bg-[#C96F1B] text-white' : 'bg-[#F5EEE5] text-[#6B5E4E] border border-[#E8DDD0]'
               }`}
             >
               {project.statusLabel}

@@ -220,12 +220,12 @@ export const EquipmentDetailPage: React.FC = () => {
           {/* Sidebar CTA Column */}
           <div className="lg:col-span-4 space-y-6">
             <Reveal delay={0.15}>
-              <div className="bg-[#3D352D] rounded-3xl p-6 sm:p-8 text-white space-y-6 shadow-lg sticky top-24">
+              <div className="bg-[#F5EEE5] rounded-3xl p-6 sm:p-8 text-[#3D352D] space-y-6 border border-[#E8DDD0] shadow-lg sticky top-24">
                 <div className="space-y-2">
-                  <h3 className="font-heading font-semibold text-xl text-white">
+                  <h3 className="font-heading font-semibold text-xl text-[#3D352D]">
                     Request This Equipment
                   </h3>
-                  <p className="text-xs text-[#D1C5B0] font-body leading-relaxed">
+                  <p className="text-xs text-[#6B5E4E] font-body leading-relaxed">
                     Share your project requirements and we will confirm availability, pricing, and deployment dates.
                   </p>
                 </div>
@@ -240,13 +240,13 @@ export const EquipmentDetailPage: React.FC = () => {
                   </Link>
                   <Link
                     to="/contact"
-                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-heading text-xs font-semibold uppercase tracking-wider transition-all border border-white/20"
+                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white hover:bg-[#EADBC8] text-[#3D352D] font-heading text-xs font-semibold uppercase tracking-wider transition-all border border-[#E8DDD0]"
                   >
                     <span>CONTACT US</span>
                   </Link>
                 </div>
 
-                <div className="pt-4 border-t border-white/10 space-y-2 text-xs text-[#D1C5B0] font-body">
+                <div className="pt-4 border-t border-[#E8DDD0] space-y-2 text-xs text-[#6B5E4E] font-body">
                   <p>Monthly single-shift rental</p>
                   <p>Operator & helper included</p>
                   <p>26 days/month schedule</p>
