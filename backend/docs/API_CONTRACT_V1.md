@@ -1,0 +1,337 @@
+# REST API Contract Specifications — V1
+
+This document defines the public and administrative REST API contract specifications for the Chitrani Construction backend (`/api/v1`).
+
+---
+
+## 1. Response Envelope Standards
+
+All REST API responses MUST follow a standardized JSON envelope structure.
+
+### Standard Success Envelope (HTTP 200 / 201):
+```json
+{
+  "success": true,
+  "data": {},
+  "meta": {
+    "requestId": "req_8f92a11b",
+    "timestamp": "2026-08-08T14:50:00Z"
+  }
+}
+```
+
+### Standard Error Envelope (HTTP 4xx / 5xx):
+```json
+{
+  "success": false,
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Please check the submitted fields.",
+    "fields": {
+      "mobileNumber": ["Mobile number must be a valid 10-digit Indian phone number."]
+    }
+  },
+  "meta": {
+    "requestId": "req_8f92a11b",
+    "timestamp": "2026-08-08T14:50:00Z"
+  }
+}
+```
+
+---
+
+## 2. Public / Admin DTO Serializer Boundary
+
+> **CRITICAL SECURITY RULE**: Backend response handlers MUST utilize explicit Data Transfer Object (DTO) serializers to isolate public payload data from administrative database attributes.
+
+The backend MUST NEVER return raw database entity rows directly to public callers.
+
+### Attributes Strictly Excluded from Public Response DTOs:
+- `internal_status` (Equipment)
+- `assigned_to` (Enquiries / Quotes)
+- `internal_notes` (Operational comments)
+- `work_order_reference` (Projects — Admin only by default)
+- `audit_logs` & system metadata
+- Admin user details & Auth UUIDs
+- Provider error messages & stack traces
+- Private environment secrets & service-role keys
+
+---
+
+## 3. HTTP Status Code Guidelines
+
+| Status Code | Meaning | Usage |
+| :--- | :--- | :--- |
+| **200 OK** | Request succeeded | Standard GET read or POST query response. |
+| **201 Created** | Entity created | Successful submission of contact forms or quote requests. |
+| **400 Bad Request** | Validation failed | Malformed JSON or Zod schema validation errors. |
+| **401 Unauthorized** | Authentication required | Missing or invalid Bearer token on protected admin routes. |
+| **403 Forbidden** | Role permission denied | User lacks required role for requested action. |
+| **404 Not Found** | Entity not found | Invalid route, service slug, or missing resource. |
+| **409 Conflict** | State conflict | Duplicate resource submission or invalid transition. |
+| **429 Too Many Requests** | Rate limit exceeded | Rate limiter triggered on public submit routes. |
+| **500 Internal Error** | Server failure | Sanitized error response. **Raw DB or stack trace errors MUST NEVER be returned publicly.** |
+
+---
+
+## 4. Public API Endpoints (`/api/v1`)
+
+### Catalog & Content Endpoints
+- `GET /api/v1/business-divisions` — Active business divisions listing. **✅ IMPLEMENTED**
+- `GET /api/v1/services` — Published services listing. **✅ IMPLEMENTED** (supports `?divisionSlug=` filter)
+- `GET /api/v1/services/:slug` — Service detail by unique slug. **✅ IMPLEMENTED**
+- `GET /api/v1/equipment` — Equipment listing (filtered by `public_status`). **✅ IMPLEMENTED** (supports `?category=` filter)
+- `GET /api/v1/equipment/:slug` — Equipment detail and public specs by slug. **✅ IMPLEMENTED**
+- `GET /api/v1/projects` — Verified projects and client requirement summaries (paginated). **✅ IMPLEMENTED**
+- `GET /api/v1/projects/:slug` — Project engagement detail by slug. **✅ IMPLEMENTED**
+- `GET /api/v1/industries` — Target industry sectors listing. **✅ IMPLEMENTED**
+- `GET /api/v1/quote-templates/:serviceSlug` — Active quote form configuration for a specific service (see Public Quote Template Boundary below). **Not implemented yet**; will be delivered with the quote submission feature.
+
+#### GET /api/v1/industries — Implemented Behaviour
+
+Returns all active, non-archived industry sectors ordered by `display_order`.
+
+**Query parameters:** None.
+
+**Response (200):**
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "uuid",
+      "name": "Residential Construction",
+      "slug": "residential-construction",
+      "shortDescription": "...",
+      "fullDescription": "...",
+      "displayOrder": 1
+    }
+  ]
+}
+```
+
+Empty collections return HTTP 200 with `data: []`.
+
+#### GET /api/v1/projects — Implemented Behaviour
+
+Returns active, non-archived projects with pagination. Projects are ordered by `featured` (desc), then `display_order` (asc), then `created_at` (desc).
+
+**Query parameters:**
+| Parameter | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `page` | integer | 1 | Page number (min 1) |
+| `limit` | integer | 12 | Items per page (min 1, max 50) |
+
+**Response (200):**
+```json
+{
+  "success": true,
+  "data": {
+    "items": [
+      {
+        "id": "uuid",
+        "name": "Project Name",
+        "slug": "project-name",
+        "clientName": "Client Ltd",
+        "location": "Mumbai",
+        "role": "Contractor",
+        "shortDescription": "...",
+        "projectStatus": "completed",
+        "featured": false,
+        "displayOrder": 0,
+        "services": [{ "id": "uuid", "name": "Service", "slug": "service" }],
+        "industries": [{ "id": "uuid", "name": "Industry", "slug": "industry" }]
+      }
+    ],
+    "pagination": {
+      "page": 1,
+      "limit": 12,
+      "total": 0,
+      "totalPages": 0
+    }
+  }
+}
+```
+
+Empty collections return HTTP 200 with `items: []` and valid pagination metadata.
+
+#### GET /api/v1/projects/:slug — Implemented Behaviour
+
+Returns a single active project by its URL-friendly slug, including `fullDescription`, SEO fields, and related services/industries.
+
+**Path parameters:** `slug` — URL-friendly slug (lowercase alphanumeric with hyphens).
+
+**Response (200):** Single project object with all public fields plus `fullDescription`, `seoTitle`, `seoDescription`, `services[]`, `industries[]`.
+
+**Error responses:**
+- 400 — Invalid slug format
+- 404 — Project not found (or inactive/archived)
+
+### Public Quote Template Boundary (`GET /api/v1/quote-templates/:serviceSlug`)
+
+> **Status**: DOCUMENTED ONLY — endpoint is NOT implemented in Step 3C. This section locks the data boundary for the future implementation.
+
+The endpoint will eventually return **ONLY** the public-safe, currently live form configuration:
+
+- Active service (that matches `serviceSlug`)
+- Active template (`is_active = true` AND `archived_at IS NULL`)
+- Current published quote form version (`status = 'published'`)
+- Active fields (`is_active = true`), including `field_key`, `label`, `input_type`, `data_type`, `is_required`, `placeholder`, `help_text`, `validation_rules`
+- Active options for each applicable field (`is_active = true`)
+- Valid simple display conditions (`operator IN ('equals', 'not_equals')`, `action = 'show'`)
+
+Ordering:
+
+- Fields ordered by `display_order`
+- Options ordered by `display_order`
+- All nested groupings follow the parent ordering
+
+MUST **NOT** return:
+
+- Archived versions (`status = 'archived'`)
+- Draft versions (`status = 'draft'`)
+- Multiple active templates per service (the one-active-template-per-service invariant guarantees at most one)
+- Internal database metadata (internal IDs beyond the minimal needed payload, `created_at`, `updated_at`, `is_active`, `archived_at`)
+- Admin / audit data (e.g. `admin_users`, `audit_logs`, internal state machine metadata)
+
+If the service slug is unknown or the service/template is not published-eligible, the endpoint returns HTTP 404 (not a malformed partial payload).
+
+### Public Intake Endpoints
+- `POST /api/v1/contact` — Submit general contact form enquiry (see Public Submission Boundary below). **✅ IMPLEMENTED**
+- `POST /api/v1/quotes` — Submit dynamic quote request (see Public Submission Boundary below). **Not implemented yet**; delivered with the intake feature.
+
+### Public Submission Boundary (`POST /api/v1/contact`, `POST /api/v1/quotes`)
+
+> **Status**: POST /api/v1/contact is **IMPLEMENTED** with rate limiting. POST /api/v1/quotes is DOCUMENTED ONLY.
+
+Both submission endpoints MUST:
+
+1. **Validate with Zod** — request bodies are validated against strict schemas (including email/phone format and consent policy).
+2. **Perform spam protection** — rate limiting / honeypot checks apply before a record is created.
+3. **Store the database record FIRST** — the enquiry or quote request must persist successfully before any email delivery is attempted. An email provider failure MUST NOT cause the saved record to disappear.
+4. **Return the generated reference number** — `CHI-ENQ-YYYY-XXXXXX` for contact, `CHI-Q-YYYY-XXXXXX` for quotes.
+5. **Use the standard API envelope** — standard success/error envelope per Section 1.
+
+#### POST /api/v1/contact — Implemented Behaviour
+
+**Accepted fields:**
+- `name` (required, string, max 200)
+- `company` (optional, string, max 200)
+- `email` (required, valid email, max 254)
+- `phone` (required, string, max 30)
+- `divisionId` (optional, valid UUID — must reference an existing business_division)
+- `serviceId` (optional, valid UUID — must reference an existing service belonging to the provided divisionId)
+- `projectLocation` (optional, string, max 300)
+- `message` (required, string, max 5000)
+- `consent` (required, boolean `true`)
+
+**Response codes:**
+- `201` — Enquiry accepted, reference number generated
+- `400` — Validation failure (missing/invalid fields, unknown fields, invalid relationship)
+- `429` — Rate limited (5 attempts per 15 minutes per client IP)
+
+**Rate limiting baseline:**
+- Limit: 5 submissions per 15-minute window per client IP
+- Scope: POST /api/v1/contact only (catalog GET endpoints are not limited)
+- Client identity: X-Real-IP header (validated via `net.isIP()`), fallback to Express req.ip
+- Memory store: counters reset on process restart; not shared across replicas
+- Both valid and invalid attempts consume quota
+- CAPTCHA/Turnstile: not yet implemented
+
+**Success response (201):**
+```json
+{
+  "success": true,
+  "data": {
+    "referenceNumber": "CHI-ENQ-2026-000001",
+    "message": "Your enquiry has been received. Our team will contact you shortly."
+  },
+  "meta": { "requestId": "..." }
+}
+```
+
+**Rate-limited response (429):**
+```json
+{
+  "success": false,
+  "error": {
+    "code": "RATE_LIMITED",
+    "message": "Too many contact requests. Please try again later."
+  },
+  "meta": { "requestId": "..." }
+}
+```
+
+`POST /api/v1/contact` creates a row in `contact_enquiries`. `POST /api/v1/quotes` creates a row in `quote_requests` plus immutable answer snapshots in `quote_answers`, and requires the selected form version to be published at submission time.
+
+Public creation responses MUST **NOT** return:
+
+- `assigned_to`
+- internal operational data
+- audit data
+- admin information
+
+A successful submission returns the reference number, a confirmation message, and safe metadata only.
+
+**Email notification:** Not yet implemented. Will be added in a future step.
+
+**Idempotency:** None. Duplicate submissions create separate enquiries with separate reference numbers.
+
+---
+
+## 5. Protected Admin API Endpoints (`/api/v1/admin/*`)
+
+All `/api/v1/admin/*` endpoints require a valid Supabase Auth Bearer token in the `Authorization` header.
+
+### Implemented Admin Resource Endpoints:
+- `GET /api/v1/admin/me` — Returns the authenticated admin's identity and role. **✅ IMPLEMENTED (route mounted, auth enforced)**
+- `GET /api/v1/admin/dashboard` — Returns aggregated dashboard summary counts for enquiries, quotes, and catalog. **✅ IMPLEMENTED**
+  - Authentication required (Bearer Supabase access token)
+  - Allowed active roles: `super_admin`, `admin`, `viewer` (read-only endpoint)
+  - Response contains aggregated counts only — no PII, no enquiry/quote bodies, no admin emails, no auth_user_id
+  - Enquiry counts by status: `total`, `new`, `contacted`, `qualified`, `closed`
+  - Quote counts by status: `total`, `new`, `under_review`, `clarification_required`, `quoted`, `won`, `lost`, `closed`
+  - Catalog counts: `businessDivisions`, `services`, `equipment`, `projects`, `industries`
+  - Zero counts are valid data
+- `GET /api/v1/admin/enquiries` — Paginated list of contact enquiries. **✅ IMPLEMENTED**
+  - Authentication required (Bearer Supabase access token)
+  - Allowed active roles: `super_admin`, `admin`, `viewer` (read-only endpoint)
+  - Query parameters: `page` (default 1), `limit` (default 20, max 100), `status` (optional: `new` | `contacted` | `qualified` | `closed`)
+  - Response: paginated list with `items[]` (id, referenceNumber, name, company, email, phone, status, createdAt), `total`, `page`, `limit`
+  - Ordered by createdAt descending (newest first)
+- `GET /api/v1/admin/enquiries/:id` — Returns full admin-safe detail for a single enquiry. **✅ IMPLEMENTED**
+  - Authentication required (Bearer Supabase access token)
+  - Allowed active roles: `super_admin`, `admin`, `viewer` (read-only endpoint)
+  - Response includes: enquiry detail (referenceNumber, name, company, email, phone, projectLocation, message, status, division, service, createdAt, updatedAt), notes[], statusHistory[]
+  - Notes include author name/role, ordered oldest→newest
+  - Status history includes oldStatus, newStatus, changedAt, actor name/role (if available)
+  - No PII beyond what admin staff need for operational handling
+- `PATCH /api/v1/admin/enquiries/:id/status` — Updates enquiry status atomically. **✅ IMPLEMENTED**
+  - Authentication required (Bearer Supabase access token)
+  - Allowed active roles: `super_admin`, `admin` (`viewer` → 403)
+  - Body: `{ "status": "contacted" }` (strict: `new` | `contacted` | `qualified` | `closed`)
+  - Uses atomic PostgreSQL function `transition_enquiry_status` — single transaction for status update + history insert
+  - Same-status request is a clean no-op (returns `changed: false`, no history row created)
+  - Returns transition result with oldStatus, newStatus, changed, historyId
+- `POST /api/v1/admin/enquiries/:id/notes` — Adds internal note to enquiry. **✅ IMPLEMENTED**
+  - Authentication required (Bearer Supabase access token)
+  - Allowed active roles: `super_admin`, `admin` (`viewer` → 403)
+  - Body: `{ "note": "Internal note text..." }` (trimmed, min 1, max 5000 chars)
+  - Author is always the authenticated admin (from token), never from request body
+  - Returns created note with author name/role, createdAt
+
+### Planned Admin Resource Endpoints:
+- `/api/v1/admin/quotes` — Quote request list (server pagination/filters) & detail
+- `/api/v1/admin/quotes/:id/status` — Quote status transition & history logging
+- `/api/v1/admin/quotes/:id/notes` — Attach internal quote notes
+- `/api/v1/admin/business-divisions` — Business division CRUD, reordering & activation
+- `/api/v1/admin/services` — Service catalog CRUD & division mapping
+- `/api/v1/admin/equipment-categories` — Equipment taxonomy CRUD
+- `/api/v1/admin/equipment` — Equipment fleet CRUD (`internal_status` & `public_status`)
+- `/api/v1/admin/equipment/:id/specs` — Dynamic equipment specs key-value manager
+- `/api/v1/admin/projects` — Project portfolio CRUD & status management
+- `/api/v1/admin/industries` — Industry sector taxonomy CRUD
+- `/api/v1/admin/media` — Storage upload, metadata editing, asset linking & deletion checks
+- `/api/v1/admin/quote-templates` — Dynamic form template versioning & field builder
+- `/api/v1/admin/admin-users` — Administrative user management & role assignment (`super_admin` only)
+- `/api/v1/admin/audit-logs` — Audit log inspection (`super_admin` only)

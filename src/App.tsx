@@ -1,8 +1,11 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { RootLayout } from './layouts/RootLayout';
+import { AdminAuthProvider } from './contexts/AdminAuthContext';
+import { AdminLayout } from './layouts/AdminLayout';
+import { ProtectedRoute } from './components/admin/ProtectedRoute';
 
-// Route-level code splitting
+// Public route-level code splitting
 const HomePage = lazy(() => import('./pages/HomePage').then(m => ({ default: m.HomePage })));
 const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
 const ServicesPage = lazy(() => import('./pages/ServicesPage').then(m => ({ default: m.ServicesPage })));
@@ -18,6 +21,12 @@ const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage').then(m 
 const TermsConditionsPage = lazy(() => import('./pages/TermsConditionsPage').then(m => ({ default: m.TermsConditionsPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 
+// Admin route-level code splitting
+const AdminLoginPage = lazy(() => import('./pages/admin/AdminLoginPage').then(m => ({ default: m.AdminLoginPage })));
+const AdminDashboardPage = lazy(() => import('./pages/admin/AdminDashboardPage').then(m => ({ default: m.AdminDashboardPage })));
+const AdminEnquiriesPage = lazy(() => import('./pages/admin/AdminEnquiriesPage').then(m => ({ default: m.AdminEnquiriesPage })));
+const AdminEnquiryDetailPage = lazy(() => import('./pages/admin/AdminEnquiryDetailPage').then(m => ({ default: m.AdminEnquiryDetailPage })));
+
 const PageFallback: React.FC = () => (
   <div className="min-h-[60vh] bg-[#EADBC8] flex items-center justify-center p-4">
     <div className="flex items-center gap-3 px-6 py-3.5 bg-white rounded-[14px] border border-[#E8DDD0] shadow-sm text-xs font-heading font-semibold text-[#3D352D]">
@@ -27,12 +36,22 @@ const PageFallback: React.FC = () => (
   </div>
 );
 
+const AdminFallback: React.FC = () => (
+  <div className="min-h-screen bg-[#F5F5F5] flex items-center justify-center">
+    <div className="flex items-center gap-3 px-6 py-3.5 bg-white rounded-[14px] border border-[#E8DDD0] shadow-sm text-xs font-semibold text-[#3D352D]">
+      <span className="w-4 h-4 rounded-full border-2 border-[#C96F1B] border-t-transparent animate-spin" />
+      <span>Loading...</span>
+    </div>
+  </div>
+);
+
 export function App() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<PageFallback />}>
-        <Routes>
-          <Route element={<RootLayout />}>
+      <Routes>
+        {/* Public website */}
+        <Route element={<RootLayout />}>
+          <Route element={<Suspense fallback={<PageFallback />}><Outlet /></Suspense>}>
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/services" element={<ServicesPage />} />
@@ -46,11 +65,28 @@ export function App() {
             <Route path="/request-quote" element={<RequestQuotePage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
             <Route path="/terms-and-conditions" element={<TermsConditionsPage />} />
-            <Route path="/404" element={<NotFoundPage />} />
-            <Route path="*" element={<Navigate to="/404" replace />} />
           </Route>
-        </Routes>
-      </Suspense>
+          <Route path="/404" element={<NotFoundPage />} />
+          <Route path="*" element={<Navigate to="/404" replace />} />
+        </Route>
+
+        {/* Admin portal */}
+        <Route element={<AdminAuthProvider><Outlet /></AdminAuthProvider>}>
+          <Route path="/admin/login" element={<Suspense fallback={<AdminFallback />}><AdminLoginPage /></Suspense>} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Suspense fallback={<AdminFallback />}><AdminDashboardPage /></Suspense>} />
+            <Route path="enquiries" element={<Suspense fallback={<AdminFallback />}><AdminEnquiriesPage /></Suspense>} />
+            <Route path="enquiries/:id" element={<Suspense fallback={<AdminFallback />}><AdminEnquiryDetailPage /></Suspense>} />
+          </Route>
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }

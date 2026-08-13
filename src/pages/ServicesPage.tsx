@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { PageHeader } from '../components/common/PageHeader';
 import { SEO } from '../components/common/SEO';
-import { getPublishedServices } from '../data/services';
-import { Reveal, SectionEyebrow } from '../components/common/Motion';
+import { useServices } from '../hooks/useServices';
+import { CardSkeleton, ApiError, EmptyState } from '../components/common/ApiStates';
+import { Reveal, SectionEyebrow, StaggerGroup, StaggerItem } from '../components/common/Motion';
 import {
   Building2,
   Truck,
@@ -24,9 +25,7 @@ import brickworkImg from '../assets/images/services/brickwork-blockwork.webp';
 import labourImg from '../assets/images/services/labour-contracting.webp';
 
 export const ServicesPage: React.FC = () => {
-  const services = getPublishedServices();
-  const contractingService = services.find(s => s.id === 'construction-contracting') || services[0];
-  const rentalService = services.find(s => s.id === 'concrete-boom-placer-rental') || services[1];
+  const { data: services, loading, error, retry } = useServices();
 
   return (
     <div className="bg-[#FFFFFF] text-[#3D352D] min-h-screen">
@@ -112,7 +111,12 @@ export const ServicesPage: React.FC = () => {
                 <span className="font-heading font-bold text-xs text-[#3D352D] uppercase tracking-wider block">
                   Documented Scope Boundaries:
                 </span>
-                {contractingService.scope?.map((item, idx) => (
+                {[
+                  'RCC structural framing and formwork',
+                  'Civil foundation and site coordination',
+                  'AAC blockwork and masonry walls',
+                  'Organised site workforce deployment'
+                ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-2 text-xs sm:text-sm font-body text-[#6B5E4E]">
                     <CheckCircle2 className="w-4 h-4 text-[#C96F1B] shrink-0 mt-0.5" />
                     <span>{item}</span>
@@ -190,7 +194,6 @@ export const ServicesPage: React.FC = () => {
             </span>
           </div>
 
-          {/* HORIZONTAL EQUIPMENT-STORY VISUAL PROGRESSION */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#F5EEE5] p-8 sm:p-14 rounded-3xl border border-[#E8DDD0] shadow-xl">
 
             <div className="lg:col-span-6 space-y-6">
@@ -212,7 +215,7 @@ export const ServicesPage: React.FC = () => {
                 </div>
                 <div className="p-3 bg-white rounded-xl border border-[#E8DDD0] text-center">
                   <span className="font-specs text-[10px] text-[#7E7267] font-bold block">PUMP OUTPUT</span>
-                  <span className="font-display text-2xl text-[#C96F1B]">90 m³/h</span>
+                  <span className="font-display text-2xl text-[#C96F1B]">90 m³</span>
                 </div>
                 <div className="p-3 bg-white rounded-xl border border-[#E8DDD0] text-center">
                   <span className="font-specs text-[10px] text-[#7E7267] font-bold block">PIPELINE</span>
