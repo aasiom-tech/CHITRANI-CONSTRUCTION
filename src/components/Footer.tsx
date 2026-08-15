@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { HardHat, MapPin, Phone, Mail, ShieldCheck, ArrowRight } from 'lucide-react';
+import { MapPin, Phone, Mail, ShieldCheck, ArrowRight } from 'lucide-react';
 import { companyConfig } from '../config/companyConfig';
 
 export const Footer: React.FC = () => {
@@ -13,13 +13,13 @@ export const Footer: React.FC = () => {
           
           {/* Col 1: Company Profile (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
-            <Link to="/" className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-[#C96F1B] text-white flex items-center justify-center font-bold">
-                <HardHat className="w-5 h-5 text-white" />
-              </div>
-              <span className="font-heading font-semibold text-xl tracking-tight text-[#3D352D] uppercase">
-                CHITRANI <span className="text-[#C96F1B]">CONSTRUCTION</span>
-              </span>
+            <Link to="/" className="flex items-center gap-3">
+              <img
+                src="/branding/chitrani-logo.svg"
+                alt="Chitrani Construction"
+                className="h-10 sm:h-12 w-auto object-contain"
+                draggable={false}
+              />
             </Link>
 
             <p className="text-xs text-[#6B5E4E] leading-relaxed font-body">

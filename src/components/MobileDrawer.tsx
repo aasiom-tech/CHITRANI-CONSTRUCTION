@@ -11,8 +11,7 @@ import {
   PhoneCall, 
   FileText,
   Phone,
-  MessageSquare,
-  HardHat
+  MessageSquare
 } from 'lucide-react';
 import { companyConfig } from '../config/companyConfig';
 
@@ -80,9 +79,12 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) =
         {/* Drawer Header */}
         <div className="p-4 border-b border-[#E8DDD0] flex items-center justify-between bg-[#F5EEE5]">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-[10px] bg-[#C96F1B] text-white flex items-center justify-center font-bold">
-              <HardHat className="w-4 h-4 text-white" />
-            </div>
+            <img
+              src="/branding/favicon.svg"
+              alt="Chitrani Construction"
+              className="w-8 h-8 object-contain"
+              draggable={false}
+            />
             <div>
               <div className="font-heading text-[11px] text-[#C96F1B] tracking-widest uppercase font-bold">NAVIGATION</div>
               <div className="font-bold font-heading text-base tracking-tight text-[#3D352D]">{companyConfig.shortName}</div>

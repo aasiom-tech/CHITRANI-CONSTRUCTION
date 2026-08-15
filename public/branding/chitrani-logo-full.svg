@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 160" fill="none">
+  <!-- CC Icon - Two interlocking curved shapes -->
+  <g transform="translate(10, 20)">
+    <!-- Outer C (left) -->
+    <path d="M58,8 C30,8 8,28 8,56 C8,72 16,86 28,95 L20,108 C6,96 0,78 0,56 C0,24 24,0 58,0 C80,0 98,10 110,26 L96,38 C88,26 74,18 58,18 Z" fill="#1B4D8C"/>
+    <!-- Inner C cutout (creates the C shape) -->
+    <path d="M58,28 C44,28 32,38 32,54 C32,68 42,78 56,78 L52,86 C36,86 22,74 22,54 C22,34 38,18 58,18 Z" fill="white"/>
+    <!-- Outer C (right) -->
+    <path d="M118,8 C90,8 68,28 68,56 C68,72 76,86 88,95 L80,108 C66,96 60,78 60,56 C60,24 84,0 118,0 C140,0 158,10 170,26 L156,38 C148,26 134,18 118,18 Z" fill="#1B4D8C"/>
+    <!-- Inner C cutout (right) -->
+    <path d="M118,28 C104,28 92,38 92,54 C92,68 102,78 116,78 L112,86 C96,86 82,74 82,54 C82,34 98,18 118,18 Z" fill="white"/>
+    <!-- Building icon (sitting on top-right of CC) -->
+    <g transform="translate(100, -22)">
+      <!-- Left building -->
+      <path d="M0,48 L0,12 L12,0 L24,12 L24,48 Z" fill="#1B4D8C"/>
+      <!-- Center tall building -->
+      <path d="M18,48 L18,6 L30,-8 L42,6 L42,48 Z" fill="#1B4D8C"/>
+      <!-- Right building -->
+      <path d="M36,48 L36,12 L48,0 L60,12 L60,48 Z" fill="#1B4D8C"/>
+      <!-- Base line -->
+      <rect x="-4" y="46" width="68" height="3" rx="1" fill="#1B4D8C"/>
+    </g>
+  </g>
+  
+  <!-- CHITRANI CONSTRUCTION wordmark -->
+  <text x="210" y="82" font-family="'Times New Roman', Georgia, serif" font-size="52" font-weight="700" fill="#1B4D8C" letter-spacing="2">CHITRANI CONSTRUCTION</text>
+  
+  <!-- GSTN line -->
+  <text x="340" y="120" font-family="'Times New Roman', Georgia, serif" font-size="20" fill="#1B4D8C" letter-spacing="1">GSTN :- 27CLUPB6299K2Z6</text>
+</svg>

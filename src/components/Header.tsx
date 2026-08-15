@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, HardHat, Phone, ArrowRight } from 'lucide-react';
+import { Menu, Phone, ArrowRight } from 'lucide-react';
 import { companyConfig } from '../config/companyConfig';
 import { MobileDrawer, navItems } from './MobileDrawer';
 
@@ -128,37 +128,47 @@ export const Header: React.FC = () => {
               className="flex items-center gap-3 group focus:outline-hidden"
               aria-label="Chitrani Construction Home"
             >
-              {/* Logo Mark Icon - Smooth desktop collapse */}
+              {/* Official Chitrani Logo (icon + wordmark) — expanded state */}
               <div
-                className={`bg-[#C96F1B] text-white flex items-center justify-center font-bold rounded-[12px] shadow-xs transition-all duration-260 ease-in-out shrink-0 ${
+                className={`relative overflow-hidden shrink-0 transition-all duration-260 ease-in-out ${
                   isExpanded
-                    ? 'w-10 h-10 opacity-100 scale-100'
-                    : 'w-8 h-8 lg:w-0 lg:h-0 lg:opacity-0 lg:scale-90 overflow-hidden'
+                    ? 'w-44 sm:w-52 h-10 sm:h-11 opacity-100 scale-100'
+                    : 'w-0 h-0 opacity-0 scale-90 overflow-hidden'
                 }`}
               >
-                <HardHat className="w-5 h-5 text-white" />
+                <img
+                  src="/branding/chitrani-logo.svg"
+                  alt="Chitrani Construction"
+                  className="absolute inset-0 w-full h-[200%] object-cover object-top"
+                  draggable={false}
+                />
               </div>
 
-              {/* Company Title & Subtitle */}
-              <div className="flex flex-col justify-center">
-                <span
-                  className={`font-heading font-bold tracking-tight text-[#3D352D] group-hover:text-[#C96F1B] transition-colors uppercase leading-none ${
-                    isExpanded ? 'text-base sm:text-lg' : 'text-sm sm:text-base'
-                  }`}
-                >
-                  CHITRANI <span className="text-[#C96F1B]">CONSTRUCTION</span>
-                </span>
+              {/* Compact logo mark (favicon icon, visible when collapsed) */}
+              <div
+                className={`shrink-0 transition-all duration-260 ease-in-out ${
+                  isExpanded
+                    ? 'w-0 h-0 opacity-0 scale-90 overflow-hidden'
+                    : 'w-8 h-8 lg:w-9 lg:h-9 opacity-100 scale-100'
+                }`}
+              >
+                <img
+                  src="/branding/favicon.svg"
+                  alt="Chitrani Construction"
+                  className="w-full h-full object-contain"
+                  draggable={false}
+                />
+              </div>
 
-                {/* Subtitle - Smooth collapse in compact state */}
-                <div
-                  className={`overflow-hidden transition-all duration-260 ease-in-out ${
-                    isExpanded ? 'max-h-6 opacity-100 mt-1' : 'max-h-0 opacity-0 mt-0'
-                  }`}
-                >
-                  <span className="font-body text-[10px] sm:text-[11px] text-[#6B5E4E] block font-medium tracking-wider leading-none uppercase">
-                    CONTRACTING & BOOM PLACER RENTAL
-                  </span>
-                </div>
+              {/* Subtitle — only visible in expanded state */}
+              <div
+                className={`flex flex-col justify-center overflow-hidden transition-all duration-260 ease-in-out ${
+                  isExpanded ? 'max-w-[200px] opacity-100' : 'max-w-0 opacity-0'
+                }`}
+              >
+                <span className="font-body text-[10px] sm:text-[11px] text-[#6B5E4E] font-medium tracking-wider leading-none uppercase">
+                  CONTRACTING & BOOM PLACER RENTAL
+                </span>
               </div>
             </Link>
           </div>
